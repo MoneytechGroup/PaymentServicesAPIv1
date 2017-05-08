@@ -1,4 +1,34 @@
 # Database
+## Objects
+### DatabaseSearchResultItem
+
+> Schema for this object
+
+
+```json
+{
+  "accountNumber":  string,
+  "key":            string,
+  "tag":            string,
+  "recordId":       number,
+  "data":           string
+}
+```
+
+
+Provides comprehensive biller information that may be required for further complex validation.
+
+Field Name|Type | Description
+----|---|------
+*accountNumber | string | This is the first part of the key that was set when the record was added using database/v1/add
+*key | string | This is the second part of the key that was set when the record was added using database/v1/add
+*tag | string | This is the third part of the key that was set when the record was added using database/v1/add
+recordId | number | This is the unique row Id that was assigned to the row when the record was added using database/v1/add
+data | string | This is the data that was set with the database/v1/add or database/v1/update APIs.  Could be null because the data is null in the User Database, or because the search property includeData = false
+
+
+*Primary Key
+
 ## Add
 
 > The above command returns JSON structured like this:
