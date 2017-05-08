@@ -316,15 +316,110 @@ InvalidDescription |Maximum length of description is 300 characters | 400
 InvalidDescriptionLength | disbursements[] collection must contain at least one item | 400 
 InvalidDisbursementsCollection | disbursements[].amount must have a value greater than $0.00 | 400 
 InvalidDisbursementItemAmount | When disbursements[].disbursementMethod equals 'mAccount' the toMAccount field must have a valid mAccount 16-Digit account number | 400
-When disbursements[].disbursementMethod equals 'mAccount' and the mAccount is a Chariy, the Charity must be a vvalid for your Sign-In Account | 400
-"When disbursements[].disbursementMethod equals 'mWallet' the mWallet field must have a valid mWallet 16-Digit account number | 400
+InvalidDisbursementItemToMAccount | When disbursements[].disbursementMethod equals 'mAccount' and the mAccount is a Chariy, the Charity must be a vvalid for your Sign-In Account | 400
+InvalidDisbursementItemToMAccountInvalidCharity | "When disbursements[].disbursementMethod equals 'mWallet' the mWallet field must have a valid mWallet 16-Digit account number | 400
 InvalidDisbursementItemDirectCreditDetails | When disbursements[].disbursementMethod equals 'directCredit' the item must have a valid toDirectCreditDetails | 400
 InvalidAmountsDontMatch | Sum of the disbursements[].amounts does not equal the totalAmount | 400 
 ToAccountNotValidToTransact | The disbursements[].toMAccount is not valid to transact | 400
+ToAccountNotValidToTransact |The disbursements[].toMAccount is not valid to transact | 400
+ToMWalletNotValidToTransact |The disbursements[].toMWallet is not valid to transact  | 400
+ToMWalletNotFound |The disbursements[].toMWallet number not found  | 400
+MAccountMustNotBeNull |mAccount must not be null | 400
+MAccountTokenMustNotBeEmpty |mAccount.token must not be null or empty  | 400
+PaymentSourceMustNotBeEmpty |paymentSource must not be empty | 400
+InvalidPaymentSource | paymentSource has an invalid value  | 400
+InvalidDisbursementMethod |disbursements[].disbursementMethod has an invalid value. Only 'mAccount', 'mWallet', 'directCredit', 'BPAY' and 'Token' are valid values  | 400
+InvalidCreditCardDetails | creditCardDetails must not be null when paymentMethod is 'creditCard' | 400
+InvalidCreditCardNameOnCard |creditCardDetails.nameOnCard must not be null or empty | 400
+InvalidCreditCardCardNumber |creditCardDetails.cardNumber is invalid. Card number must be a valid Card number issued by 'Visa', 'Mastercard', 'Amex' or 'Diners' | 400
+InvalidCreditCardExpiryMonth | creditCardDetails.expiryMonth is invalid  | 400
+InvalidCreditCardExpiryYear | creditCardDetails.expiryYear is invalid | 400
+InvalidCreditCardExpired |  creditCardDetails.Expired has expired | 400
+InvalidCreditCardValidationNumber | creditCardDetails.cardValidationNumber must not be null or empty | 400
+InvalidCreditCardValidationNumberLength3 |  creditCardDetails.cardValidationNumber must be 3 digits in length | 400
+InvalidCreditCardValidationNumberLength4 |  creditCardDetails.cardValidationNumber must be 4 digits in length | 400
+CreditCardTransactionFailed | The transaction was rejected by the payment gateway. Gateway response message: |  400
+InvalidDisbursementItemDisbursementMethod | disbursements[].disbursementMethod has an invalid value. Only 'mAccount', 'directCredit', 'BPAY' and 'Token' are valid values | 400
+UnknownCreditCardCardBinNumber |  The creditCardDetails.cardNumber's first 6 digits (called the BIN - Bank Identification Number) was not recognised by the Platform. Only Credit-Cards of type - 'Visa', 'Mastercard', 'Amex' and 'Diners' are supported | 400
+InvalidCreditCardType | The creditCardDetails.cardNumber's first 6 digits (called the BIN - Bank Identification Number) represents a non supported brand. Only'Visa', 'Mastercard', 'Amex' and 'Diners' are supported | 400
+InvalidTestCreditCardNumber | On Development and Staging, only specific Credit-Card numbers are supported. See documentation | 400
+InvalidIgnoreCardType | The ignoreCardTypes array has an invalid value. Only 'Visa', 'Mastercard', 'Amex' and 'Diners' are supported | 400
+InvalidDisbursementItemDirectCreditDetailBsbNumber | When disbursements[].disbursementMethod has a value of 'directCredit' then disbursement[].toDirectCreditDetails.bsbNumber must have a valid Bank-State-Branch code. Format '999-999' | 400
+InvalidDisbursementItemDirectCreditDetailAccountNumber | When disbursements[].disbursementMethod has a value of 'directCredit' then disbursement[].toDirectCreditDetails.accountNumber must have a valid Bank Account number. Minimum length is 4 digits. Maximum length is 9 digits | 400
+InvalidDisbursementItemDirectCreditDetailInvalidMerchant |  disbursements[].disbursementMethod is 'directCredit'. The merchant you are attempting to pay is invalid to transact | 400
+IgnoreCreditCardType |  The creditCardDetails.cardNumber is of a type that is to be ignored | 400
+BpayToBpayDetailsReferenceNumberIsNull |  When disbursements[].disbursementMethod is 'BPAY', there must be a valid disbursements[].toBpayDetails.referenceNumber field | 400
+BpayToBpayDetailsInvalidNullReferenceNumber | When disbursements[].disbursementMethod is 'BPAY', the field disbursements[].toBpayDetails.referenceNumber must be a valid reference numbe  | 400
+BpayValidationError | disbursements[] - BPAY Validation error | 400
+InvalidMWalletPin | mWallet.pin is invalid  | 400
+MAccountInvalidToTransact | mAccount.token is invalid to transact | 400
+InvalidMWallet |  mWallet was not found | 400
+InvalidDirectDebit |  directDebit details not found | 400
+InvalidMAccount | mAccount was not found  | 400
+MWalletInvalidToTransact |  mWallet is not valid to transact  | 400
+MAccountInvalidForBPay |  mAccount is not valid for BPAY  | 400
+NotAuthorisedToDebitmAccount |  Not authorised to debit from mAccount. Only mAccounts that were issued by yourself may be debited | 400
+SignInAccountIsNotAmAccountIssue | Not authorised to issue mAccounts |400
+MWalletHasInsufficientFund | mWallet has insufficient funds  |400
+DebitTransactionWillExceedMAccountCreditLimi | The amount to debit will exceed the mAccount credit limit | 400
+DebitTransactionWillExceedSignInCreditLimit | The amount to debit will exceed your credit limit | 400
+OnlyOnemAccountAllowedWithMid | Only one mAccount with their own MID is allowed in the disbursement list  | 400
+CreditTransactionWillExceedMAccountCreditLimit |  disbursements[].disbursementMethod will exceed the mAccount credit limit  | 400
+YourAccountIsNotAuthorisdedForDirectDebit | Your Account is not authorised for Direct Debit 400
+MWalletWillExceedMaximumAllowedBalance |  disbursements[].disbursementMethod will exceed the maximum allowed mWallet balance  | 400
+UnknownDirectDebitBsbNumber | The BSB number is unknown to the Platform | 400
+InvalidDirectDebitBsbFormat | When paymentSource has a value of 'directDebit' then directDebit.bsbNumber must have a valid Bank-State-Branch code. Format '999-999' | 400
+InvalidDirectDebitAccountNumber | When paymentSource has a value of 'directDebit' then directDebit.AccountNumber must have a valid Bank Account number. Minimum length is 4 digits. Maximum length is 9 digits  | 400
+InvalidDirectDebitAccountName | When paymentSource has a value of 'directDebit' then directDebit.AccountName must have a valid Bank Account name. Minimum length is 4 characters. Maximum length is 32 characters | 400
+NotAuthorisedForBPay |  Your Account is not authorised for BPAY payments  | 400
+MAccountInvalidIsACharity | When paymentSource has a value of 'mAccount' then the mAccount must not be a 'Charity' mAccount | 400
+InvalidSourceToken |  When paymentSource has a value of 'token' there must be a valid paymentSource.token property  | 400
+InvalidSourceTokenHasBeenDeleted |  paymentSource has a value of 'token' which has been deleted | 400
+InvalidSourceTokenType |  paymentSource.token represents an invalid token type  | 400
+InvalidDisbursementToken |  disbursements[].toToken is unknown  | 400
+InvalidDisbursementTokenHasBeenDeleted |  disbursements[].toToken has been delete | 400
+DirectDebitMerchantNotValidToTransact | The Australian Bank Account to direct debit is an existing mAccount that is not valid to transact | 400
+NoDisbursementToTokenFound |  When disbursements[].disbursementMethod is 'Token', toToken must have a valid token value | 400
+ExceedMWalletDailySpendLimit |  Transaction will exceed mWallet daily spend limit | 400
+ExceedMWalletMaximumBalance | Transaction will exceed mWallet maximum allowed balance | 400
+InvalidCreditCardMidToken | midToken must be a valid token if one is supplied. midTokens are issued by Moneytech Payments | 400
+DeletedCreditCardMidToken | midToken has been deleted | 400
+CreditCardMidTokenNotOwnedBySignInMerchant |  midToken is not owned by the Signin Merchant | 400
+AnMidCanOnlyBeSuppliedWhebSourceIsCreditCard |  A midToken is only valid when the paymentSource is a CreditCard | 400
+BlockedDisbursementItemDirectCreditDetailAccount |  disbursements[].disbursementMethod has a value of 'directCredit' but the Australian Bank Account has been blocked from transacting. Please contact Moneytech Payments Pty Ltd | 400
+BlockeddDirectDebitAccount |  When paymentSource has a value of 'directDebit'. The Australian Bank Account hase been blocked from transacting. Please contact Moneytech Payments | 400
+YouDoNotHavePermissionToProcessDirectDebit |  You do not have permission to process Direct Debits | 400
+YouDoNotHavePermissionToProcessDirectCredit | You do not have permission to process Direct Credits  | 400
+YouDoNotHavePermissionToProcessCreditCards |  You do not have permission to process Credit-Cards | 400
+YouDoNotHavePermissionToProcessBpay | You do not have permission to process BPAY | 400
 
-InvalidDisbursementItemToMAccount |
-InvalidDisbursementItemToMAccountInvalidCharity |
 
+### Refund
 
+Status Code | Description | HTTP Status
+----------- | ----------- | -----------
+Ok |  Operation completed successfully  |200
+Unauthorized |  Authentication Failure  |401
+Exception | An unhandled Exception has occurred. Transaction has been cancelled |400
+Error | An unknown processing error occurred. Transaction has been cancelled  |400
+RequestBodyNotValidJson | The request body was not valid JSON |400
+UniqueReferenceExists | The uniqueReference already exists  |400
+UniqueReferencMissing | The uniqueReference must not be empty or null |400
+UniqueReferenceExceedsMaxLength | The uniqueReference must not exceed 200 characters in length | 400
+InvalidDescription | description must not be empty or null |400
+InvalidDescriptionLength | Maximum length of description is 300 character | 400
+CreditCardRefundFailed | The refund was rejected by the payment gateway. Gateway response message | 400
+DebitTransactionWillExceedSignInCreditLimit | The amount to debit will exceed your credit limi  |400
+InvalidRefundAmount | refundAmount must be greater than $0.00 and must be no more than two decimal places |400
+InvalidOriginalTransactionId |  originalTransactionId must be greater then 0. This is the transactionId that was returned for the original Credit-Card payment  |400
+InvalidOriginalTransactionIdNotFound |  The originalTransactionId was not located. This is the transactionId that was returned for the original Credit-Card payment |400
+InvalidOriginalTransactionFromAccountType | The original transaction was not a Credit-Card debit. Only Financial transactions that debited a Credit-Card are supported by the Refund API | 400
+InvalidOriginalTransactionWasNotSuccessful |  The original transaction was not successful | 400
+InvalidOriginalCreditCardTransactionNotFound |  The original Credit-Card transaction details were not found | 400
+InvalidOriginalCreditCardTransactionNotPayment |  The original Credit-Card transaction was not a payment  | 400
+InvalidOriginalCreditCardTransactionWasNotSuccessful |  The original Credit-Card transaction was not successful | 400
+InvalidOriginalMidTokenIsNotOwnedBySigninMerchant | The original Credit-Card transaction's midToken is not owned by the Sign In Merchant  | 400
+InvalidOriginalMidTokenHasBeenDeleted | The original Credit-Card transaction's midToken has been deleted" | 400
+YouDoNotHavePermissionToProcessCreditCards |  You do not have permission to process Credit-Cards  | 400
 
 

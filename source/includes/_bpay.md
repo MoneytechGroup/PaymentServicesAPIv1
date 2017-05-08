@@ -1,4 +1,4 @@
-# BPay
+# BPAY
 
 The BPAY APIs do not perform any financial transactions and are used to validate BPAY information that is used in the financial/v1/transaction/ execute API. The financial/v1/transaction/validate APIs also validates BPAY information using the same sub-system as documented in this section before performing any financial transactions.
 
@@ -9,7 +9,7 @@ The BPAY APIs do not perform any financial transactions and are used to validate
  * By design, BPAY validation can be amount sensitive. If you cache valid BPAY information for later use and change the amount to pay then this could be invalid.
  * BPAY validation should be performed immediately before calling the financial/v1/transaction/execute API to perform the bill payment. You have the option of calling financial/v1/transaction/validate (The first validation error will be returned which may not be a BPAY error)
 
-## BPay Biller
+## Biller
 
 > The above command returns JSON structured like this:
 
@@ -41,7 +41,7 @@ statusDescription | string | This is a plain English description of the status
 durationMs | number | This can be ignored. This value represents the total time in milliseconds that the Platform took to process the request
 
 
-## BPay Billers
+## Billers
 
 > The above command returns JSON structured like this:
 
@@ -82,7 +82,7 @@ statusDescription | string | This is a plain English description of the status
 durationMs | number | This can be ignored. This value represents the total time in milliseconds that the Platform took to process the request
 
 
-## BPay History
+## History
 
 > The above command returns JSON structured like this:
 
@@ -120,7 +120,7 @@ status | string | This is the status of executing the BPAY request. A code of â€
 statusDescription | string | This is a plain English description of the status
 durationMs | number | This can be ignored. This value represents the total time in milliseconds that the Platform took to process the request
 
-## BPay Validate
+## Validate
 
 > The above command returns JSON structured like this:
 
@@ -161,11 +161,12 @@ statusDescription | string | This is a plain English description of the status
 durationMs | number | This can be ignored. This value represents the total time in milliseconds that the Platform took to process the request
 
 
-## BPay Statuses
+## Statuses
 
 This section documents the returned status codes and the default descriptions.
 
 Status Code | Description | HTTP Status
+---|---|---
 Ok | Validation has passed | 200
 Unauthorized | Authentication failure | 401
 ReferenceNumberCheckFailed | Variable. Describes the reason for the failure | 200
