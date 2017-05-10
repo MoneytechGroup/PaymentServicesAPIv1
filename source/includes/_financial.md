@@ -734,7 +734,7 @@ DebitTransactionWillExceedMAccountCreditLimi | The amount to debit will exceed t
 DebitTransactionWillExceedSignInCreditLimit | The amount to debit will exceed your credit limit | 400
 OnlyOnemAccountAllowedWithMid | Only one mAccount with their own MID is allowed in the disbursement list  | 400
 CreditTransactionWillExceedMAccountCreditLimit |  disbursements[].disbursementMethod will exceed the mAccount credit limit  | 400
-YourAccountIsNotAuthorisdedForDirectDebit | Your Account is not authorised for Direct Debit 400
+YourAccountIsNotAuthorisdedForDirectDebit | Your Account is not authorised for Direct Debit | 400
 MWalletWillExceedMaximumAllowedBalance |  disbursements[].disbursementMethod will exceed the maximum allowed mWallet balance  | 400
 UnknownDirectDebitBsbNumber | The BSB number is unknown to the Platform | 400
 InvalidDirectDebitBsbFormat | When paymentSource has a value of 'directDebit' then directDebit.bsbNumber must have a valid Bank-State-Branch code. Format '999-999' | 400

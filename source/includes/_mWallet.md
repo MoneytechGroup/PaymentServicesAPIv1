@@ -72,7 +72,7 @@ allowDuplicates|boolean	| | Id true, allowes the creation of a duplicate mWallet
 options|	[mWalletOptionItem]| |See mWalletOptionItem class
 *Required Field
 
-### mWalletCreate
+### mWalletDetails
 > Schema for this object
 
 
@@ -90,11 +90,11 @@ options|	[mWalletOptionItem]| |See mWalletOptionItem class
 	"authenticationEmail": 			string,
 	"authenticationMobile": 		string,
 	"authenticationLandLine": 		string,
-	"registeredByMAccountNumber: 	string,
+	"registeredByMAccountNumber": 	string,
 	"isOnHold": 					boolean,
 	"isClosed": 					boolean,
 	"isStolen": 					boolean,
-	"isLockedToMerMAccountNumber: 	string,
+	"isLockedToMerMAccountNumber": 	string,
 	"isRegistered": 				boolean,
 	"financials": 					mWalletFinancials,
 	"options": 						[
@@ -134,9 +134,9 @@ options |[mWalletOptionItem]| | See mWalletOptionItem class
 
 ```json
 {
-	"actualBalance":		number,
+	"actualBalance":	number,
 	"availableSpend":	number,
-	"availableLoad":		number
+	"availableLoad":	number
 }
 ```
 

@@ -124,9 +124,9 @@ durationMs | number | This can be ignored. This value represents the total time 
 ```json
 {
   	"oneShotSecurityToken":  string,
-  	"status":			 	         string,
-  	"statusDescription": 	   string,
-  	"durationMs":		 	       number
+  	"status":                string,
+  	"statusDescription":     string,
+  	"durationMs":            number
 }
 ```
 
@@ -214,9 +214,9 @@ durationMs | number | This can be ignored. This value represents the total time 
 
 ```json
 {
-  	"status":			 	      string,
-  	"statusDescription": 	string,
-  	"durationMs":		 	    number
+  	"status":            string,
+  	"statusDescription": string,
+  	"durationMs":        number
 }
 ```
 
@@ -247,10 +247,10 @@ durationMs | number | This can be ignored. This value represents the total time 
 
 ```json
 {
-	"impersonationToken":	  string,
-  	"status":			 	      string,
-  	"statusDescription": 	string,
-  	"durationMs":		 	    number
+	"impersonationToken":  string,
+  	"status":            string,
+  	"statusDescription": string,
+  	"durationMs":        number
 }
 ```
 
@@ -293,9 +293,9 @@ durationMs | number | This can be ignored. This value represents the total time 
 
 ```json
 {
-  	"status":			 	      string,
-  	"statusDescription": 	string,
-  	"durationMs":		 	    number
+  	"status":            string,
+  	"statusDescription": string,
+  	"durationMs":        number
 }
 ```
 
@@ -351,11 +351,11 @@ durationMs | number | This can be ignored. This value represents the total time 
   	"childMAccountMonthlyFeeExGst":  number,
   	"disbursementFees":              [
                                         DisbursementFeeDetail
-					  				                 ],
+                                     ],
   	"loadFees":                      [
                                         LoadFeeDetail
-					  				                 ],
-  	"status": 						           string,
+		                                 ],
+  	"status":                        string,
   	"statusDescription":             string,
   	"durationMs":                    number
 }

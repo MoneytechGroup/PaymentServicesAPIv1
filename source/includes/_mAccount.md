@@ -59,25 +59,25 @@ name | string | This is the formal name of the charity
 
 ```json
 {
-  "accountNumber":    string,  // This field is ignored in create
-  "allowDuplicates":  boolean, // This field is only used in create
-  "name":             string,
-  "abn":              string,
-  "contactName":      string,
-  "contactNumber":    string,
-  "email":            string,
-  "addressLine1":     string,
-  "addressLine2":     string,
-  "suburb":           string,
-  "state":            string,
-  "postCode":         string,
-  "bsb":              string,
-  "bankAccountNumber: string,
-  "bankAccountTitle": string,
-  "financials":       mAccountFinancials,
-  "options":          [
-                        mAccountOptionItem
-                      ]
+  "accountNumber":      string,  // This field is ignored in create
+  "allowDuplicates":    boolean, // This field is only used in create
+  "name":               string,
+  "abn":                string,
+  "contactName":        string,
+  "contactNumber":      string,
+  "email":              string,
+  "addressLine1":       string,
+  "addressLine2":       string,
+  "suburb":             string,
+  "state":              string,
+  "postCode":           string,
+  "bsb":                string,
+  "bankAccountNumber":  string,
+  "bankAccountTitle":   string,
+  "financials":         mAccountFinancials,
+  "options":            [
+                          mAccountOptionItem
+                        ]
 }
 ```
 
@@ -188,12 +188,10 @@ SendMonthlyStatement | “true” or “false” | Set to “true” if you woul
 Supplies the account number whose password is to be reset and landing page that the generated email uses to activate the new password.
 
 
-Field Name|Type| Description
-----|---|------
+Field Name|Type| Max Size | Description
+----|---|----|----
 *accountNumber | string | 16 |  16-Digit account number that uniquely identifies the mAccount. 
-resetUrlLandingPage |string | 500 | "The email generated contains a hyperlink that refers to this page that allows the user to activate the auto-generated password.
-This URL will have a query param auth appended for use in activation. 
-If this parameter is empty then the default page used is the default mAccount activation web page."
+resetUrlLandingPage |string | 500 | The email generated contains a hyperlink that refers to this page that allows the user to activate the auto-generated password. This URL will have a query param auth appended for use in activation.  If this parameter is empty then the default page used is the default mAccount activation web page.
 *Required Field
 
 
@@ -363,25 +361,25 @@ durationMs | number | This can be ignored. This value represents the total time 
 
 ```json
 {
-  "accountNumber":    string,  // This field is ignored in create
-  "allowDuplicates":  boolean, // This field is only used for create
-  "name":             string,
-  "abn":              string,
-  "contactName":      string,
-  "contactNumber":    string,
-  "email":            string,
-  "addressLine1":     string,
-  "addressLine2":     string,
-  "suburb":           string,
-  "state":            string,
-  "postCode":         string,
-  "bsb":              string,
-  "bankAccountNumber: string,
-  "bankAccountTitle:  string,
-  "financials":       mAccountFinancials, // This field is ignored in create
-  "options":          [
-                        mAccountOptionItem
-                      ]
+  "accountNumber":      string,  // This field is ignored in create
+  "allowDuplicates":    boolean, // This field is only used for create
+  "name":               string,
+  "abn":                string,
+  "contactName":        string,
+  "contactNumber":      string,
+  "email":              string,
+  "addressLine1":       string,
+  "addressLine2":       string,
+  "suburb":             string,
+  "state":              string,
+  "postCode":           string,
+  "bsb":                string,
+  "bankAccountNumber":  string,
+  "bankAccountTitle":   string,
+  "financials":         mAccountFinancials, // This field is ignored in create
+  "options":            [
+                          mAccountOptionItem
+                        ]
 }
 ```
 
@@ -423,9 +421,9 @@ durationMs | number | This can be ignored. This value represents the total time 
 ```json
 {
   "financials":         mAccountFinancials,
-  "status":                string,
-  "statusDescription":     string,
-  "durationMs":            number
+  "status":             string,
+  "statusDescription":  string,
+  "durationMs":         number
 }
 ```
 
@@ -572,12 +570,12 @@ durationMs | number | This can be ignored. This value represents the total time 
 ```json
 {
   "accountNumber":  string,
-  "startDate":    string,
-  "endDate":      string,
-  "skip":       number,
-  "take":       number,
+  "startDate":      string,
+  "endDate":        string,
+  "skip":           number,
+  "take":           number,
   "descending":     boolean,
-  "useTime":      boolean
+  "useTime":        boolean
 }
 ```
 

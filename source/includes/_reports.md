@@ -5,7 +5,7 @@
 
 ```json
 {
-	"disbursementAmount: 		number,
+	"disbursementAmount": 		number,
 	"transactionId": 			number,
 	"uniqueReferenced": 		string, 
 	"disbursementMethod": 		string,

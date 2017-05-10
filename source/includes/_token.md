@@ -69,14 +69,14 @@ amount | number | Amount as shown on the Bill. Must be a valid amount on token c
 
 ```json
 {
-	"accountNumber": 	string, // TokenPayloadBase
-	"tokenToUpdate": 	string, // TokenPayloadBase
-	"description": 		string, // TokenPayloadBase
-	"creditCardNumber: 	string,
-	"expiryMonth": 		number,
-	"expiryYear": 		number,
-	"cvn": 				string,
-	"name": 			string
+	"accountNumber":	string, // TokenPayloadBase
+	"tokenToUpdate":	string, // TokenPayloadBase
+	"description":		string, // TokenPayloadBase
+	"creditCardNumber":	string,
+	"expiryMonth":		number,
+	"expiryYear":		number,
+	"cvn":				string,
+	"name":				string
 }
 ```
 
@@ -98,7 +98,7 @@ name|string|100|Name appearing on the card. Must not be blank or empty.
 	"token": 		string,
 	"hint": 		string,
 	"payloadType": 	string,
-	“description”: 	string
+	"description": 	string
 }
 ```
 
@@ -117,12 +117,12 @@ description | string | Text supplied when the token was created.
 
 ```json
 {
-	"accountNumber": 	string, 	// TokenPayloadBase
-	"tokenToUpdate": 	string, 	// TokenPayloadBase – Not used for create
-	"description": 		string, 	// TokenPayloadBase
-	"bankAccountName": 	string,
-	"bsb": 				string,
-	"bankAccountNumber": string
+	"accountNumber": 		string, 	// TokenPayloadBase
+	"tokenToUpdate": 		string, 	// TokenPayloadBase – Not used for create
+	"description": 			string, 	// TokenPayloadBase
+	"bankAccountName": 		string,
+	"bsb": 					string,
+	"bankAccountNumber":	string
 }
 ```
 
@@ -169,12 +169,12 @@ durationMs | number | This can be ignored. This value represents the total time 
 
 ```json
 {
-	"accountNumber": 	string, 	// TokenPayloadBase
-	"tokenToUpdate": 	string, 	// TokenPayloadBase – Not used for create
-	"description": 		string, 	// TokenPayloadBase
-	"bankAccountName": 	string,
-	"bsb": 				string,
-	"bankAccountNumber": string
+	"accountNumber": 		string, 	// TokenPayloadBase
+	"tokenToUpdate": 		string, 	// TokenPayloadBase – Not used for create
+	"description": 			string, 	// TokenPayloadBase
+	"bankAccountName": 		string,
+	"bsb": 					string,
+	"bankAccountNumber":	string
 }
 ```
 
@@ -220,7 +220,7 @@ durationMs | number | This can be ignored. This value represents the total time 
 	"accountNumber":	string, 	// TokenPayloadBase
 	"tokenToUpdate":	string, 	// TokenPayloadBase – Not used for create
 	"description":		string, 	// TokenPayloadBase
-	"creditCardNumber:	string,
+	"creditCardNumber":	string,
 	"expiryMonth":		number,
 	"expiryYear":		number,
 	"cvn":				string,
@@ -358,12 +358,12 @@ durationMs | number | This can be ignored. This value represents the total time 
 
 ```json
 {
-	"accountNumber": 	string, 	// TokenPayloadBase
-	"tokenToUpdate": 	string, 	// TokenPayloadBase – Not used for create
-	"description": 		string, 	// TokenPayloadBase
-	"bankAccountName": 	string,
-	"bsb": 				string,
-	"bankAccountNumber": string
+	"accountNumber": 		string, 	// TokenPayloadBase
+	"tokenToUpdate": 		string, 	// TokenPayloadBase – Not used for create
+	"description": 			string, 	// TokenPayloadBase
+	"bankAccountName": 		string,
+	"bsb": 					string,
+	"bankAccountNumber":	string
 }
 
 ```
@@ -414,7 +414,7 @@ durationMs | number | This can be ignored. This value represents the total time 
 	"tokenToUpdate": 			string,  // TokenPayloadBase
 	"description": 				string,  // TokenPayloadBase
 	"billerCode": 				number,
-	"customerReferenceNumber: 	string,
+	"customerReferenceNumber": 	string,
 	"amount": 					number
 }
 ```
@@ -461,7 +461,7 @@ durationMs | number | This can be ignored. This value represents the total time 
 	"accountNumber":	string, 	// TokenPayloadBase
 	"tokenToUpdate":	string, 	// TokenPayloadBase – Not used for create
 	"description":		string, 	// TokenPayloadBase
-	"creditCardNumber:	string,
+	"creditCardNumber":	string,
 	"expiryMonth":		number,
 	"expiryYear":		number,
 	"cvn":				string,
