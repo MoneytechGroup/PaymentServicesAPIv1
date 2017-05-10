@@ -603,7 +603,7 @@ statusDescription | string | This is a plain English description of the status. 
 durationMs | number | This can be ignored. This value represents the total time in milliseconds that thePlatform took to process the request.
 
 
-## Financial Status Code Descriptions
+## Status Codes and Descriptions
 
 This section documents the returned status codes for bothtransaction and refund APIs along with the default descriptions. Descriptions may not match exactly as in many cases the invalid value will be returned as part of the description. If the description contains an array[‘]’ the returned description will contain the actual index containing the error eg. ‘[2]’
 

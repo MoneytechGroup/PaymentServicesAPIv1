@@ -232,7 +232,7 @@ statusDescription | string | This is a plain English description of the status
 durationMs | number | This can be ignored. This value represents the total time in milliseconds that the Platform took to process the request
 
 
-## Database Status and Description
+## Status Codes and Descriptions
 
 Status Code | Description | HTTP Status
 ------------|-------------|------------

@@ -3,7 +3,7 @@ title: MoneyTech RESTful Payment Gateway API Reference
 
 language_tabs:
   - shell: cURL
-  - python: Ruby
+  - python: Python
   - javascript: NodeJS
 
 toc_footers:
@@ -51,31 +51,47 @@ The Platform is a payment gateway developed by Moneytech Payments which provides
 
 > To authorize, use this code:
 
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-```
-
 ```python
-import kittn
+from requests.auth import HTTPBasicAuth
 
-api = kittn.authorize('meowmeowmeow')
+requests.get("BASE_URL+SOME_ENDPOINT", auth=HTTPBasicAuth('user', 'pass'))
 ```
 
 ```shell
 # With shell, you can just pass the correct header with each request
-curl "api_endpoint_here"
-  -H "Authorization: meowmeowmeow"
+curl --basic --user user:password BASE_URL+SOME_ENDPOINT
 ```
 
 ```javascript
-const kittn = require('kittn');
+var options = {
+   host: 'BASE_URL',
+   port: 443,
+   path: 'SOME_ENDPOINT',
+   // authentication headers
+   headers: {
+      'Authorization': 'Basic ' + new Buffer(user + ':' + pass).toString('base64')
+   }   
+};
 
-let api = kittn.authorize('meowmeowmeow');
+//this is the call
+request = https.get(options, function(res){
+   var body = "";
+   res.on('data', function(data) {
+      body += data;
+   });
+   res.on('end', function() {
+    //here we have the full response, html or json object
+      console.log(body);
+   })
+   res.on('error', function(e) {
+      onsole.log("Got error: " + e.message);
+   });
+  });
+
+}
 ```
 
-> Make sure to replace `meowmeowmeow` with your API key.
+> Make sure to replace user and pass with your authentication details.
 
 **Live Authentication Credentials**
 

@@ -3,9 +3,9 @@
 
 The security/v1 APIs provide services to manage security tokens which give you an alternative to using UserName/Password for BASIC authentication for each API call. Security tokens come in three forms:
 
-	- OneShotSecurityToken
-	- SecurityToken
-	- ImpersonationSecurityToken
+ * OneShotSecurityToken
+ * SecurityToken
+ * ImpersonationSecurityToken
 
 
 All three security tokens operate exactly the same. The token is used to replace your UserName when configuring BASIC Authentication (no password is required, it will be ignored if supplied). Each token type has an expiry time between 1 and 15 minutes.
@@ -121,10 +121,10 @@ durationMs | number | This can be ignored. This value represents the total time 
 
 ```json
 {
-  	"oneShotSecurityToken": string,
-  	"status":			 	string,
-  	"statusDescription": 	string,
-  	"durationMs":		 	number
+  	"oneShotSecurityToken":  string,
+  	"status":			 	         string,
+  	"statusDescription": 	   string,
+  	"durationMs":		 	       number
 }
 ```
 
@@ -166,10 +166,10 @@ durationMs | number | This can be ignored. This value represents the total time 
 
 ```json
 {
-  	"securityToken": 		string,
-  	"status":			 	string,
+  	"securityToken": 		  string,
+  	"status":			 	      string,
   	"statusDescription": 	string,
-  	"durationMs":		 	number
+  	"durationMs":		 	    number
 }
 ```
 
@@ -212,9 +212,9 @@ durationMs | number | This can be ignored. This value represents the total time 
 
 ```json
 {
-  	"status":			 	string,
+  	"status":			 	      string,
   	"statusDescription": 	string,
-  	"durationMs":		 	number
+  	"durationMs":		 	    number
 }
 ```
 
@@ -245,10 +245,10 @@ durationMs | number | This can be ignored. This value represents the total time 
 
 ```json
 {
-	"impersonationToken":	string,
-  	"status":			 	string,
+	"impersonationToken":	  string,
+  	"status":			 	      string,
   	"statusDescription": 	string,
-  	"durationMs":		 	number
+  	"durationMs":		 	    number
 }
 ```
 
@@ -291,9 +291,9 @@ durationMs | number | This can be ignored. This value represents the total time 
 
 ```json
 {
-  	"status":			 	string,
+  	"status":			 	      string,
   	"statusDescription": 	string,
-  	"durationMs":		 	number
+  	"durationMs":		 	    number
 }
 ```
 
@@ -331,31 +331,31 @@ durationMs | number | This can be ignored. This value represents the total time 
 
 ```json
 {
-  	"canDebitCreditCards": boolean,
-  	"canPayBpay": 					boolean,
-  	"canImpersonate": 				boolean,
-  	"canDirectDebit": 				boolean,
-  	"canDirectCredit": 				boolean,
-  	"canCreateMAccounts": 			boolean,
-  	"canCreateMWallets": 			boolean,
-  	"canAccessUserDatabase": 		boolean,
-  	"isIssuer": 					boolean,
-  	"issuerMAccountNumber": 		string,
-  	"monthlyFeeExGst": 				number,
-  	"clearingMAccountNumber": 		string,
-  	"feeMAccountNumber": 			string,
-  	"feeMAccountMonthlyFeeExGst: 	number,
-  	"childMAccountSetupFeeExGst: 	number,
-  	"childMAccountMonthlyFeeExGst:	number,
-  	"disbursementFees": 			[
-										DisbursementFeeDetail
-					  				],
-  	"loadFees": 					[
-										LoadFeeDetail
-					  				],
-  	"status": 						string,
-  	"statusDescription":			string,
-  	"durationMs": 					number
+  	"canDebitCreditCards":           boolean,
+  	"canPayBpay":                    boolean,
+  	"canImpersonate":                boolean,
+  	"canDirectDebit":                boolean,
+  	"canDirectCredit":               boolean,
+  	"canCreateMAccounts":            boolean,
+  	"canCreateMWallets":             boolean,
+  	"canAccessUserDatabase":         boolean,
+  	"isIssuer":                      boolean,
+  	"issuerMAccountNumber":          string,
+  	"monthlyFeeExGst":               number,
+  	"clearingMAccountNumber":        string,
+  	"feeMAccountNumber":             string,
+  	"feeMAccountMonthlyFeeExGst":    number,
+  	"childMAccountSetupFeeExGst":    number,
+  	"childMAccountMonthlyFeeExGst":  number,
+  	"disbursementFees":              [
+                                        DisbursementFeeDetail
+					  				                 ],
+  	"loadFees":                      [
+                                        LoadFeeDetail
+					  				                 ],
+  	"status": 						           string,
+  	"statusDescription":             string,
+  	"durationMs":                    number
 }
 
 ```
@@ -395,7 +395,7 @@ statusDescription | string | This is a plain English description of the status. 
 durationMs | number | This can be ignored. This value represents the total time in milliseconds that thePlatform took to process the request.
 
 
-## Status and Description
+## Status Codes and Descriptions
 
 Status Code | Description | HTTP Status
 ---|---|---

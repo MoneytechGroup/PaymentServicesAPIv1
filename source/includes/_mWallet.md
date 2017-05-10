@@ -786,7 +786,7 @@ statusDescription | string | This is a plain English description of the status. 
 durationMs | number | This can be ignored. This value represents the total time in milliseconds that thePlatform took to process the request.
 
 
-## Status and Description
+## Status Codes and Descriptions
 
 Status Code	| Description |HTTP Status
 ---- | --------| ---------

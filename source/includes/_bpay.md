@@ -333,7 +333,7 @@ statusDescription | string | This is a plain English description of the status
 durationMs | number | This can be ignored. This value represents the total time in milliseconds that the Platform took to process the request
 
 
-## Statuses
+## Status Codes and Descriptions
 
 This section documents the returned status codes and the default descriptions.
 
