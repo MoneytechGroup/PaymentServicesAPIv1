@@ -359,6 +359,32 @@ durationMs | number | This can be ignored. This value represents the total time 
 
 ## Create
 
+> The above comand expects a JSON payload like this:
+
+```json
+{
+  "accountNumber":    string,  // This field is ignored in create
+  "allowDuplicates":  boolean, // This field is only used for create
+  "name":             string,
+  "abn":              string,
+  "contactName":      string,
+  "contactNumber":    string,
+  "email":            string,
+  "addressLine1":     string,
+  "addressLine2":     string,
+  "suburb":           string,
+  "state":            string,
+  "postCode":         string,
+  "bsb":              string,
+  "bankAccountNumber: string,
+  "bankAccountTitle:  string,
+  "financials":       mAccountFinancials, // This field is ignored in create
+  "options":          [
+                        mAccountOptionItem
+                      ]
+}
+```
+
 > The above command returns JSON structured like this:
 
 ```json
@@ -374,33 +400,11 @@ This API creates an mAccount.
 
 ### HTTP Request
 
-`POST BASE_URL + /mAccount/v1/close/{accountNumber}`
+`POST BASE_URL + /mAccount/v1/create`
 
 ### Request Body Schema
 
-```json
-{
-	"accountNumber": 	string,  // This field is ignored in create
-	"allowDuplicates":  boolean, // This field is only used for create
-	"name": 			string,
-	"abn": 				string,
-	"contactName": 		string,
-	"contactNumber": 	string,
-	"email": 			string,
-	"addressLine1": 	string,
-	"addressLine2": 	string,
-	"suburb": 			string,
-	"state": 			string,
-	"postCode": 		string,
-	"bsb": 				string,
-	"bankAccountNumber: string,
-	"bankAccountTitle:  string,
-	"financials":       mAccountFinancials, // This field is ignored in create
-	"options":          [
-					      mAccountOptionItem
-				        ]
-}
-```
+See mAccountDetails object.
 
 ### Response Field Descriptions ###
 
@@ -520,6 +524,17 @@ durationMs | number | This can be ignored. This value represents the total time 
 
 ## Send Statement
 
+> The above command expects a JSON payload structured like this:
+
+```json
+{
+  "accountNumber": string,
+  "frequency":     string,
+  "startDate":     string,
+  "endDate":       string
+}
+```
+
 > The above command returns JSON structured like this:
 
 ```json
@@ -539,18 +554,7 @@ This API generates a detailed pdf statement for delivery via email.
 
 ### Request Body Schema
 
-```json
-{
-	"accountNumber": string,
-	"frequency":     string,
-	"startDate":     string,
-	"endDate":       string
-}
-```
-
-Field Name | Description
----- | ----
-accountNumber|16-Digit number representing the required mAccount
+See mWalletSelectionFilter object
 
 ### Response Field Descriptions ###
 
@@ -562,6 +566,20 @@ durationMs | number | This can be ignored. This value represents the total time 
 
 
 ## Transactions
+
+> The above command expects a JSON payload structured like this:
+
+```json
+{
+  "accountNumber":  string,
+  "startDate":    string,
+  "endDate":      string,
+  "skip":       number,
+  "take":       number,
+  "descending":     boolean,
+  "useTime":      boolean
+}
+```
 
 > The above command returns JSON structured like this:
 
@@ -582,17 +600,7 @@ This API generates a detailed pdf statement for delivery via email.
 
 ### Request Body Schema
 
-```json
-{
-	"accountNumber": 	string,
-	"startDate": 		string,
-	"endDate": 			string,
-	"skip": 			number,
-	"take": 			number,
-	"descending": 		boolean,
-	"useTime": 			boolean
-}
-```
+See mAccountTransactionRequestDetails object
 
 
 ### Response Field Descriptions ###
@@ -611,6 +619,31 @@ durationMs | number | This can be ignored. This value represents the total time 
 
 
 ## Update
+
+> The above command expects a JSON payload structured like this:
+
+```json
+{
+  "accountNumber":      string, 
+  "name":               string,
+  "abn":                string,
+  "contactName":        string,
+  "contactNumber":      string,
+  "email":              string,
+  "addressLine1":       string,
+  "addressLine2":       string,
+  "suburb":             string,
+  "state":              string,
+  "postCode":           string,
+  "bsb":                string,
+  "bankAccountNumber":  string,
+  "bankAccountTitle":   string,
+  "financials":         mAccountFinancials,   // This field is ignored in update
+  "options":            [
+                          mAccountOptionItem
+                        ]
+}
+```
 
 > The above command returns JSON structured like this:
 
@@ -634,28 +667,7 @@ The information retrieved is in real-time and represents the same details as dis
 
 ### Request Body Schema
 
-```json
-{
-  "accountNumber": 		string, 
-  "name": 				string,
-  "abn": 				string,
-  "contactName": 		string,
-  "contactNumber": 		string,
-  "email": 				string,
-  "addressLine1": 		string,
-  "addressLine2": 		string,
-  "suburb": 			string,
-  "state": 				string,
-  "postCode": 			string,
-  "bsb": 				string,
-  "bankAccountNumber":  string,
-  "bankAccountTitle":   string,
-  "financials": 		mAccountFinancials, 	// This field is ignored in update
-  "options": 			[
-							       mAccountOptionItem
-  						    ]
-}
-```
+See mAccountDetails object
 
 
 ### Response Field Descriptions ###

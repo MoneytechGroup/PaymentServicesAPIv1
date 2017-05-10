@@ -380,6 +380,24 @@ durationMs | number | This can be ignored. This value represents the total time 
 
 ## Create
 
+> The above command expects a JSON payload structured like this:
+
+```json
+{
+       "identifier":	  string,
+       "pin":			  string,
+       "name":			  string,
+       "nickName":		  string,
+       "dateOfBirth":	  string,
+       "phone":			  string,
+       "email":			  string,
+       "allowDuplicates": boolean,
+       "options":         [
+							mWalletOptionItem
+  						  ]
+}
+```
+
 > The above command returns JSON structured like this:
 
 ```json
@@ -408,25 +426,11 @@ If the customer forgets their pin then it can be reset using the ResetPin functi
 
 ### HTTP Request
 
-`POST BASE_URL + /mAccount/v1/close/{accountNumber}`
+`POST BASE_URL + /mAccount/v1/create`
 
 ### Request Body Schema
 
-```json
-{
-       "identifier":	  string,
-       "pin":			  string,
-       "name":			  string,
-       "nickName":		  string,
-       "dateOfBirth":	  string,
-       "phone":			  string,
-       "email":			  string,
-       "allowDuplicates": boolean,
-       "options":         [
-							mWalletOptionItem
-  						  ]
-}
-```
+See mWalletCreate object
 
 ### Response Field Descriptions ###
 
@@ -558,6 +562,16 @@ durationMs | number | This can be ignored. This value represents the total time 
 
 ## Reset PIN
 
+> The above command expects a JSON payload structured like this:
+
+```json
+{
+       "accountNumber": string,
+       "pin": 			string,
+       "dateOfBirth":	string
+}
+```
+
 > The above command returns JSON structured like this:
 
 ```json
@@ -579,15 +593,7 @@ This API should be used when a customer has forgotten their pin.
 
 ### Request Body Schema
 
-
-```json
-{
-       "accountNumber": string,
-       "pin": 			string,
-       "dateOfBirth":	string
-}
-```
-
+See mWalletResetPin object.
 
 ### Response Field Descriptions ###
 
@@ -599,6 +605,17 @@ durationMs | number | This can be ignored. This value represents the total time 
 
 
 ## Send Statement
+
+> The above command expects a JSON payload structured like this:
+
+```json
+{
+	"accountNumber": 	string,
+	"frequency": 		string,
+	"startDate": 		string,
+	"endDate": 			string
+}
+```
 
 > The above command returns JSON structured like this:
 
@@ -618,14 +635,7 @@ This API generates a detailed pdf statement for delivery via email. An error cod
 
 ### Request Body Schema
 
-```json
-{
-	"accountNumber": 	string,
-	"frequency": 		string,
-	"startDate": 		string,
-	"endDate": 			string
-}
-```
+See mWalletSelectionFilter object
 
 
 ### Response Field Descriptions ###
@@ -638,6 +648,21 @@ durationMs | number | This can be ignored. This value represents the total time 
 
 
 ## Transactions
+
+> The above command expects a JSON payload structured like this:
+
+```json
+{
+	"accountNumber":	string,
+	"pin": 				string,
+	"startDate":		string,
+	"endDate": 			string,
+	"skip": 			number,
+	"take": 			number,
+	"descending": 		boolean,
+	"useTime":			boolean
+}
+```
 
 > The above command returns JSON structured like this:
 
@@ -667,18 +692,9 @@ The information retrieved is in real-time and represents the same details as dis
 
 ### Request Body Schema
 
-```json
-{
-	"accountNumber":	string,
-	"pin": 				string,
-	"startDate":		string,
-	"endDate": 			string,
-	"skip": 			number,
-	"take": 			number,
-	"descending": 		boolean,
-	"useTime":			boolean
-}
-```
+See mWalletTransactionRequestDetails object.
+
+
 
 
 ### Response Field Descriptions ###
@@ -696,6 +712,22 @@ durationMs | number | This can be ignored. This value represents the total time 
 
 
 ## Update
+
+> The above command expects a JSON payload structured like this:
+
+```json
+{
+	"accountNumber":	string,
+	"pin":				string,
+	"name":				string,
+	"nickName":			string,
+	"phone":			string,
+	"email":			string,
+	"options":			[
+				  			mWalletOptionItem
+					  	]
+}
+```
 
 > The above command returns JSON structured like this:
 
@@ -722,19 +754,7 @@ The pin or dateOfBirth Dates are not updateable.
 
 ### Request Body Schema
 
-```json
-{
-	"accountNumber":	string,
-	"pin":				string,
-	"name":				string,
-	"nickName":			string,
-	"phone":			string,
-	"email":			string,
-	"options":			[
-				  			mWalletOptionItem
-					  	]
-}
-```
+See mWalletUpdate object.
 
 
 ### Response Field Descriptions ###
@@ -767,7 +787,7 @@ If the returned value of status is “OK” then the PIN is valid. If the value 
 
 ### HTTP Request
 
-`POST BASE_URL + /mWallet/v1/update`
+`GET BASE_URL + /mWallet/v1/validatePin/{accountNumber}/{pin}`
 
 ### Request Parameter Fields
 

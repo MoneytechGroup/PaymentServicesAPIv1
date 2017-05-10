@@ -113,6 +113,19 @@ description | string | Text supplied when the token was created.
 
 ## Create Australian Bank Account
 
+> The above command expects a JSON payload structured like this:
+
+```json
+{
+	"accountNumber": 	string, 	// TokenPayloadBase
+	"tokenToUpdate": 	string, 	// TokenPayloadBase – Not used for create
+	"description": 		string, 	// TokenPayloadBase
+	"bankAccountName": 	string,
+	"bsb": 				string,
+	"bankAccountNumber": string
+}
+```
+
 > The above command returns JSON structured like this:
 
 ```json
@@ -136,17 +149,8 @@ The new password must be passed in twice in fields password1 and password2.
 
 ### Request Body Schema
 
-```json
-{
-	"accountNumber": 	string, 	// TokenPayloadBase
-	"tokenToUpdate": 	string, 	// TokenPayloadBase – Not used for create
-	"description": 		string, 	// TokenPayloadBase
-	"bankAccountName": 	string,
-	"bsb": 				string,
-	"bankAccountNumber": string
-}
+See TokenAustralianBankAccountPayload object.
 
-```
 
 ### Response Field Descriptions ###
 
@@ -160,6 +164,19 @@ durationMs | number | This can be ignored. This value represents the total time 
 
 
 ## Create BPAY
+
+> The above command expects a JSON payload structured like this:
+
+```json
+{
+	"accountNumber": 	string, 	// TokenPayloadBase
+	"tokenToUpdate": 	string, 	// TokenPayloadBase – Not used for create
+	"description": 		string, 	// TokenPayloadBase
+	"bankAccountName": 	string,
+	"bsb": 				string,
+	"bankAccountNumber": string
+}
+```
 
 > The above command returns JSON structured like this:
 
@@ -181,17 +198,7 @@ This API creates a token representing BPAY details by passing a TokenBPAYPayload
 
 ### Request Body Schema
 
-```json
-{
-	"accountNumber": 	string, 	// TokenPayloadBase
-	"tokenToUpdate": 	string, 	// TokenPayloadBase – Not used for create
-	"description": 		string, 	// TokenPayloadBase
-	"bankAccountName": 	string,
-	"bsb": 				string,
-	"bankAccountNumber": string
-}
-
-```
+See TokenBPAYPayload object.
 
 ### Response Field Descriptions ###
 
@@ -205,6 +212,21 @@ durationMs | number | This can be ignored. This value represents the total time 
 
 
 ## Create Credit Cards
+
+> The above command expects a JSON payload structured like this:
+
+```json
+{
+	"accountNumber":	string, 	// TokenPayloadBase
+	"tokenToUpdate":	string, 	// TokenPayloadBase – Not used for create
+	"description":		string, 	// TokenPayloadBase
+	"creditCardNumber:	string,
+	"expiryMonth":		number,
+	"expiryYear":		number,
+	"cvn":				string,
+	"name":				string
+}
+```
 
 > The above command returns JSON structured like this:
 
@@ -226,18 +248,7 @@ This API creates a token representing BPAY details by passing a TokenBPAYPayload
 
 ### Request Body Schema
 
-```json
-{
-	"accountNumber":	string, 	// TokenPayloadBase
-	"tokenToUpdate":	string, 	// TokenPayloadBase – Not used for create
-	"description":		string, 	// TokenPayloadBase
-	"creditCardNumber:	string,
-	"expiryMonth":		number,
-	"expiryYear":		number,
-	"cvn":				string,
-	"name":				string
-}
-```
+See TokenCreditCardPayload object.
 
 ### Response Field Descriptions ###
 
@@ -343,6 +354,20 @@ durationMs | number | This can be ignored. This value represents the total time 
 
 ## Update Australian Bank Account
 
+> The above command expects a JSON payload structured like this:
+
+```json
+{
+	"accountNumber": 	string, 	// TokenPayloadBase
+	"tokenToUpdate": 	string, 	// TokenPayloadBase – Not used for create
+	"description": 		string, 	// TokenPayloadBase
+	"bankAccountName": 	string,
+	"bsb": 				string,
+	"bankAccountNumber": string
+}
+
+```
+
 > The above command returns JSON structured like this:
 
 ```json
@@ -366,17 +391,7 @@ The new password must be passed in twice in fields password1 and password2.
 
 ### Request Body Schema
 
-```json
-{
-	"accountNumber": 	string, 	// TokenPayloadBase
-	"tokenToUpdate": 	string, 	// TokenPayloadBase – Not used for create
-	"description": 		string, 	// TokenPayloadBase
-	"bankAccountName": 	string,
-	"bsb": 				string,
-	"bankAccountNumber": string
-}
-
-```
+See TokenAustralianBankAccountPayload object.
 
 ### Response Field Descriptions ###
 
@@ -390,6 +405,19 @@ durationMs | number | This can be ignored. This value represents the total time 
 
 
 ## Update BPAY
+
+> The above command expects a JSON payload structured like this:
+
+```json
+{
+	"accountNumber": 			string,  // TokenPayloadBase
+	"tokenToUpdate": 			string,  // TokenPayloadBase
+	"description": 				string,  // TokenPayloadBase
+	"billerCode": 				number,
+	"customerReferenceNumber: 	string,
+	"amount": 					number
+}
+```
 
 > The above command returns JSON structured like this:
 
@@ -411,17 +439,7 @@ This API provides the ability to update the payload associated with an existing 
 
 ### Request Body Schema
 
-```json
-{
-	"accountNumber": 	string, 	// TokenPayloadBase
-	"tokenToUpdate": 	string, 	// TokenPayloadBase – Not used for create
-	"description": 		string, 	// TokenPayloadBase
-	"bankAccountName": 	string,
-	"bsb": 				string,
-	"bankAccountNumber": string
-}
-
-```
+See TokenBPAYPayload object.
 
 ### Response Field Descriptions ###
 
@@ -435,6 +453,21 @@ durationMs | number | This can be ignored. This value represents the total time 
 
 
 ## Update Credit Card
+
+> The above command expects a JSON payload structured like this:
+
+```json
+{
+	"accountNumber":	string, 	// TokenPayloadBase
+	"tokenToUpdate":	string, 	// TokenPayloadBase – Not used for create
+	"description":		string, 	// TokenPayloadBase
+	"creditCardNumber:	string,
+	"expiryMonth":		number,
+	"expiryYear":		number,
+	"cvn":				string,
+	"name":				string
+}
+```
 
 > The above command returns JSON structured like this:
 
@@ -456,18 +489,7 @@ This API creates a token representing BPAY details by passing a TokenBPAYPayload
 
 ### Request Body Schema
 
-```json
-{
-	"accountNumber":	string, 	// TokenPayloadBase
-	"tokenToUpdate":	string, 	// TokenPayloadBase – Not used for create
-	"description":		string, 	// TokenPayloadBase
-	"creditCardNumber:	string,
-	"expiryMonth":		number,
-	"expiryYear":		number,
-	"cvn":				string,
-	"name":				string
-}
-```
+See TokenCreditCardPayload object.
 
 ### Response Field Descriptions
 

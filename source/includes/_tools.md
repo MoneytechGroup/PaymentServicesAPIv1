@@ -181,6 +181,21 @@ durationMs | number | This can be ignored. This value represents the total time 
 
 ## Validate Credit Card
 
+> The above command expects a JSON payload structured like this:
+
+```json
+{
+	"nameOnCard": 			string,
+	"cardNumber": 			string,
+	"expiryMonth": 			number,
+	"expiryYear": 			number,
+	"cardValidationNumber":	string,
+	"returnFee": 			boolean,
+	"usage": 				string,
+	"amount": 				number
+}
+```
+
 > The above command returns JSON structured like this:
 
 ```json
@@ -198,29 +213,17 @@ The purpose of this API is to return details about a BSB (Bank-State-Branch) num
 
 ### HTTP Request
 
-`POST BASE_URL + /tools/v1/bsbValidate/{bsbNumber}`
+`POST BASE_URL + /tools/v1/creditCardValidate`
 
 ### Request Body Schema
 
-```json
-{
-	"nameOnCard": 			string,
-	"cardNumber": 			string,
-	"expiryMonth": 			number,
-	"expiryYear": 			number,
-	"cardValidationNumber":	string,
-	"returnFee": 			boolean,
-	"usage": 				string,
-	"amount": 				number
-}
-```
+See ValidateCreditCardDetail object
 
 ### Response Field Descriptions
 
 Field Name | Type | Description
 --------- | ------- | -----------
-cardType|string|"If successful, this field will contain the type of Credit-Card. 
- Only  'Visa', 'Mastercard', 'Amex' and 'Diners' are supported. Value will be null on any errors."
+cardType|string|If successful, this field will contain the type of Credit-Card.  Only  'Visa', 'Mastercard', 'Amex' and 'Diners' are supported. Value will be null on any errors.
 fee|CreditCardFee|If successful and the ValidateCreditCardDetail.returnFee field is true, this field will contain an instance of the CreditCardFee class. Value will be null on any errors.
 status | string | This is the status of executing the request. A code of ‘Ok’ indicates no errors. See the sectionStatus & Descriptions
 statusDescription | string | This is a plain English description of the status. See the sectionStatus Description.
@@ -261,6 +264,16 @@ durationMs | number | This can be ignored. This value represents the total time 
 
 ## Send Email to Issuer
 
+> The above command expects a JSON payload structured like this:
+
+```json
+{
+	"subject":		string,
+	"isBodyHtml": 	boolean,
+	"body": 		string
+}
+```
+
 > The above command returns JSON structured like this:
 
 ```json
@@ -280,13 +293,7 @@ The purpose of this API is to provide email functionality for your application t
 
 ### Request Body Schema
 
-```json
-{
-	"subject":		string,
-	"isBodyHtml": 	boolean,
-	"body": 		string
-}
-```
+See EmailBodyDetail object.
 
 ### Response Field Descriptions
 

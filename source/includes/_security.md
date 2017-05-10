@@ -73,6 +73,15 @@ feeFixedExGst |number | The fixed amount to be taken as a fee Excluding GST
 
 ## Change Password
 
+> The above command expects a JSON payload structured like this:
+
+```json
+{
+    "password1": string,
+    "password2": string
+}
+```
+
 > The above command returns JSON structured like this:
 
 ```json
@@ -93,13 +102,6 @@ The new password must be passed in twice in fields password1 and password2.
 `POST BASE_URL + /security/v1/changePassword`
 
 ### Request Body Schema
-
-```json
-{
-  	"password1": string,
-  	"password2": string
-}
-```
 
 Field Name|Type|Length|Description
 ----------|----|-------|-----------

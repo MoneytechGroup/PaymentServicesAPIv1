@@ -13,6 +13,14 @@ The APIs in this section require NO authentication.
 
 ## Activate Password Reset
 
+> The above command expects a JSON payload structured like this:
+
+```json
+{
+	"encryptedCreds": string
+}
+```
+
 > The above command returns JSON structured like this:
 
 ```json
@@ -34,11 +42,7 @@ This API will make active a password that was sent to an mAccount account holder
 
 ### Request Body Schema
 
-```json
-{
-	"encryptedCreds"		: string
-}
-```
+See mAccountActivatePasswordReset object.
 
 ### Response Field Descriptions ###
 
@@ -50,6 +54,16 @@ durationMs | number | This can be ignored. This value represents the total time 
 
 
 ## Send Password Reset Email
+
+> The above command expects a JSON payload structured like this:
+
+```json
+{
+	"accountNumber":		string,
+	"resetUrlLandingPage":	string
+}
+
+```
 
 > The above command returns JSON structured like this:
 
@@ -72,13 +86,7 @@ This API generates a new password that is sent to the mAccount owner via their r
 
 ### Request Body Schema
 
-```json
-{
-	"accountNumber":		string,
-	"resetUrlLandingPage":	string
-}
-
-```
+See mAccountPasswordResetRequest object
 
 ### Response Field Descriptions ###
 

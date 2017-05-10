@@ -31,6 +31,17 @@ data | string | This is the data that was set with the database/v1/add or databa
 
 ## Add
 
+> The above command expects a JSON payload structured like this:
+
+```json
+{
+  "accountNumber": string,
+  "key":           string,
+  "tag":           string,
+  "data":          string
+}
+```
+
 > The above command returns JSON structured like this:
 
 ```json
@@ -154,6 +165,20 @@ durationMs | number | This can be ignored. This value represents the total time 
 
 ## Search
 
+> The above command expects a JSON payload structured like this:
+
+```json
+{
+  "accountNumber":                    string,
+  "key":                              string,
+  "tag":                              string,
+  "isAccountNumberRegularExpression": boolean,
+  "isKeyRegularExpression":           boolean,
+  "isTagRegularExpression":           boolean,
+  "includeData":                      boolean
+} 
+```
+
 > The above command returns JSON structured like this:
 
 ```json
@@ -198,6 +223,15 @@ durationMs | number | This can be ignored. This value represents the total time 
 
 
 ## Update
+
+> The above command expects a JSON payload structured like this:
+
+```json
+{
+  "recordId": number,
+  "data":     string
+} 
+```
 
 > The above command returns JSON structured like this:
 
