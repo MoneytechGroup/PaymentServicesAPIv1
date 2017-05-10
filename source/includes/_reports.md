@@ -1,4 +1,60 @@
 # Reports
+## Objects
+### SettlementItem
+> Schema for this object
+
+```json
+{
+	"disbursementAmount: 		number,
+	"transactionId": 			number,
+	"uniqueReferenced": 		string, 
+	"disbursementMethod": 		string,
+	"feeAmountExclGst": 		number,
+	"feeAmountGstComponent": 	number,
+	"feeAmountInclGst": 		number
+}
+```
+
+The Settlement API returns an array node, providing details of each settlement.
+
+Field Name|Type| Description
+----|---|-------
+disbursementAmount | number | This is the settlement or the requested disbursement amount.
+transactionId | number | This is the transactionId that was returned when the transaction was executed
+uniqueReference | string | This is your uniqueReference that was passed in when the transaction was executed
+disbursementMethod | string | This is the disbursementMethod that was used to make the settlement payment
+feeAmountExclGst | number | This is the fee amount of the disbursement excluding GST
+feeAmountGstComponent | number | This is the GST component of the disbursement fee
+feeAmountInclGst | number | This is the fee amount of the disbursement including GST
+
+### TransactionItem
+> Schema for this object
+
+
+```json
+{
+	"dateTime": 				string,
+	"feeAmountExcludingGst": 	number,
+	"feeAmountGstComponent": 	number,
+	"feeAmountIncludingGst": 	number,
+	"totalAmount": 				number,
+	"transactionId": 			number,
+	"uniqueReferenced": 		string 
+}
+```
+
+The Settlement API returns an array node, providing details of each transaction.
+
+Field Name|Type| Description
+----|---|-------
+dateTime| string | The date time that the transaction was executed on the Platform Servers. Format is ISO8601 - "2015-09-01T19:19:58"
+feeAmountExcludingGst| number | This is the fee amount Excluding GST that has been debited from your mAccount
+feeAmountGstComponent| number | This is the GST Component of the fee amount that has been debited from your mAccount 
+feeAmountIncludingGst| number | This is the total fee amount Including GST that has been debited from your mAccount
+totalAmount| number | This is the total amount of the transaction what was disbursed.
+transactionId| number | This is the transactionId that was returned when the transaction was executed
+uniqueReference| string | This is your uniqueReference that was passed in when the transaction was executed
+
 ## Settlement
 
 > The above command returns JSON structured like this:

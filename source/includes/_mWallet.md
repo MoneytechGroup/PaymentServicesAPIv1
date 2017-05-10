@@ -30,6 +30,317 @@ The following APIs require an mWallet holders 4 digit PIN for authorisation:
 	* mWallet/v1/validatePin
 
 
+## Objects
+
+### mWalletCreate
+> Schema for this object
+
+
+```json
+{
+	"identfier": 		string,
+	"pin": 				string,
+	"name": 			string,
+	"nickName": 		string,
+	"dateOfBirth": 		string,
+	"phone": 			string,
+	"email": 			string,
+	"allowDuplicates":	boolean,
+	"options": 			[
+							WalletOptionItem
+ 				  		]
+}
+```
+
+Provides information to create an mWallet.
+
+
+**Note:**
+
+ Either a phone number, or an email, are required. If a phone number is used then an email is not required and vice versa.
+
+Field Name|Type | Description
+----|---|------
+*identifier|string|300|Email address, Telephone number, landline number or mWallet account number
+*pin|	string	|4|4 digit numerical pin. 
+*name|	String	|50|Full name of customer. 
+nickName|string|20|This is a short form of the customer’s name. 
+*dateOfBirth|	string	|	| Birth date of customer in ISO 8601 date format. This is used when changing the customers private pin number. This date need not be a Date of Birth it is just a significant date to the customer. **THIS FIELD IS THE CUSTOMERS ULTIMATE IDENTIFICATION FIELD AND IS NEEDED TO CHANGE THE PIN. IT CANNOT BE CHANGED BY THIS API.** Note that Timezone is suppressed. The default Timezone is Sydney local time
+phone|	string	|11|Contact phone number. This is not used for authentication. Required field in conjunction with email address that must start with 0.
+email|	string	|300|Contact email. This is not used for authentication. Required field in conjunction with phone and should contain @ and follow normal email format conventions. Converted to lowercase.
+allowDuplicates|boolean	| | Id true, allowes the creation of a duplicate mWallet of any identifier type
+options|	[mWalletOptionItem]| |See mWalletOptionItem class
+*Required Field
+
+### mWalletCreate
+> Schema for this object
+
+
+```json
+{
+	"createdDateTime": 				string,
+	"accountNumber": 				string,
+	"allowDuplicates": 				boolean,
+	"name": 						string,
+	"nickName": 					string,
+	"email": 						string,
+	"mobile": 						string,
+	"lastTransactionDate": 			string,
+	"contactPhone": 				string,
+	"authenticationEmail": 			string,
+	"authenticationMobile": 		string,
+	"authenticationLandLine": 		string,
+	"registeredByMAccountNumber: 	string,
+	"isOnHold": 					boolean,
+	"isClosed": 					boolean,
+	"isStolen": 					boolean,
+	"isLockedToMerMAccountNumber: 	string,
+	"isRegistered": 				boolean,
+	"financials": 					mWalletFinancials,
+	"options": 						[
+										mWalletOptionItem
+  									]
+}
+```
+
+Provides customer detail information as the result of the search operation.
+
+
+Field Name|Type | Description
+----|---|------
+createdDateTime |string	||Date that this customer was created. ISO 8601 date format. Note that Timezone is suppressed. The default Timezone is Sydney local time.
+accountNumber |string|16|16-Digit account number that uniquely identifies the customer.
+name |string|50|Customers full name. 
+nickName |string|20|This is a short form name of the customer. 
+email |string|300|Email address of the customer. 
+mobile |string|15|Mobile phone number of the customer.
+lastTransactionDate|string| | Date of the last transaction that the customer performed. ISO 8601 date format. This is an empty string if no transactions. Note that Timezone is suppressed. The default Timezone is Sydney local time.
+contactPhone|string|15|Contact phone number for customer. Can be a mobile or landline. 
+authenticationEmail|string|300|Unique email address used to authenticate customer. Can be null.
+authenticationMobile|string|15|Unique mobile number used to authenticate customer. Can be null.
+authenticationLandLine|string|15|Unique telephone number used to authenticate customer. Can be null.
+registeredByMAccountNumber|string|16|16-Digit account number of the mAccount who created the customer.
+isOnHold |boolean|	The customer’s account has been put on hold
+isClosed |boolean|	The customer’s account has been closed
+isRegistered |boolean| | The mWallet is registered and is able to purchase restricted items from the mAccount such as BPAY.
+financials |mWalletFinancials| | See mWalletFinancials class
+options |[mWalletOptionItem]| | See mWalletOptionItem class
+*Required Field
+
+
+### mWalletFinancials
+> Schema for this object
+
+
+```json
+{
+	"actualBalance":		number,
+	"availableSpend":	number,
+	"availableLoad":		number
+}
+```
+
+Provides current mWallet financial values
+
+
+Field Name|Type | Description
+----|---|------
+actualBalance|number|Current remaining balance on the mWallet account
+availableSpend|number|The amount of funds that can be debited from the mWallet at this time before exceeding ASIC daily limit
+availableLoad|number|The amount of funds that can be credited to the mWallet before exceeding ASIC limit
+
+### mWalletOptionItem
+> Schema for this object
+
+
+```json
+{
+  "key":    string,
+  "value":  string
+}
+
+```
+
+An mWalletOptionItem represents a key/value pair of configuration options that apply to a particular mWallet.
+
+
+**Note **
+
+
+ - If value is an empty string, the option represented by the key is set to its default value.
+ - If the key is omitted from the array, the option represented by the key is left as is.
+ - An invalid key or value will result in an error.
+ - key is case insensitive
+
+
+Field Name|Type| Description
+----|---|------
+key | string | Unique identifier of the value. See Key Definitions table below
+value | string | The actual value represented by the Key
+
+**Key Definitions**
+
+Key | Range | Description
+-----|------|------------
+SendDailyStatement | “true” or “false” | Set to “true” if you would like a daily statement automatically sent to the Email address of the mAccount. If the mAccount has no transactions for the period, no statement is sent.
+SendMonthlyStatement | “true” or “false” | Set to “true” if you would like a Monthly statement automatically sent to the Email address of the mAccount. Sent on the 1st of each month for the previous month. If the mAccount has no transactions for the period, no statement is sent.
+MobileForSms | “0414111111”	| Mobile number to use for receiving SMS notifications
+
+### mWalletSelectionFilter
+> Schema for this object
+
+
+```json
+{
+	"accountNumber":	string,
+	"frequency": 		string,
+	"startDate": 		string,
+	"endDate": 			string
+}
+```
+
+Provides current mWallet financial values
+
+
+Field Name|Type | Description
+----|---|------
+*accountNumber | string | The 16-Digit account number that uniquely identifies the mWallet.
+*frequency | string | An enumeration of fixed selection types. <br>All, <br>ThisMonth, <br>LastMonth, <br>ThisFinancialYear, <br>LastFinancialYear, <br>Custom
+startDate | string | Start date of statement when the frequency is set to custom. In ISO 8601 date format. Note that Timezone is suppressed. The default Timezone is Sydney local time. **Required field when frequency is set to custom.**
+endDate | string | End date of statement when the frequency is set to custom. In ISO 8601 date format. Note that Timezone is suppressed. The default Timezone is Sydney local time. **Required field when frequency is set to custom.**
+*Required Field
+
+### mWalletResetPin
+> Schema for this object
+
+
+```json
+{
+	"accountNumber":	string,
+	"pin": 				string,
+	"dateOfBirth":		string
+}
+```
+
+Provides customer information for mWallet creation
+
+
+Field Name|Type|Max Size | Description
+----|---|----|--
+*accountNumber | string	| 16| The 16-Digit mWallet account number to reset.
+*pin | string | 4| 4 digit numerical pin.
+*dateOfBirth | string | | Birth date of customer or require field in ISO 8601 date format. Note that Timezone is suppressed. The default Timezone is Sydney local time. 
+*Required Field
+
+### mWalletUpdate
+> Schema for this object
+
+
+```json
+{
+	"accountNumber":	string,
+	"pin": 				string,
+	"name": 			string,
+	"nickName": 		string,
+	"phone": 			string,
+	"email": 			string,
+	"options": 			[
+							mWalletOptionItem
+				  		]
+}
+```
+
+Provides customer information for mWalletupdate
+
+
+**Note:** 
+
+
+ Either a phone number, or an email, is required. If a phone number is used then an email is not required and vice versa.
+
+
+Field Name|Type|Max Size | Description
+----|---|----|--
+*accountNumber | string | 16 | 16-Digit mWallet account number to update.
+*pin | string | 4 |  4 digit numerical pin.
+*name | string | 50 | Full name of customer. 
+nickName | string | 20 | This is a short form name of the customer. Can be empty 
+phone | string | 11 | Contact phone number. This is not used for authentication. Required field in conjunction with email address that must start with 0. All non-numbers are stripped.
+email | string | 300 | Contact email. This is not used for authentication. Limited to 300 characters. Required field in conjunction with phone and should contain @ and follow normal email format conventions. Converted to lowercase.
+options	| [mWalletOptionItem]	| | See mWalletOptionItem class 
+
+
+### mWalletTransactionLineItem
+> Schema for this object
+
+
+```json
+{
+	"transactionId":		number,
+	"rowOrder":				number,
+	"dateTime":				string,
+	"description":			string,
+	"debit":				number,
+	"credit":				number,
+	"runningBalance":		number,
+	"mAccountName":			string,
+	"transactionType":		string,
+	"subTransactionType":	string,
+	"mPaymentsId":			number
+}
+```
+
+Represents a single line item or row on an mWallet statement.  See mWallet/v1/transactions
+
+
+Field Name|Type | Description
+----|---|------
+transactionId | number | This is the transactionId that was returned from a financial transaction
+*dateTime | string | The time the transaction occurred in ISO 8601 date format. Note that Timezone is suppressed. The default Timezone is Sydney local time. 
+*description | string | This is the description that was passed in by the calling financial API call
+*debit | number | The amount of funds debited from the mWallet
+*credit | number | The amount of funds credited to the mWallet
+*runningBalance | number | The current balance of the mAccount at the end of this single row transaction
+rowOrder | number | If you need to sort the results, only use this field. If you sort the results on any other field, the runningBalance won’t make sense. rowOrder start at 0.
+*mAccountName | string | Name of the mAccount that conducted the transaction
+transactionType | string | Major keyword describing the transaction. E.g. include Payment, LoadFunds
+subTransactionType | string | Minor keyword describing the transaction. E.g. GatewayMWalletCredit
+mPaymentsId|number|This is the Platform internal Id for the row returned. 
+*Required Fields
+
+
+### mWalletTransactionRequestDetails
+> Schema for this object
+
+
+```json
+{
+	"accountNumber": 	string,
+	"pin": 				string,
+	"startDate": 		string,
+	"endDate": 			string,
+	"skip": 			number,
+	"take": 			number,
+	"descending": 		boolean,
+	"useTime": 			boolean
+}
+```
+
+Represents a single line item or row on an mWallet statement.  See mWallet/v1/transactions
+
+
+Field Name|Type |Max Size| Description
+----|---|----|--
+*accountNumber | string | 16 | 16-Digit account number that uniquely identifies the mWallet. 
+*pin | string | 4 | 4 digit numerical pin. 
+startDate | string| | Start date of transaction range to retrieve. In ISO 8601 date format. Note that Timezone is suppressed. The default Timezone is Sydney local time. If not set to a valid date then the 1 Jan 2013 is used. The time component is ignored unless useTime is set to true.
+endDate | string| | End date of transaction range to retrieve. In ISO 8601 date format. Note that Timezone is suppressed. The default Timezone is Sydney local time.  If not set todays date is used. The time component is ignored unless useTime is set to true.
+skip | number| | Number of records to skip. 0 is the first record.
+take | number| | Number of records to take. If take is 0 the all records will be returned.
+descending | boolean| | Sort the returned transaction list ascending or descending.
+useTime | boolean| | Use the time component of startDate and endDate in the selection.
+*Required Fields
+
 ## Close
 
 > The above command returns JSON structured like this:

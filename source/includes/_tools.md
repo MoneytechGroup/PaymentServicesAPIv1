@@ -3,6 +3,81 @@
 
 The APIs in the tools/v1/ section represent utilities that you may find useful while consuming the other APIs offered  as part of the Platform other APIs.
 
+## Objects
+### CreditCardFee
+> Schema for this object
+
+```json
+{
+    "feeAmountExcludingGst":				number,
+    "feeAmountGstComponent":				number,
+    "feeAmountIncludingGst": 				number,
+    "recommendedMinimumSurchargeAmount": 	number
+}
+```
+
+Contains the Fee that will be applied to your Sign-In mAccount to process a specified Credit-Card. Returned as part of the tools/v1/creditCardValidate API.
+
+
+Field Name|Type| Description
+----|---|-------
+feeAmountExcludingGst|number|The fee amount excluding GST 
+feeAmountGstComponent|number|The GST associated with the fee
+feeAmountIncludingGst|number|The fee amount including GST
+recommendedMinimumSurchargeAmount|number|This is the recommended minimum amount that should be added to the Credit-Card amount to cover just the Moneytech Payments Credit-Card fee. The amount is rounded up to the nearest cent, calculated using the following formula: (BaseAmount+FixedFeeIncludingGST)/(1-(PercentageFeeIncludingGST/100))
+
+### EmailBodyDetail
+> Schema for this object
+
+```json
+{
+    "subject": 		string,
+   	"isBodyHtml": 	boolean,
+    "body": 		string
+}
+```
+
+Provides details about a Credit-Card to be validated. Used by the tools/v1/creditCardValidate API.
+
+
+Field Name|Type| Max Size | Description
+----|---|----|---
+*subject | string | 256 | This is the emails subject 
+isBodyHtml | boolean | | Set to true if the body contains HTML
+body | string | | Email body. Can be HTML or plain text 
+*Required Field
+
+### ValidateCreditCardDetail
+> Schema for this object
+
+```json
+{
+	"nameOnCard": 				string,
+	"cardNumber": 				string,
+	"expiryMonth": 				number,
+	"expiryYear": 				number,
+	"cardValidationNumber": 	string,
+	"returnFee": 				boolean
+	"usage": 					string,
+	"amount": 					number
+}
+```
+
+Provides details about a Credit-Card to be validated. Used by the tools/v1/creditCardValidate API.
+
+
+Field Name|Type| Max Size | Description
+----|---|----|---
+*nameOnCard | string | 100 | This is the name on the Credit-Card. 
+*cardNumber | string | 16 | This is the Credit-Cards number. This field must be numeric only.
+*expiryMonth | number | | This is the expiry month of the Credit-Card. Must be between 1 and 12
+*expiryYear | number | | This is the expiry year of the Credit-Card. Can be either a 2 or 4 digit year
+*cardValidationNumber | string | 4 | This is the Credit-Cards validation number. Must be a 4 or 3 digit number depending on the card type.
+*returnFee | boolean	| | Set to true if you want the fee that will be debited from your Sign-In mAccount returned. Default is false
+usage | string | | This field indicates how you intend to use the Credit-Card. Options are to either debit the Credit-Card for some funds or apply a refund to the card. This field must be one of either debit or refund. Required if returnFee is true.
+amount | number | | The amount you intend to either debit the Credit-Card or refund back on the card. Required if returnFee is true
+*Required Field
+
 ## Validate ABN
 
 > The above command returns JSON structured like this:

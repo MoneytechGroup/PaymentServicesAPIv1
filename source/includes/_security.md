@@ -25,6 +25,52 @@ All token types may be deleted before they expire by calling security/v1/deleteS
 
 **Note:**  The security tokens discussed in this section provide secure sign-in from a web page. They have nothing to do withn the token/v1 APIs described elsewhere in this document.
 
+## Objects
+### DisbursementFeeDetail
+> Schema for this object
+
+```json
+{
+  "method":             string,
+  "feePercentageExGst": number,
+  "feeFixedExGst":      number
+}
+```
+
+Returns the fee details for a particular disbursement (credit) method.
+
+
+Field Name|Type| Description
+----|---|-------
+method| string | The type of  Disbursement:<br>mAccount<br>mWallet<br>DirectCredit<br>BPAY<br>Charity<br>Sign-In mAccount
+feePercentageExGst| number | The percentage of the amount to be taken as a fee Excluding GST 
+feeFixedExGst|number | The fixed amount to be taken as a fee Excluding GST
+
+### LoadFeeDetail
+> Schema for this object
+
+```json
+{
+  "method":             string,
+  "cardType":           string,
+  "debitFromMAccount":  string,
+  "feePercentageExGst": number,
+  "feeFixedExGst":      number
+}
+```
+
+Returns the fee details for a particular disbursement (credit) method.
+
+
+Field Name|Type| Description
+----|---|-------
+method | string | The type of  Disbursement:<br>mAccount<br>mWallet<br>DirectDebit<br>CreditCard<br>Charity<br>Sign-In mAccount
+cardType | string | Type of Credit-Card. Null if method is not CreditCard<br>Mastercard<br>Visa<br>Diners<br>Amex
+debitFromMAccount |string | Contains the 16-Digit if the fee is associated to a specific mAccount, otherwise null
+feePercentageExGst | number | The percentage of the amount to be taken as a fee Excluding GST 
+feeFixedExGst |number | The fixed amount to be taken as a fee Excluding GST
+
+
 ## Change Password
 
 > The above command returns JSON structured like this:
