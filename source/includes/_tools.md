@@ -114,7 +114,7 @@ If the resulting status property contains ‘Ok’ then examine the property isA
 
 ### HTTP Request
 
-`GET http://example.com/tools/v1/abnValidate/{abnNumber}`
+`GET BASE_URL + /tools/v1/abnValidate/{abnNumber}`
 
 ### Response Field Descriptions
 
@@ -161,7 +161,7 @@ The purpose of this API is to return details about a BSB (Bank-State-Branch) num
 
 ### HTTP Request
 
-`GET http://example.com/tools/v1/bsbValidate/{bsbNumber}`
+`GET BASE_URL + /tools/v1/bsbValidate/{bsbNumber}`
 
 ### Response Field Descriptions
 
@@ -198,7 +198,7 @@ The purpose of this API is to return details about a BSB (Bank-State-Branch) num
 
 ### HTTP Request
 
-`POST http://example.com/tools/v1/bsbValidate/{bsbNumber}`
+`POST BASE_URL + /tools/v1/bsbValidate/{bsbNumber}`
 
 ### Request Body Schema
 
@@ -246,7 +246,7 @@ The primary purpose of the ping API is to validate your credentials as well vali
 
 ### HTTP Request
 
-`GET http://example.com/tools/v1/ping`
+`GET BASE_URL + /tools/v1/ping`
 
 ### Response Field Descriptions ###
 
@@ -276,7 +276,7 @@ The purpose of this API is to provide email functionality for your application t
 
 ### HTTP Request
 
-`POST http://example.com/tools/v1/sendEmailToIssuer`
+`POST BASE_URL + /tools/v1/sendEmailToIssuer`
 
 ### Request Body Schema
 

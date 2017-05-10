@@ -90,7 +90,7 @@ The new password must be passed in twice in fields password1 and password2.
 
 ### HTTP Request
 
-`POST http://example.com/security/v1/changePassword`
+`POST BASE_URL + /security/v1/changePassword`
 
 ### Request Body Schema
 
@@ -142,7 +142,7 @@ If you create the token and no longer require it, call security/v1/deleteSecurit
 
 ### HTTP Request
 
-`GET http://example.com/security/v1/v1/createOneShotSecurityToken/{expiryMinutes}`
+`GET BASE_URL + /security/v1/v1/createOneShotSecurityToken/{expiryMinutes}`
 
 ### Request Parameter Decriptions
 
@@ -188,7 +188,7 @@ You may extend the life of a securityTokenby calling the API security/v1/refresh
 
 ### HTTP Request
 
-`GET http://example.com/security/v1/createSecurityToken/{expiryMinutes}`
+`GET BASE_URL + /security/v1/createSecurityToken/{expiryMinutes}`
 
 ### Request Parameter Decriptions
 
@@ -222,7 +222,7 @@ This API deletes the security token specified in the parameter {token}. If no {t
 
 ### HTTP Request
 
-`GET http://example.com/security/v1/deleteSEcurityToken/{token}`
+`GET BASE_URL + /security/v1/deleteSEcurityToken/{token}`
 
 ### Request Parameter Decriptions
 
@@ -266,7 +266,7 @@ Why would you want to use this? Using the mAccount/v1/listAsIssuer API which ret
 
 ### HTTP Request
 
-`GET http://example.com/security/v1/createImpersonationTokenAsIssuer/{accountNumber}/{expiryMinutes}`
+`GET BASE_URL + /security/v1/createImpersonationTokenAsIssuer/{accountNumber}/{expiryMinutes}`
 
 ### Request Parameter Decriptions
 
@@ -308,7 +308,7 @@ OneShotSecurityTokens can not have their life span extended.
 
 ### HTTP Request
 
-`GET http://example.com/security/v1/refreshSecurityToken/{token}`
+`GET BASE_URL + /security/v1/refreshSecurityToken/{token}`
 
 ### Request Parameter Decriptions
 
@@ -365,7 +365,7 @@ This API returns the fees and permissions that have been given to the Sign-In Ac
 
 ### HTTP Request
 
-`GET http://example.com/security/v1/signInAccountSettings`
+`GET BASE_URL + /security/v1/signInAccountSettings`
 
 
 ### Response Field Descriptions ###

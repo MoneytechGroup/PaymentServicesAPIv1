@@ -30,7 +30,7 @@ This API will make active a password that was sent to an mAccount account holder
 
 ### HTTP Request
 
-`POST http://example.com/mAccount/v1/public/activatePasswordReset`
+`POST BASE_URL + /mAccount/v1/public/activatePasswordReset`
 
 ### Request Body Schema
 
@@ -68,7 +68,7 @@ This API generates a new password that is sent to the mAccount owner via their r
 
 ### HTTP Request
 
-`POST http://example.com/mAccount/v1/public/sendPasswordResetEmail`
+`POST BASE_URL + /mAccount/v1/public/sendPasswordResetEmail`
 
 ### Request Body Schema
 
@@ -107,7 +107,7 @@ The primary purpose of the ping API is to validate that the Platform servers are
 
 ### HTTP Request
 
-`GET http://example.com/public/v1/ping`
+`GET BASE_URL + /public/v1/ping`
 
 ### Response Field Descriptions ###
 

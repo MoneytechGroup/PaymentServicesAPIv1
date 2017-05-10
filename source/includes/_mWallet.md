@@ -358,7 +358,7 @@ This API will set an account to be closed and no further financial transactions 
 
 ### HTTP Request
 
-`GET http://example.com/mWallet/v1/close/{accountNumber}/{pin}`
+`GET BASE_URL + /mWallet/v1/close/{accountNumber}/{pin}`
 
 ### Field Descriptions
 
@@ -408,7 +408,7 @@ If the customer forgets their pin then it can be reset using the ResetPin functi
 
 ### HTTP Request
 
-`POST http://example.com/mAccount/v1/close/{accountNumber}`
+`POST BASE_URL + /mAccount/v1/close/{accountNumber}`
 
 ### Request Body Schema
 
@@ -456,7 +456,7 @@ This API will return the current financials for an mWallet.
 
 ### HTTP Request
 
-`GET http://example.com/mWallet/v1/financials/{accountNumber}`
+`GET BASE_URL + /mWallet/v1/financials/{accountNumber}`
 
 ### Request Body Schema
 
@@ -503,7 +503,7 @@ This is the first function to call when trying to identify a customer with an mW
 
 ### HTTP Request
 
-`GET http://example.com/mWallet/v1/search?identifier={identifier}`
+`GET BASE_URL + /mWallet/v1/search?identifier={identifier}`
 
 ### Request Parameter Fields
 
@@ -538,7 +538,7 @@ This API will reopen an account that was closed
 
 ### HTTP Request
 
-`GET http://example.com/mWallet/v1/repoen/{accountNumber}/{pin}`
+`GET BASE_URL + /mWallet/v1/repoen/{accountNumber}/{pin}`
 
 ### Request Parameter Fields
 
@@ -575,7 +575,7 @@ This API should be used when a customer has forgotten their pin.
 
 ### HTTP Request
 
-`POST http://example.com/mWallet/v1/resetPin`
+`POST BASE_URL + /mWallet/v1/resetPin`
 
 ### Request Body Schema
 
@@ -614,7 +614,7 @@ This API generates a detailed pdf statement for delivery via email. An error cod
 
 ### HTTP Request
 
-`POST http://example.com/mWallet/v1/sendStatement`
+`POST BASE_URL + /mWallet/v1/sendStatement`
 
 ### Request Body Schema
 
@@ -663,7 +663,7 @@ The information retrieved is in real-time and represents the same details as dis
 
 ### HTTP Request
 
-`POST http://example.com/mWallet/v1/transactions`
+`POST BASE_URL + /mWallet/v1/transactions`
 
 ### Request Body Schema
 
@@ -718,7 +718,7 @@ The pin or dateOfBirth Dates are not updateable.
 
 ### HTTP Request
 
-`POST http://example.com/mWallet/v1/update`
+`POST BASE_URL + /mWallet/v1/update`
 
 ### Request Body Schema
 
@@ -767,7 +767,7 @@ If the returned value of status is “OK” then the PIN is valid. If the value 
 
 ### HTTP Request
 
-`POST http://example.com/mWallet/v1/update`
+`POST BASE_URL + /mWallet/v1/update`
 
 ### Request Parameter Fields
 

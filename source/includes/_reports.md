@@ -78,7 +78,7 @@ The Platform settles transactions at 4pm (Sydney time) each business day. Theref
 
 ### HTTP Request
 
-`GET http://example.com/reports/v1/settlement/{date}`
+`GET BASE_URL + /reports/v1/settlement/{date}`
 
 ### Request Parameter Fields
 
@@ -117,7 +117,7 @@ This API returns all successful transactions on the given date. Date is represen
 
 ### HTTP Request
 
-`GET http://example.com/reports/v1/statement/{date}`
+`GET BASE_URL + /reports/v1/statement/{date}`
 
 ### Request Parameter Fields
 

@@ -312,7 +312,7 @@ This API returns a list of charities that you are authorised to make donations t
 
 ### HTTP Request
 
-`GET http://example.com/mAccount/v1/charities`
+`GET BASE_URL + /mAccount/v1/charities`
 
 ### Response Field Descriptions ###
 
@@ -340,7 +340,7 @@ This API closes an mAccount.
 
 ### HTTP Request
 
-`GET http://example.com/mAccount/v1/close/{accountNumber}`
+`GET BASE_URL + /mAccount/v1/close/{accountNumber}`
 
 ### Field Descriptions
 
@@ -374,7 +374,7 @@ This API creates an mAccount.
 
 ### HTTP Request
 
-`POST http://example.com/mAccount/v1/close/{accountNumber}`
+`POST BASE_URL + /mAccount/v1/close/{accountNumber}`
 
 ### Request Body Schema
 
@@ -429,7 +429,7 @@ This API will return the current financials for an mAccount.
 
 ### HTTP Request
 
-`GET http://example.com/mAccount/v1/financials/{accountNumber}`
+`GET BASE_URL + /mAccount/v1/financials/{accountNumber}`
 
 ### Request Body Schema
 
@@ -467,7 +467,7 @@ Property details.options will contain ALL options and their current values.
 
 ### HTTP Request
 
-`GET http://example.com/mAccount/v1/get/{accountNumber}`
+`GET BASE_URL + /mAccount/v1/get/{accountNumber}`
 
 ### Request Body Schema
 
@@ -504,7 +504,7 @@ Returns a list of 16-Digit mAccounts that you own. These mAccounts can be used b
 
 ### HTTP Request
 
-`GET http://example.com/mAccount/v1/listAsIssuer`
+`GET BASE_URL + /mAccount/v1/listAsIssuer`
 
 
 ### Response Field Descriptions ###
@@ -535,7 +535,7 @@ This API generates a detailed pdf statement for delivery via email.
 
 ### HTTP Request
 
-`POST http://example.com/mAccount/v1/sendStatement`
+`POST BASE_URL + /mAccount/v1/sendStatement`
 
 ### Request Body Schema
 
@@ -578,7 +578,7 @@ This API generates a detailed pdf statement for delivery via email.
 
 ### HTTP Request
 
-`POST http://example.com/mAccount/v1/transactions`
+`POST BASE_URL + /mAccount/v1/transactions`
 
 ### Request Body Schema
 
@@ -630,7 +630,7 @@ The information retrieved is in real-time and represents the same details as dis
 
 ### HTTP Request
 
-`POST http://example.com/mAccount/v1/update`
+`POST BASE_URL + /mAccount/v1/update`
 
 ### Request Body Schema
 

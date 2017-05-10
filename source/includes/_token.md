@@ -132,7 +132,7 @@ The new password must be passed in twice in fields password1 and password2.
 
 ### HTTP Request
 
-`POST http://example.com/token/v1/createAustralianBankAccount`
+`POST BASE_URL + /token/v1/createAustralianBankAccount`
 
 ### Request Body Schema
 
@@ -177,7 +177,7 @@ This API creates a token representing BPAY details by passing a TokenBPAYPayload
 
 ### HTTP Request
 
-`POST http://example.com/token/v1/createBPAY`
+`POST BASE_URL + /token/v1/createBPAY`
 
 ### Request Body Schema
 
@@ -222,7 +222,7 @@ This API creates a token representing BPAY details by passing a TokenBPAYPayload
 
 ### HTTP Request
 
-`POST http://example.com/token/v1/createCreditCard`
+`POST BASE_URL + /token/v1/createCreditCard`
 
 ### Request Body Schema
 
@@ -266,7 +266,7 @@ This API creates a token representing BPAY details by passing a TokenBPAYPayload
 
 ### HTTP Request
 
-`DELETE http://example.com/token/v1/delete/{token}`
+`DELETE BASE_URL + /token/v1/delete/{token}`
 
 
 ### Response Field Descriptions ###
@@ -296,7 +296,7 @@ This API will return the payload attached to the specified token.
 
 ### HTTP Request
 
-`GET http://example.com/token/v1/get/{token}`
+`GET BASE_URL + /token/v1/get/{token}`
 
 
 ### Response Field Descriptions ###
@@ -328,7 +328,7 @@ This API will return a list of all tokens associated with the provided mWallet o
 
 ### HTTP Request
 
-`GET http://example.com/token/v1/list/{accountNumber}`
+`GET BASE_URL + /token/v1/list/{accountNumber}`
 
 
 ### Response Field Descriptions ###
@@ -362,7 +362,7 @@ The new password must be passed in twice in fields password1 and password2.
 
 ### HTTP Request
 
-`POST http://example.com/token/v1/updateAustralianBankAccount`
+`POST BASE_URL + /token/v1/updateAustralianBankAccount`
 
 ### Request Body Schema
 
@@ -407,7 +407,7 @@ This API provides the ability to update the payload associated with an existing 
 
 ### HTTP Request
 
-`POST http://example.com/token/v1/updateBPAY`
+`POST BASE_URL + /token/v1/updateBPAY`
 
 ### Request Body Schema
 
@@ -452,7 +452,7 @@ This API creates a token representing BPAY details by passing a TokenBPAYPayload
 
 ### HTTP Request
 
-`POST http://example.com/token/v1/updateCreditCard`
+`POST BASE_URL + /token/v1/updateCreditCard`
 
 ### Request Body Schema
 
@@ -496,7 +496,7 @@ This API creates a token representing BPAY details by passing a TokenBPAYPayload
 
 ### HTTP Request
 
-`GET http://example.com/token/v1/get/{token}`
+`GET BASE_URL + /token/v1/get/{token}`
 
 ### Response Field Descriptions
 

@@ -158,7 +158,7 @@ Status will be “UnknownBillerCode” if Biller Code is invalid.
 
 ### HTTP Request
 
-`GET http://example.com/bpay/v1/biller/{billerCode}`
+`GET BASE_URL + /bpay/v1/biller/{billerCode}`
 
 ### Field Descriptions
 
@@ -234,7 +234,7 @@ Use skip and take to page through result set. Skip and take will be changed back
 
 ### HTTP Request
 
-`GET http://example.com/bpay/v1/billers?search={search}&skip={skip}&take={take}`
+`GET BASE_URL + /bpay/v1/billers?search={search}&skip={skip}&take={take}`
 
 ### Query Parameters
 
@@ -274,7 +274,7 @@ The returned history list is sorted by the count property of the BPAYHistoryItem
 
 ### HTTP Request
 
-`GET http://example.com/bpay/v1/history/{accountNumber}?take={take}`
+`GET BASE_URL + /bpay/v1/history/{accountNumber}?take={take}`
 
 ### Query Parameters
 
@@ -312,7 +312,7 @@ When fully validated a BPAY financial transaction should be made as soon as prac
 
 ### HTTP Request
 
-`GET http://example.com/bpay/v1/validate/{billerCode}?custRef={customerReference}&amount={amount}`
+`GET BASE_URL + /bpay/v1/validate/{billerCode}?custRef={customerReference}&amount={amount}`
 
 ### Query Parameters
 

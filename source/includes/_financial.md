@@ -358,7 +358,7 @@ Funds are debited from the Sign-In mAccount then refunded back to the Credit-Car
 
 ### HTTP Request
 
-`POST http://example.com/financial/v1/refund/execute`
+`POST BASE_URL + /financial/v1/refund/execute`
 
 ### Field Descriptions
 
@@ -407,7 +407,7 @@ The purpose of the refund/validate API is to determine if the parameters for the
 
 ### HTTP Request
 
-`POST http://example.com/financial/v1/refund/validate`
+`POST BASE_URL + /financial/v1/refund/validate`
 
 ### Request Body Field Descriptions
 
@@ -454,7 +454,7 @@ See the section Callback Notification for a discussion on being notified when a 
 
 ### HTTP Request
 
-`GET http://example.com/financial/v1/status/{uniqueReference}`
+`GET BASE_URL + /financial/v1/status/{uniqueReference}`
 
 ### Request Parameters
 
@@ -491,7 +491,7 @@ You can use the Transaction/validate API to determine if the parameters are corr
 
 ### HTTP Request
 
-`POST http://example.com/financial/v1/transaction/execute`
+`POST BASE_URL + /financial/v1/transaction/execute`
 
 ### Request Body Schema
 
@@ -561,7 +561,7 @@ You can use the Transaction/validate API to determine if the parameters are corr
 
 ### HTTP Request
 
-`POST http://example.com/financial/v1/transaction/execute`
+`POST BASE_URL + /financial/v1/transaction/execute`
 
 ### Request Body Schema
 

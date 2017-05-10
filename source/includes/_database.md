@@ -46,7 +46,7 @@ This purpose of this API is to insert a new record into the User Database.
 
 ### HTTP Request
 
-`POST http://example.com/database/v1/add`
+`POST BASE_URL + /database/v1/add`
 
 
 ### Body Request Field Descriptions
@@ -90,7 +90,7 @@ The recordId is returned from the database/v1/add and database/v1/search APIs
 
 ### HTTP Request
 
-`DELETE http://example.com/database/v1/delete/{recordId}`
+`DELETE BASE_URL + /database/v1/delete/{recordId}`
 
 
 ### Parameter Descriptions ###
@@ -129,7 +129,7 @@ This purpose of this API is to retrieve a record from the User Database.
 
 ### HTTP Request
 
-`GET http://example.com/database/v1/get/{recordId}`
+`GET BASE_URL + /database/v1/get/{recordId}`
 
 
 ### Parameter Descriptions ###
@@ -172,7 +172,7 @@ This purpose of this API is to retrieve a record from the User Database.
 
 ### HTTP Request
 
-`POST http://example.com/database/v1/search`
+`POST BASE_URL + /database/v1/search`
 
 
 ### Parameter Descriptions ###
@@ -213,7 +213,7 @@ This purpose of this API is to retrieve a record from the User Database.
 
 ### HTTP Request
 
-`POST http://example.com/database/v1/update`
+`POST BASE_URL + /database/v1/update`
 
 
 ###  Descriptions ###
