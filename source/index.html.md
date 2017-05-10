@@ -77,14 +77,94 @@ let api = kittn.authorize('meowmeowmeow');
 
 > Make sure to replace `meowmeowmeow` with your API key.
 
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
+**Live Authentication Credentials**
 
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
 
-`Authorization: meowmeowmeow`
+Field | Value
+----- | -----
+Username | Your Platform 16-Digit account number
+Password | TBA
+Base URL | https://api.mpay.com.au/
 
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
+The RESTful APIs in this document all use BASIC Authentication (except those APIs in public/v1) in four scenarios; either:
+
+ - UserName/Password
+ - SecurityToken
+ - OneShotSecurityToken
+ - ImpersonationToken
+
+
+When using the LIVE Platform, your Sign-In Account is given five (5) attempts to authenticate your credentials. On the fifth failure your Sign-In Account is locked for one (1) hour. The returned data will indicate that your account is locked and the time in UTC that the account will be unlocked. 
+
+
+When using the Staging system, you are given fifty (50) attempts with a lockout time of two (2) minutes.
+
+
+If you require the account to be unlocked on the LIVE system you may contact your Moneytech Payments representative and at his or her discretion they will unlock the account. A fee may be applied for this service.
+See the API routes in Security to manage Passwords and Tokens.
+
+## UserName/Password
+
+Using this scenario you configure BASIC Authentication with the following:
+
+ * UserName  - your mAccounts 16-Digit account number (This is called the Sign-In Account)
+ * Password  - password that will be supplied by Moneytech Payments when you have demonstrated successful implementation of the API on our Staging environment
+
+
+Passwords are stored in a cryptographic format that is not reversible. If you forget your password, it cannot be recovered. You will need to contact Moneytech Payments and have a new password generated. There will be a fee for this.
+
+## SecurityToken
+Using this scenario, you make an API call to security/v1/createSecurityToken using UserName/Password. A SecurityToken is returned that may be used multiple times until it expires. See the security/v1 section for further details.
+
+
+The SecurityToken returned is used in place of your UserName when configuring BASIC Authentication for future API calls (No password is required).
+
+
+Expiry time is between 1 and 15 minutes.
+
+## OneShotSecurityToken
+Using this scenario, you make an API call to security/v1/createOneShotSecurityToken using UserName/Password. A OneShotSecurityToken is returned that can be used only once or until it expires.
+
+
+An OneShotSecurityToken is exactly the same as the SecurityToken scenario except the token will be deleted on first use.
+
+
+Expiry time is between 1 and 15 minutes.
+
+## ImpersonationToken
+
+Using this scenario, you make an API call to security/v1/createImpersonationTokenAsIssuer using UserName/Password and provid the mAccount you want to impersonate.  An ImpersonationToken is returned that is used to call any other API (as the other tiken types) except this time the Platform acts as you are the mAccount supplied as the Sign-In Account. This API is only available to Issuers. Extremy usefull to retrieve financial data or access to the User Database for each mAccount you own to generate custom statements and reports.
+
+# Testing
+
+## Staging Authentication Credentials
+
+Field | Value
+--- | ----
+Username | 6279059610001205
+Password | $MP@yments2968
+Base URL | https://api.m-pay.com.au/
+
+## Staging Test Credit-Cards
+
+Card Type | Card Number | Expiry Date
+---- | --- | -----
+MasterCard| 5123456789012346 | 05/17
+Visa| 4987654321098769 | 05/17
+Amex| 345678901234564| 05/17
+Diners Club| 30123456789019 | 05/17
+
+
+To allow testing Credit-Card failures, you can set the status code you wish to have returned by changing the Credit-Cards CVN (Amex has a 4 digit CVN)
+
+Description | CVN | CVN (American Express) 
+------- | ----- | ---
+Transaction approved  | 000 | 0000
+Transaction could not be processed  | 010 | 0010
+Transaction declined  | 005 | 0005
+No reply from processing host | 068 | 0068
+Card has expired  | 033 | 0033
+Insufficient credit | 051 | 0051
+
 
 # API Hierarchy
