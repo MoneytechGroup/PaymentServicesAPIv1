@@ -584,6 +584,14 @@ status | string | This is the status of executing the request. A code of â€˜Okâ€
 statusDescription | string | This is a plain English description of the status. See the sectionStatus Description.
 durationMs | number | This can be ignored. This value represents the total time in milliseconds that thePlatform took to process the request.
 
+### Example 1 - Credit-Card -> mWallet ###
+
+Debit Credit-Card with the funds going to an mWallet.
+
+For example we are going to debit a crdit card for $100 and credit an mWallet for the full amount.
+
+<img src = "images\mWallet\mWalletPDFstatement.png">
+
 
 ## Transaction - Validate
 
