@@ -1,25 +1,19 @@
 ```shell
 # Response of a "complete" transaction
-my-machine$ curl -u USER:PASS BASE_URL/financial/v1/status/2421
+my-machine$ curl -u USER:PASS BASE_URL/mAccount/v1/listAsIssuer
 
 {
-  "dishonouredDate": null,
-  "transactionStatus": "Complete",
+  "mAccounts": [
+    "6279059600000779",
+    "6279059700000448",
+    "6279059700022871",
+    "6279059700018366"
+  ],
   "status": "Ok",
   "statusDescription": "Operation completed successfully",
-  "durationMs": 92
+  "durationMs": 397
 }
 
-# Response of a "dishonored" transaction
-my-machine$ curl -u USER:PASS BASE_URL/financial/v1/status/2421
-
-{
-  "dishonouredDate"   : "2016-03-07",
-  "transactionStatus" : "Dishonoured",
-  "status"      : "Ok",
-  "statusDescription" : "Operation completed successfully",
-  "durationMs"    : 92
-}
 ```
 
 ```python
@@ -27,7 +21,7 @@ my-machine$ curl -u USER:PASS BASE_URL/financial/v1/status/2421
 import requests
 from requests.auth import HTTPBasicAuth
 
-r = requests.get(BASE_URL + "/financial/v1/status/" + "2421", auth=HTTPBasicAuth(USER, PASS))
+r = requests.get(BASE_URL + "/mAccount/v1/listAsIssuer", auth=HTTPBasicAuth(USER, PASS))
 print(r)
 ```
 
@@ -35,7 +29,7 @@ print(r)
 let rp = require('request-promise');
 
 var options = {
-  uri: BASE_URL + "/financial/v1/status" + 2421,
+  uri: BASE_URL + "/mAccount/v1/listAsIssuer",
   headers: {
     'Authorization': 'Basic ' + new Buffer(USER + ':' + PASS).toString('base64')
   },

@@ -293,6 +293,65 @@ mPaymentsId | number | This is the Platform internal Id for the row returned.
 
 ## Charities
 
+```shell
+# Response of a "complete" transaction
+my-machine$ curl -u USER:PASS BASE_URL/mAccount/v1/charities
+
+{ 
+  "items": [
+    {
+      "mAccountNumber": "6279059700000356",
+      "name": "Angel Flight Australia Fund"
+    },
+    {
+      "mAccountNumber": "6279059700000372",
+      "name": "Mcgrath Foundation"},
+    {
+      "mAccountNumber": "6279059700000364",
+      "name": "Royal Flying Doctor Service"
+    },
+    {
+      "mAccountNumber": "6279059700022319",
+      "name": "Variety The Childrens Charity NSW"
+    }
+  ],
+  "status": "Ok",
+  "statusDescription": "Operation completed successfully",
+  "durationMs": 103
+}
+
+```
+
+```python
+
+import requests
+from requests.auth import HTTPBasicAuth
+
+r = requests.get(BASE_URL + "/mAccount/v1/charities", auth=HTTPBasicAuth(USER, PASS))
+print(r)
+```
+
+```javascript
+let rp = require('request-promise');
+
+var options = {
+  uri: BASE_URL + "/financial/v1/status",
+  headers: {
+    'Authorization': 'Basic ' + new Buffer(USER + ':' + PASS).toString('base64')
+  },
+  json: true // Automatically parses the JSON string in the response 
+};
+
+rp(options)
+   .then(res => {
+      console.log('result:', res);
+   })
+   .catch(err => {
+      // request failed
+      console.log('error:', err);
+   });
+```
+
 > The above command returns JSON structured like this:
 
 ```json
@@ -323,6 +382,48 @@ durationMs | number | This can be ignored. This value represents the total time 
 
 
 ## Close
+
+```shell
+# Response of a "complete" transaction
+my-machine$ curl -u USER:PASS BASE_URL/mAccount/v1/close/6279059700023317
+
+{ 
+  "status": "Ok",
+  "statusDescription": "Operation completed successfully",
+  "durationMs": 159
+}
+
+```
+
+```python
+
+import requests
+from requests.auth import HTTPBasicAuth
+
+r = requests.get(BASE_URL + "/mAccount/v1/close/6279059700023317", auth=HTTPBasicAuth(USER, PASS))
+print(r)
+```
+
+```javascript
+let rp = require('request-promise');
+
+var options = {
+  uri: BASE_URL + "/financial/v1/status",
+  headers: {
+    'Authorization': 'Basic ' + new Buffer(USER + ':' + PASS).toString('base64')
+  },
+  json: true // Automatically parses the JSON string in the response 
+};
+
+rp(options)
+   .then(res => {
+      console.log('result:', res);
+   })
+   .catch(err => {
+      // request failed
+      console.log('error:', err);
+   });
+```
 
 > The above command returns JSON structured like this:
 
@@ -356,6 +457,116 @@ durationMs | number | This can be ignored. This value represents the total time 
 
 
 ## Create
+
+```shell
+my-machine$ curl -u USER:PASS -H "Content-Type: application/json" -X POST -d '{ "accountNumber": "","allowDuplicates": true,"name": "Moneytech Ltd","abn": "77 106 249 852","contactName": "Kelly Royal","contactNumber": "02 9555 5555","email": "kelly.royal@mailinator.com", "addressLine1": "Level 6","addressLine2": "97 Pacific Highway","suburb": "North Sydney","state": "NSW","postCode": "2060","bsb": "012-366","bankAccountNumber": "123456789","bankAccountTitle": "Test Bank Account","financials": null,"options": [{"key": "DebitTplusXDays","value": "2"},{"key": "CreditTplusXDays","value": "4"},{"key": "SettlementFrequency","value": "Daily"}]}' BASE_URL/mAccount/v1/create
+
+{
+  "accountNumber": "6279059700022434",
+  "status": "Ok",
+  "statusDescription": "Operation completed successfully",
+  "durationMs": 159
+}
+```
+
+```python
+
+import requests
+from requests.auth import HTTPBasicAuth
+
+accInfo = { 
+  "accountNumber": "",
+  "allowDuplicates": true,
+  "name": "Moneytech Ltd",
+  "abn": "77 106 249 852",
+  "contactName": "Kelly Royal",
+  "contactNumber": "02 9555 5555",
+  "email": "kelly.royal@mailinator.com", 
+  "addressLine1": "Level 6",
+  "addressLine2": "97 Pacific Highway",
+  "suburb": "North Sydney",
+  "state": "NSW",
+  "postCode": "2060",
+  "bsb": "012-366",
+  "bankAccountNumber": "123456789",
+  "bankAccountTitle": "Test Bank Account",
+  "financials": null,
+  "options": [
+    {
+      "key": "DebitTplusXDays",
+      "value": "2"
+    },
+    {
+      "key": "CreditTplusXDays",
+      "value": "4"
+    },
+    {
+      "key": "SettlementFrequency",
+      "value": "Daily"
+    }
+  ]     
+}
+
+r = requests.post(BASE_URL + "/mAccount/v1/create", data=accInfo, auth=HTTPBasicAuth(USER, PASS))
+print(r)
+```
+
+```javascript
+let rp = require('request-promise');
+
+let accInfo = { 
+  "accountNumber": "",         // Ignored
+  "allowDuplicates": true,
+  "name": "Moneytech Ltd",
+  "abn": "77 106 249 852",     // Spaces are stripped
+  "contactName": "Kelly Royal",
+  "contactNumber": "02 9555 5555",     // Spaces are stripped
+  "email": "kelly.royal@mailinator.com", 
+  "addressLine1": "Level 6",      // Optional
+  "addressLine2": "97 Pacific Highway",
+  "suburb": "North Sydney",
+  "state": "NSW",
+  "postCode": "2060",
+  "bsb": "012-366",      // Optional. Must have a dash
+  "bankAccountNumber": "123456789",      // Optional
+  "bankAccountTitle": "Test Bank Account",    // Optional
+  "financials": null,       // Ignored
+  "options": [
+    {
+      "key": "DebitTplusXDays",
+      "value": "2"
+    },
+    {
+      "key": "CreditTplusXDays",
+      "value": "4"
+    },
+    {
+      "key": "SettlementFrequency",
+      "value": "Daily"
+    }
+  ]     
+};
+
+
+var options = {
+  method: "POST",
+  uri: BASE_URL + "/mAccount/v1/create",
+  headers: {
+    'Authorization': 'Basic ' + new Buffer(USER + ':' + PASS).toString('base64')
+  },
+  body: accInfo,
+  json: true // Automatically parses the JSON string in the response 
+};
+
+rp(options)
+   .then(res => {
+      console.log('result:', res);
+   })
+   .catch(err => {
+      // request failed
+      console.log('error:', err);
+   });
+```
 
 > The above comand expects a JSON payload like this:
 
@@ -416,6 +627,51 @@ durationMs | number | This can be ignored. This value represents the total time 
 
 ## Financials
 
+```shell
+# Response of a "complete" transaction
+my-machine$ curl -u USER:PASS BASE_URL/mAccount/v1/financials/6279059700023317
+
+{
+  "financials": {
+    "actualBalance": 137.50
+  },
+  "status": "Ok",
+  "statusDescription": "Operation completed successfully",
+  "durationMs": 243
+}
+
+```
+
+```python
+
+import requests
+from requests.auth import HTTPBasicAuth
+
+r = requests.get(BASE_URL + "/mAccount/v1/financials/" + "6279059700023317", auth=HTTPBasicAuth(USER, PASS))
+print(r)
+```
+
+```javascript
+let rp = require('request-promise');
+
+var options = {
+  uri: BASE_URL + "/mAccount/v1/financials/" + "6279059700023317",
+  headers: {
+    'Authorization': 'Basic ' + new Buffer(USER + ':' + PASS).toString('base64')
+  },
+  json: true // Automatically parses the JSON string in the response 
+};
+
+rp(options)
+   .then(res => {
+      console.log('result:', res);
+   })
+   .catch(err => {
+      // request failed
+      console.log('error:', err);
+   });
+```
+
 > The above command returns JSON structured like this:
 
 ```json
@@ -450,6 +706,77 @@ durationMs | number | This can be ignored. This value represents the total time 
 
 
 ## Get
+
+```shell
+# Response of a "complete" transaction
+my-machine$ curl -u USER:PASS BASE_URL/mAccount/v1/get/6279059700023317
+
+{
+  "details": {
+    "accountNumber": "6279059700023317",
+    "name": "Moneytech Ltd",
+    "abn": "77106249852",
+    "contactName": "Kelly Royal",
+    "contactNumber": "0295555555",
+    "email": "kelly.royal@moneytech.com.au",
+    "addressLine1": "Level 6",
+    "addressLine2": "97 Pacific Highway",
+    "suburb": "North Sydney",
+    "state": "NSW",
+    "postCode": "2060",
+    "bsb": "012-366",
+    "bankAccountNumber": "123456789",
+    "bankAccountTitle": "Test Bank Account",
+    "financials": {
+      "actualBalance": 0
+    },
+    "options": [
+      {
+        "key": "DebitTplusXDays",
+        "value": "2"
+      },
+      {
+        "key": "CreditTplusXDays",
+        "value": "4"
+      }
+    ]
+  },
+  "status": "Ok",
+  "statusDescription": "Operation completed successfully",
+  "durationMs": 159
+}
+
+```
+
+```python
+
+import requests
+from requests.auth import HTTPBasicAuth
+
+r = requests.get(BASE_URL + "/mAccount/v1/get/" + "6279059700023317", auth=HTTPBasicAuth(USER, PASS))
+print(r)
+```
+
+```javascript
+let rp = require('request-promise');
+
+var options = {
+  uri: BASE_URL + "/mAccount/v1/get/" + "6279059700023317",
+  headers: {
+    'Authorization': 'Basic ' + new Buffer(USER + ':' + PASS).toString('base64')
+  },
+  json: true // Automatically parses the JSON string in the response 
+};
+
+rp(options)
+   .then(res => {
+      console.log('result:', res);
+   })
+   .catch(err => {
+      // request failed
+      console.log('error:', err);
+   });
+```
 
 > The above command returns JSON structured like this:
 
@@ -489,6 +816,54 @@ durationMs | number | This can be ignored. This value represents the total time 
 
 ## ListAsIssuer
 
+```shell
+# Response of a "complete" transaction
+my-machine$ curl -u USER:PASS BASE_URL/mAccount/v1/listAsIssuer
+
+{
+  "mAccounts": [
+    "6279059600000779",
+    "6279059700000448",
+    "6279059700022871",
+    "6279059700018366"
+  ],
+  "status": "Ok",
+  "statusDescription": "Operation completed successfully",
+  "durationMs": 397
+}
+
+```
+
+```python
+
+import requests
+from requests.auth import HTTPBasicAuth
+
+r = requests.get(BASE_URL + "/mAccount/v1/listAsIssuer", auth=HTTPBasicAuth(USER, PASS))
+print(r)
+```
+
+```javascript
+let rp = require('request-promise');
+
+var options = {
+  uri: BASE_URL + "/mAccount/v1/listAsIssuer",
+  headers: {
+    'Authorization': 'Basic ' + new Buffer(USER + ':' + PASS).toString('base64')
+  },
+  json: true // Automatically parses the JSON string in the response 
+};
+
+rp(options)
+   .then(res => {
+      console.log('result:', res);
+   })
+   .catch(err => {
+      // request failed
+      console.log('error:', err);
+   });
+```
+
 > The above command returns JSON structured like this:
 
 ```json
@@ -521,6 +896,62 @@ durationMs | number | This can be ignored. This value represents the total time 
 
 
 ## Send Statement
+
+```shell
+my-machine$ curl -u USER:PASS -H "Content-Type: application/json" -X POST -d '{"accountNumber": "6279059700023317","frequency": "LastFinancialQuarter","startDate": "","endDate": ""}' BASE_URL/mAccount/v1/sendStatement
+
+{
+  "status": "Ok",
+  "statusDescription": "Operation completed successfully",
+  "durationMs": 159
+}
+```
+
+```python
+
+import requests
+from requests.auth import HTTPBasicAuth
+
+query = {
+  "accountNumber": "6279059700023317",
+  "frequency": "LastFinancialQuarter",
+  "startDate": "",
+  "endDate": ""
+}
+
+r = requests.post(BASE_URL + "/mAccount/v1/sendStatement", data=query, auth=HTTPBasicAuth(USER, PASS))
+print(r)
+```
+
+```javascript
+let rp = require('request-promise');
+
+let query = {
+  "accountNumber": "6279059700023317",
+  "frequency": "LastFinancialQuarter",
+  "startDate": "",
+  "endDate": ""
+};
+
+var options = {
+  method: "POST",
+  uri: BASE_URL + "/mAccount/v1/sendStatement",
+  headers: {
+    'Authorization': 'Basic ' + new Buffer(USER + ':' + PASS).toString('base64')
+  },
+  body: query,
+  json: true // Automatically parses the JSON string in the response 
+};
+
+rp(options)
+   .then(res => {
+      console.log('result:', res);
+   })
+   .catch(err => {
+      // request failed
+      console.log('error:', err);
+   });
+```
 
 > The above command expects a JSON payload structured like this:
 
@@ -564,6 +995,116 @@ durationMs | number | This can be ignored. This value represents the total time 
 
 
 ## Transactions
+
+```shell
+my-machine$ curl -u USER:PASS -H "Content-Type: application/json" -X POST -d '{"accountNumber": "6279059700023317","frequency": "LastFinancialQuarter","startDate": "","endDate": ""}' BASE_URL/mAccount/v1/transactions
+
+{
+  "closingBalance": -1.1,
+  "openingBalance": 0.0,
+  "totalCredits": 25.0,
+  "totalDebits": 26.1,
+  "items": [
+    {
+      "dateTime": "2016-11-18T19:06:09",
+      "credit": 25.0,
+      "debit": 0.0,
+      "description": "0bbae2f1-428a-4843-8993-0b3e4bc - test description",
+      "mPaymentsId": 2303202,
+      "mWalletAccountNumber": null,
+      "rowOrder": 0,
+      "runningBalance": 25.0,
+      "subTransactionType": "GatewayCreditCardDebit",
+      "transactionDescription": "Credit-Card Debit",
+      "transactionId": 4958475,
+      "transactionType": "Payment"
+    },
+    {
+      "credit": 0,
+      "dateTime": "2016-11-18T19:06:09",
+      "debit": 25.0,
+      "description": "0bbae2f1-428a-4843-8993-0b3e4bc - test description",
+      "mPaymentsId": 2303203,
+      "mWalletAccountNumber": "6279059600062340",
+      "rowOrder": 1,
+      "runningBalance": 0.0,
+      "subTransactionType": "GatewayMWalletCredit",
+      "transactionDescription": "Payment To mWallet",
+      "transactionId": 4958475,
+      "transactionType": "LoadFunds"
+    },
+    {
+      "credit": 0,
+      "dateTime": "2016-11-18T19:06:09",
+      "debit": 1.1,
+      "description": "0bbae2f1-428a-4843-8993-0b3e4bc - test description",
+      "mPaymentsId": 2303204,
+      "mWalletAccountNumber": null,
+      "rowOrder": 2,
+      "runningBalance": -1.1,
+      "subTransactionType": "MoapiPaymentGatewayMerchantFee",
+      "transactionDescription": "Processing Fee",
+      "transactionId": 4958475,
+      "transactionType": "LoadFunds"
+    }
+  ],
+  "status": "Ok",
+  "statusDescription": "Operation completed successfully",
+  "durationMs": 847
+}
+```
+
+```python
+
+import requests
+from requests.auth import HTTPBasicAuth
+
+query = {
+  "accountNumber": "6279059700007161",
+  "startDate": "2016-11-18T00:00:00",
+  "endDate": "2016-11-18T00:00:00",
+  "skip": 0,
+  "take": 3,
+  "descending": false,
+  "useTime": false
+}
+
+r = requests.post(BASE_URL + "/mAccount/v1/transactions", data=query, auth=HTTPBasicAuth(USER, PASS))
+print(r)
+```
+
+```javascript
+let rp = require('request-promise');
+
+let query = {
+  "accountNumber": "6279059700007161",
+  "startDate": "2016-11-18T00:00:00",
+  "endDate": "2016-11-18T00:00:00",
+  "skip": 0,
+  "take": 3,
+  "descending": false,
+  "useTime": false
+};
+
+var options = {
+  method: "POST",
+  uri: BASE_URL + "/mAccount/v1/transactions",
+  headers: {
+    'Authorization': 'Basic ' + new Buffer(USER + ':' + PASS).toString('base64')
+  },
+  body: query,
+  json: true // Automatically parses the JSON string in the response 
+};
+
+rp(options)
+   .then(res => {
+      console.log('result:', res);
+   })
+   .catch(err => {
+      // request failed
+      console.log('error:', err);
+   });
+```
 
 > The above command expects a JSON payload structured like this:
 
@@ -617,6 +1158,104 @@ durationMs | number | This can be ignored. This value represents the total time 
 
 
 ## Update
+
+```shell
+my-machine$ curl -u USER:PASS -H "Content-Type: application/json" -X POST -d '{"accountNumber": "6279059700023317","name": "Moneytech Ltd","abn": "77 106 249 852","contactName": "Kelly Royal","contactNumber": "02 9555 5555","email": "kelly.royal@moneytech.com.au","addressLine1": "Level 6","addressLine2": "97 Pacific Highway","suburb": "North Sydney","state": "NSW","postCode": "2060","bsb": "012-366","bankAccountNumber": "123456789","bankAccountTitle": "Test Bank Account","financials": null,"options": [{"key": "DebitTplusXDays","value": "1"},{"key": "CreditTplusXDays","value": "1"}]}' BASE_URL/mAccount/v1/update
+
+{
+  "status": "Ok",
+  "statusDescription": "Operation completed successfully",
+  "durationMs": 159
+}
+```
+
+```python
+
+import requests
+from requests.auth import HTTPBasicAuth
+
+query = {
+  "accountNumber": "6279059700023317",
+  "name": "Moneytech Ltd",
+  "abn": "77 106 249 852",
+  "contactName": "Kelly Royal",
+  "contactNumber": "02 9555 5555",
+  "email": "kelly.royal@moneytech.com.au",
+  "addressLine1": "Level 6",
+  "addressLine2": "97 Pacific Highway",
+  "suburb": "North Sydney",
+  "state": "NSW",
+  "postCode": "2060",
+  "bsb": "012-366",
+  "bankAccountNumber": "123456789",
+  "bankAccountTitle": "Test Bank Account",
+  "financials": null,
+  "options": [
+    {
+      "key": "DebitTplusXDays",
+      "value": "1"
+    },
+    {
+      "key": "CreditTplusXDays",
+      "value": "1"
+    }
+  ]
+}
+
+r = requests.post(BASE_URL + "/mAccount/v1/update", data=query, auth=HTTPBasicAuth(USER, PASS))
+print(r)
+```
+
+```javascript
+let rp = require('request-promise');
+
+let query = {
+  "accountNumber": "6279059700023317",
+  "name": "Moneytech Ltd",
+  "abn": "77 106 249 852",
+  "contactName": "Kelly Royal",
+  "contactNumber": "02 9555 5555",
+  "email": "kelly.royal@moneytech.com.au",
+  "addressLine1": "Level 6",
+  "addressLine2": "97 Pacific Highway",
+  "suburb": "North Sydney",
+  "state": "NSW",
+  "postCode": "2060",
+  "bsb": "012-366",
+  "bankAccountNumber": "123456789",
+  "bankAccountTitle": "Test Bank Account",
+  "financials": null,
+  "options": [
+    {
+      "key": "DebitTplusXDays",
+      "value": "1"
+    },
+    {
+      "key": "CreditTplusXDays",
+      "value": "1"
+    }
+  ]
+};
+
+var options = {
+  method: "POST",
+  uri: BASE_URL + "/mAccount/v1/update",
+  headers: {
+    'Authorization': 'Basic ' + new Buffer(USER + ':' + PASS).toString('base64')
+  },
+  body: query,
+  json: true // Automatically parses the JSON string in the response 
+};
+
+rp(options)
+   .then(res => {
+      console.log('result:', res);
+   })
+   .catch(err => {
+      // request failed
+      console.log('error:', err);
+   });
+```
 
 > The above command expects a JSON payload structured like this:
 

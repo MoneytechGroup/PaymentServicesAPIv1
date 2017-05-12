@@ -1,34 +1,10 @@
 ```shell
-# credit card to mWallet
-my-machine$ curl -u USER:PASS -H "Content-Type: application/json" -X POST -d '{"uniqueReference": "12345","totalAmount": 100,"description": "Flower Arrangement. Inv# 2421","printUniqueReferenceOnStatement": true,"paymentSource": "creditCard","creditCard": {"nameOnCard": "Fred Smith","cardNumber": "345678901234564","expiryMonth": 5,"expiryYear": 17,"cardValidationNumber": "0000"},"disbursements": [{"disbursementMethod": "mWallet","toMWallet": "6279059700010827","amount": 100}]}' BASE_URL/financial/v1/transaction/validate
+my-machine$ curl -u USER:PASS -H "Content-Type: application/json" -X POST -d '{"accountNumber": "6279059700023317","name": "Moneytech Ltd","abn": "77 106 249 852","contactName": "Kelly Royal","contactNumber": "02 9555 5555","email": "kelly.royal@moneytech.com.au","addressLine1": "Level 6","addressLine2": "97 Pacific Highway","suburb": "North Sydney","state": "NSW","postCode": "2060","bsb": "012-366","bankAccountNumber": "123456789","bankAccountTitle": "Test Bank Account","financials": null,"options": [{"key": "DebitTplusXDays","value": "1"},{"key": "CreditTplusXDays","value": "1"}]}' BASE_URL/mAccount/v1/update
 
 {
-  "bpayReceipts": [],
-  "callerUniqueReference": "12345",
-  "feeAmountExcludingGst": 1.20,
-  "feeAmountGstComponent": 0.12,
-  "feeAmountIncludingGst": 1.32,
-  "feeBreakdown": {
-    "debitFee": {
-      "feeAmountExcludingGst": 1.20,
-      "feeAmountGstComponent": 0.12,
-      "feeAmountIncludingGst": 1.32
-    },
-    "disbursementFees": [
-      {
-        "disbursementArrayIndex": 0,
-        "disbursementFee": {
-          "feeAmountExcludingGst":0.00,
-          "feeAmountGstComponent":0.00,
-          "feeAmountIncludingGst":0.00
-        }
-      }
-    ]
-  }, 
-  "transactionId": 3,
   "status": "Ok",
   "statusDescription": "Operation completed successfully",
-  "durationMs": 693
+  "durationMs": 159
 }
 ```
 
@@ -37,67 +13,76 @@ my-machine$ curl -u USER:PASS -H "Content-Type: application/json" -X POST -d '{"
 import requests
 from requests.auth import HTTPBasicAuth
 
-# credit card -> mWallet
-cardToMWallet = {
-  "uniqueReference": "12345",
-  "totalAmount": 100,
-  "description": "Flower Arrangement. Inv# 2421",
-  "printUniqueReferenceOnStatement": true,
-  "paymentSource": "creditCard",
-  "creditCard": {
-    "nameOnCard": "Fred Smith",
-    "cardNumber": "345678901234564",
-    "expiryMonth": 5,
-    "expiryYear": 17,
-    "cardValidationNumber": "0000"
-  },
-  "disbursements": [
-                     {
-                        "disbursementMethod": "mWallet",
-                        "toMWallet": "6279059700010827",
-                        "amount": 100
-                     }
-                   ]
-};
+query = {
+  "accountNumber": "6279059700023317",
+  "name": "Moneytech Ltd",
+  "abn": "77 106 249 852",
+  "contactName": "Kelly Royal",
+  "contactNumber": "02 9555 5555",
+  "email": "kelly.royal@moneytech.com.au",
+  "addressLine1": "Level 6",
+  "addressLine2": "97 Pacific Highway",
+  "suburb": "North Sydney",
+  "state": "NSW",
+  "postCode": "2060",
+  "bsb": "012-366",
+  "bankAccountNumber": "123456789",
+  "bankAccountTitle": "Test Bank Account",
+  "financials": null,
+  "options": [
+    {
+      "key": "DebitTplusXDays",
+      "value": "1"
+    },
+    {
+      "key": "CreditTplusXDays",
+      "value": "1"
+    }
+  ]
+}
 
-r = requests.post(BASE_URL + "/financial/v1/transaction/validate", data=cardToMWallet, auth=HTTPBasicAuth(USER, PASS))
+r = requests.post(BASE_URL + "/mAccount/v1/update", data=query, auth=HTTPBasicAuth(USER, PASS))
 print(r)
 ```
 
 ```javascript
 let rp = require('request-promise');
 
-// credit card -> mWallet
-let cardToMWallet = {
-  "uniqueReference": "12345",
-  "totalAmount": 100,
-  "description": "Flower Arrangement. Inv# 2421",
-  "printUniqueReferenceOnStatement": true,
-  "paymentSource": "creditCard",
-  "creditCard": {
-    "nameOnCard": "Fred Smith",
-    "cardNumber": "345678901234564",
-    "expiryMonth": 5,
-    "expiryYear": 17,
-    "cardValidationNumber": "0000"
-  },
-  "disbursements": [
-     {
-        "disbursementMethod": "mWallet",
-        "toMWallet": "6279059700010827",
-        "amount": 100
-     }
-   ]
+let query = {
+  "accountNumber": "6279059700023317",
+  "name": "Moneytech Ltd",
+  "abn": "77 106 249 852",
+  "contactName": "Kelly Royal",
+  "contactNumber": "02 9555 5555",
+  "email": "kelly.royal@moneytech.com.au",
+  "addressLine1": "Level 6",
+  "addressLine2": "97 Pacific Highway",
+  "suburb": "North Sydney",
+  "state": "NSW",
+  "postCode": "2060",
+  "bsb": "012-366",
+  "bankAccountNumber": "123456789",
+  "bankAccountTitle": "Test Bank Account",
+  "financials": null,
+  "options": [
+    {
+      "key": "DebitTplusXDays",
+      "value": "1"
+    },
+    {
+      "key": "CreditTplusXDays",
+      "value": "1"
+    }
+  ]
 };
-
 
 var options = {
   method: "POST",
-  uri: BASE_URL + "/financial/v1/transaction/validate",
+  uri: BASE_URL + "/mAccount/v1/update",
   headers: {
     'Authorization': 'Basic ' + new Buffer(USER + ':' + PASS).toString('base64')
   },
-  body: cardToMWallet,
+  body: query,
   json: true // Automatically parses the JSON string in the response 
 };
 
