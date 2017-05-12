@@ -336,6 +336,72 @@ description | string | 500 | An optional description of the disbursement item
 
 ## Refund - Execute
 
+```shell
+
+my-machine$ curl -u USER:PASS -H "Content-Type: application/json" -X POST -d '{  "uniqueReference": "Refund-00001", "refundAmount": 25, "description": "test refund description", "originalTransactionId": 155}' BASE_URL/financial/v1/refund/execute
+
+{
+  "callerUniqueReference": "Refund-00001,
+  "feeAmountExcludingGst": 0.20,
+  "feeAmountGstComponent": 0.02,
+  "feeAmountIncludingGst": 0.22,
+  "transactionId": 326,
+  "status": "Ok",
+  "statusDescription": "Operation completed successfully",
+  "durationMs": 793
+}
+```
+
+```python
+
+import requests
+from requests.auth import HTTPBasicAuth
+
+
+data = {
+  "uniqueReference": "Refund-00001",
+  "refundAmount": 25,
+  "description": "test refund description",
+  "originalTransactionId": 155
+};
+
+
+r = requests.post(BASE_URL + "/financial/v1/refund/execute", data=data, auth=HTTPBasicAuth(USER, PASS))
+print(r)
+```
+
+```javascript
+let rp = require('request-promise');
+
+
+let data = {
+  "uniqueReference": "Refund-00001",
+  "refundAmount": 25,
+  "description": "test refund description",
+  "originalTransactionId": 155
+};
+
+
+var options = {
+  method: "POST",
+  uri: BASE_URL + "/financial/v1/refund/execute",
+  headers: {
+    'Authorization': 'Basic ' + new Buffer(USER + ':' + PASS).toString('base64')
+  },
+  body: emptyRows,
+  json: true // Automatically parses the JSON string in the response 
+};
+
+rp(options)
+   .then(res => {
+      console.log('result:', res);
+   })
+   .catch(err => {
+      // request failed
+      console.log('error:', err);
+   });
+```
+
 > The above command expects a JSON payload structured like this:
 
 ```json
@@ -420,6 +486,72 @@ durationMs | number | This can be ignored. This value represents the total time 
 
 ## Refund - Validate
 
+```shell
+# returns response without execution 
+my-machine$ curl -u USER:PASS -H "Content-Type: application/json" -X POST -d '{  "uniqueReference": "Refund-00001", "refundAmount": 25, "description": "test refund description", "originalTransactionId": 155}' BASE_URL/financial/v1/refund/validate
+
+{
+  "callerUniqueReference": "Refund-00001,
+  "feeAmountExcludingGst": 0.20,
+  "feeAmountGstComponent": 0.02,
+  "feeAmountIncludingGst": 0.22,
+  "transactionId": 326,
+  "status": "Ok",
+  "statusDescription": "Operation completed successfully",
+  "durationMs": 793
+}
+```
+
+```python
+
+import requests
+from requests.auth import HTTPBasicAuth
+
+# returns response without execution
+data = {
+  "uniqueReference": "Refund-00001",
+  "refundAmount": 25,
+  "description": "test refund description",
+  "originalTransactionId": 155
+};
+
+
+r = requests.post(BASE_URL + "/financial/v1/refund/validate", data=data, auth=HTTPBasicAuth(USER, PASS))
+print(r)
+```
+
+```javascript
+let rp = require('request-promise');
+
+// returns response without execution
+let data = {
+  "uniqueReference": "Refund-00001",
+  "refundAmount": 25,
+  "description": "test refund description",
+  "originalTransactionId": 155
+};
+
+
+var options = {
+  method: "POST",
+  uri: BASE_URL + "/financial/v1/refund/validate",
+  headers: {
+    'Authorization': 'Basic ' + new Buffer(USER + ':' + PASS).toString('base64')
+  },
+  body: emptyRows,
+  json: true // Automatically parses the JSON string in the response 
+};
+
+rp(options)
+   .then(res => {
+      console.log('result:', res);
+   })
+   .catch(err => {
+      // request failed
+      console.log('error:', err);
+   });
+```
+
 > The above command returns JSON structured like this:
 
 ```json
@@ -465,6 +597,60 @@ durationMs | number | This can be ignored. This value represents the total time 
 
 ## Status
 
+```shell
+# Response of a "complete" transaction
+my-machine$ curl -u USER:PASS BASE_URL/financial/v1/status/2421
+
+{
+  "dishonouredDate": null,
+  "transactionStatus": "Complete",
+  "status": "Ok",
+  "statusDescription": "Operation completed successfully",
+  "durationMs": 92
+}
+
+# Response of a "dishonored" transaction
+my-machine$ curl -u USER:PASS BASE_URL/financial/v1/status/2421
+
+{
+  "dishonouredDate"   : "2016-03-07",
+  "transactionStatus" : "Dishonoured",
+  "status"      : "Ok",
+  "statusDescription" : "Operation completed successfully",
+  "durationMs"    : 92
+}
+```
+
+```python
+
+import requests
+from requests.auth import HTTPBasicAuth
+
+r = requests.get(BASE_URL + "/financial/v1/status/" + "2421", auth=HTTPBasicAuth(USER, PASS))
+print(r)
+```
+
+```javascript
+let rp = require('request-promise');
+
+var options = {
+  uri: BASE_URL + "/financial/v1/status" + 2421,
+  headers: {
+    'Authorization': 'Basic ' + new Buffer(USER + ':' + PASS).toString('base64')
+  },
+  json: true // Automatically parses the JSON string in the response 
+};
+
+rp(options)
+   .then(res => {
+      console.log('result:', res);
+   })
+   .catch(err => {
+      // request failed
+      console.log('error:', err);
+   });
+```
+
 > The above command returns JSON structured like this:
 
 ```json
@@ -494,6 +680,119 @@ uniqueReference | The unique reference provided by a successful execution of a f
 
 
 ## Transaction - Execute
+
+```shell
+# credit card to mWallet
+my-machine$ curl -u USER:PASS -H "Content-Type: application/json" -X POST -d '{"uniqueReference": "12345","totalAmount": 100,"description": "Flower Arrangement. Inv# 2421","printUniqueReferenceOnStatement": true,"paymentSource": "creditCard","creditCard": {"nameOnCard": "Fred Smith","cardNumber": "345678901234564","expiryMonth": 5,"expiryYear": 17,"cardValidationNumber": "0000"},"disbursements": [{"disbursementMethod": "mWallet","toMWallet": "6279059700010827","amount": 100}]}' BASE_URL/financial/v1/transaction/execute
+
+{
+  "bpayReceipts": [],
+  "callerUniqueReference": "12345",
+  "feeAmountExcludingGst": 1.20,
+  "feeAmountGstComponent": 0.12,
+  "feeAmountIncludingGst": 1.32,
+  "feeBreakdown": {
+    "debitFee": {
+      "feeAmountExcludingGst": 1.20,
+      "feeAmountGstComponent": 0.12,
+      "feeAmountIncludingGst": 1.32
+    },
+    "disbursementFees": [
+      {
+        "disbursementArrayIndex": 0,
+        "disbursementFee": {
+          "feeAmountExcludingGst":0.00,
+          "feeAmountGstComponent":0.00,
+          "feeAmountIncludingGst":0.00
+        }
+      }
+    ]
+  }, 
+  "transactionId": 3,
+  "status": "Ok",
+  "statusDescription": "Operation completed successfully",
+  "durationMs": 693
+}
+```
+
+```python
+
+import requests
+from requests.auth import HTTPBasicAuth
+
+# credit card -> mWallet
+cardToMWallet = {
+  "uniqueReference": "12345",
+  "totalAmount": 100,
+  "description": "Flower Arrangement. Inv# 2421",
+  "printUniqueReferenceOnStatement": true,
+  "paymentSource": "creditCard",
+  "creditCard": {
+    "nameOnCard": "Fred Smith",
+    "cardNumber": "345678901234564",
+    "expiryMonth": 5,
+    "expiryYear": 17,
+    "cardValidationNumber": "0000"
+  },
+  "disbursements": [
+                     {
+                        "disbursementMethod": "mWallet",
+                        "toMWallet": "6279059700010827",
+                        "amount": 100
+                     }
+                   ]
+};
+
+r = requests.post(BASE_URL + "/financial/v1/transaction/execute", data=cardToMWallet, auth=HTTPBasicAuth(USER, PASS))
+print(r)
+```
+
+```javascript
+let rp = require('request-promise');
+
+// credit card -> mWallet
+let cardToMWallet = {
+  "uniqueReference": "12345",
+  "totalAmount": 100,
+  "description": "Flower Arrangement. Inv# 2421",
+  "printUniqueReferenceOnStatement": true,
+  "paymentSource": "creditCard",
+  "creditCard": {
+    "nameOnCard": "Fred Smith",
+    "cardNumber": "345678901234564",
+    "expiryMonth": 5,
+    "expiryYear": 17,
+    "cardValidationNumber": "0000"
+  },
+  "disbursements": [
+     {
+        "disbursementMethod": "mWallet",
+        "toMWallet": "6279059700010827",
+        "amount": 100
+     }
+   ]
+};
+
+
+var options = {
+  method: "POST",
+  uri: BASE_URL + "/financial/v1/transaction/execute",
+  headers: {
+    'Authorization': 'Basic ' + new Buffer(USER + ':' + PASS).toString('base64')
+  },
+  body: cardToMWallet,
+  json: true // Automatically parses the JSON string in the response 
+};
+
+rp(options)
+   .then(res => {
+      console.log('result:', res);
+   })
+   .catch(err => {
+      // request failed
+      console.log('error:', err);
+   });
+```
 
 > Payload request JSON should look like this:
 
@@ -586,6 +885,119 @@ durationMs | number | This can be ignored. This value represents the total time 
 
 
 ## Transaction - Validate
+
+```shell
+# credit card to mWallet
+my-machine$ curl -u USER:PASS -H "Content-Type: application/json" -X POST -d '{"uniqueReference": "12345","totalAmount": 100,"description": "Flower Arrangement. Inv# 2421","printUniqueReferenceOnStatement": true,"paymentSource": "creditCard","creditCard": {"nameOnCard": "Fred Smith","cardNumber": "345678901234564","expiryMonth": 5,"expiryYear": 17,"cardValidationNumber": "0000"},"disbursements": [{"disbursementMethod": "mWallet","toMWallet": "6279059700010827","amount": 100}]}' BASE_URL/financial/v1/transaction/validate
+
+{
+  "bpayReceipts": [],
+  "callerUniqueReference": "12345",
+  "feeAmountExcludingGst": 1.20,
+  "feeAmountGstComponent": 0.12,
+  "feeAmountIncludingGst": 1.32,
+  "feeBreakdown": {
+    "debitFee": {
+      "feeAmountExcludingGst": 1.20,
+      "feeAmountGstComponent": 0.12,
+      "feeAmountIncludingGst": 1.32
+    },
+    "disbursementFees": [
+      {
+        "disbursementArrayIndex": 0,
+        "disbursementFee": {
+          "feeAmountExcludingGst":0.00,
+          "feeAmountGstComponent":0.00,
+          "feeAmountIncludingGst":0.00
+        }
+      }
+    ]
+  }, 
+  "transactionId": 3,
+  "status": "Ok",
+  "statusDescription": "Operation completed successfully",
+  "durationMs": 693
+}
+```
+
+```python
+
+import requests
+from requests.auth import HTTPBasicAuth
+
+# credit card -> mWallet
+cardToMWallet = {
+  "uniqueReference": "12345",
+  "totalAmount": 100,
+  "description": "Flower Arrangement. Inv# 2421",
+  "printUniqueReferenceOnStatement": true,
+  "paymentSource": "creditCard",
+  "creditCard": {
+    "nameOnCard": "Fred Smith",
+    "cardNumber": "345678901234564",
+    "expiryMonth": 5,
+    "expiryYear": 17,
+    "cardValidationNumber": "0000"
+  },
+  "disbursements": [
+                     {
+                        "disbursementMethod": "mWallet",
+                        "toMWallet": "6279059700010827",
+                        "amount": 100
+                     }
+                   ]
+};
+
+r = requests.post(BASE_URL + "/financial/v1/transaction/validate", data=cardToMWallet, auth=HTTPBasicAuth(USER, PASS))
+print(r)
+```
+
+```javascript
+let rp = require('request-promise');
+
+// credit card -> mWallet
+let cardToMWallet = {
+  "uniqueReference": "12345",
+  "totalAmount": 100,
+  "description": "Flower Arrangement. Inv# 2421",
+  "printUniqueReferenceOnStatement": true,
+  "paymentSource": "creditCard",
+  "creditCard": {
+    "nameOnCard": "Fred Smith",
+    "cardNumber": "345678901234564",
+    "expiryMonth": 5,
+    "expiryYear": 17,
+    "cardValidationNumber": "0000"
+  },
+  "disbursements": [
+     {
+        "disbursementMethod": "mWallet",
+        "toMWallet": "6279059700010827",
+        "amount": 100
+     }
+   ]
+};
+
+
+var options = {
+  method: "POST",
+  uri: BASE_URL + "/financial/v1/transaction/validate",
+  headers: {
+    'Authorization': 'Basic ' + new Buffer(USER + ':' + PASS).toString('base64')
+  },
+  body: cardToMWallet,
+  json: true // Automatically parses the JSON string in the response 
+};
+
+rp(options)
+   .then(res => {
+      console.log('result:', res);
+   })
+   .catch(err => {
+      // request failed
+      console.log('error:', err);
+   });
+```
 
 > The above command expects a JSON payload structured like this:
 
