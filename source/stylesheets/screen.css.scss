@@ -55,6 +55,15 @@ html, body {
     $nav-subitem-bg;
 }
 
+// Section headers
+.tocify-item[data-unique="api-hierarchy"] {
+  text-transform: uppercase;
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+  border-bottom: 1px solid $nav-footer-border-color;
+  font-weight: bold;
+}
+
 .tocify-wrapper {
   transition: left 0.3s ease-in-out;
 
