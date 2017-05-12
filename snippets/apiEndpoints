@@ -39,7 +39,7 @@ GET BASE_URL + /reports/v1/statement/{date}
 POST BASE_URL + /security/v1/changePassword
 GET BASE_URL + /security/v1/v1/createOneShotSecurityToken/{expiryMinutes}
 GET BASE_URL + /security/v1/createSecurityToken/{expiryMinutes}
-GET BASE_URL + /security/v1/deleteSEcurityToken/{token}
+GET BASE_URL + /security/v1/deleteSecurityToken/{token}
 GET BASE_URL + /security/v1/createImpersonationTokenAsIssuer/{accountNumber}/{expiryMinutes}
 GET BASE_URL + /security/v1/refreshSecurityToken/{token}
 GET BASE_URL + /security/v1/signInAccountSettings
