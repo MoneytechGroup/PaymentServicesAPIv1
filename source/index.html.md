@@ -47,6 +47,68 @@ The Platform is a payment gateway developed by Moneytech Payments which provides
 
   * Credit-Card (Visa, Mastercard, Diners, Amex)
 
+## Settlement
+In Platform terms, the act of a settlement is to calculate the balance of each mAccount at 4PM (Sydney Time) each business day (this balance is called the ‘Settlement Balance’). The ‘Settlement Balance’ is used to create a reversing transaction (called a ‘Settlement Transaction’) to bring the mAccount balance to $0.00. These ‘Settlement Transactions’ are then submitted to either Debit or Credit the physical Australian Bank Account (ABA) attached to the mAccount.
+
+  * A ‘Settlement Balance’ below $0.00 (-ve) will Debit the mAccounts physical Australian Bank Account (ABA)
+  * A ‘Settlement Balance’ above $0.00 (+ve) will Credit the mAccounts physical Australian Bank Account (ABA)
+
+### Settlement Frequency
+By default, mAcounts are settled every business day at 4PM. Many other options are available by contacting your Moneytech Payments representative. Some of the options are:
+
+  * Daily at 4PM (Sydney Time)
+  * Daily at 10AM (Sydney Time)
+  * On-Demand
+  * Beginning of Month
+  * Mid-Month 
+  * End of Month
+  * Never Settle
+
+### Deferred Settlement - T+n
+T+n is a term that indicates how many business days after the Transaction you want the funds Debited from or Credited to the mAccounts linked Australian Bank Account (ABA). When an mAccount is created/updated using the mAccount/v1 APIs, you can set the T+n values independently for both the Debit and Credit settlements. The default is to settle Debit and Credits as T+0 – same day if the transaction occurred before 4pm Sydney time.
+
+How T+n works: The mAccount ‘Settlement Transaction’ is created as usual at 4pm each business day. The ‘Settlement Transaction’ date is set to the calculated date in the future (+n business days) and will appear on the statement with this future date (so you know when to expect it). The actual instructions to Debit or
+Credit the funds are delayed until the calculated date.
+
+### Settlement Notifications
+mAccounts receive a settlement email at the end of the settlement run, explaining the amount to be Debited/Credited to their mAccounts physical Australian Bank Account, the date the settlement will occur (remember T+n) and a financial statement (as a PDF) which lists each transaction that was settled, as well as an Excel Spreadsheet with all the transactions listed in the PDF statement for further analysis.
+
+### Sample Settlement Email
+<img src = "images\Settlement\SettlementSampleEmail.png">
+
+<b>Note</b>
+
+
+The above ‘Credit Date’ would have the actual date the settlement would occur if T+n are > 0.
+
+### Sample PDF Settlement Statement
+The Statement From Date and the To date in the statement below (inside the green box) are from 4pm the previous settlement date (1 December 2016 – A Friday) to 4pm the current settlement date (5th December 2016 – A Monday). This is why it’s called a Settlement Statement. It’s only showing transactions that were settled on the 5th December 2016 (a Monday) which included any transactions over the weekend.
+
+When looking at any of the Platform statements, think of the Platform as a bank. In the example below, the Settlement transaction (row 3) shows there is a Debit of $50.00 for the settlement. This is a Debit FROM your Platform account and will therefore be a Credit INTO your physical bank account.
+
+
+<img src = "images\Settlement\SettlementSamplePDFStatement.png">
+
+### Sample Excel Settlement Spreadsheet
+The Settlement Notification email includes an Excel spreadsheet with the same details as the PDF Settlement Statement. This provides you with the same data that you can use for analysis.
+
+
+<img src = "images\Settlement\SettlementSampleSpreadsheet.png">
+
+## Financial Statements
+The Platform will automatically send financials statements to both mAccounts and mWallets if an email address is provided. These include Month to Date, Last Month, Last Financial Year and others.
+
+Statements are emailed as a PDF attachment along with an Excel spreadsheet containing the same details as the PDF statement.
+
+Using the mAccount/v1/sendStatement and mWallet/v1/sendStatement APIs you may request a statement to be sent at any time.
+
+A Credit Settlement transaction will appear as a Debit on your physical Bank Statement and a Debit Settlement transaction will appear as a Credit on your physical Bank Statement. Both mAccounts and mWallets represent a financial account held on the Platform. The Statements are in respect to the Platform NOT your physical bank account.
+
+### Example – mAccount Month To Date Financial Statement
+
+<img src = "images\FinancialStatement.png">
+
+
 # Authentication
 
 > To authorize, use this code:

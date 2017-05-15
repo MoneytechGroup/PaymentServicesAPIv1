@@ -584,13 +584,189 @@ status | string | This is the status of executing the request. A code of ‘Ok�
 statusDescription | string | This is a plain English description of the status. See the sectionStatus Description.
 durationMs | number | This can be ignored. This value represents the total time in milliseconds that thePlatform took to process the request.
 
-### Example 1 - Credit-Card -> mWallet ###
+### Example 1 - Credit-Card -> mWallet 
 
 Debit Credit-Card with the funds going to an mWallet.
 
 For example we are going to debit a crdit card for $100 and credit an mWallet for the full amount.
 
-<img src = "images\mWallet\mWalletPDFstatement.png">
+### Statement
+
+<b>Sign-in Account - 6279059610001205</b>
+
+<img src = "images\Example1\SignInAccountPDFstatement.png">
+
+As can be seen, there was a credit to the Sign-In Account from the Credit-Card for $100.00 then immediately paid the mWallet account.
+
+Moneytech Payments took $3.57 as a processing fee leaving the Sign-In Account with a debt of -$3.57.
+
+
+<b>mWallet- 6279059700010827</b>
+
+<img src = "images\Example1\mWalletPDF.png">
+
+
+The mWallet owner simply sees a credit into his/her account for $100.00
+
+### Example 2 – Credit-Card -> mAccount
+
+In this example, we are going to debit a Credit card for flowers costing $100 + a $2 processing fee. We will have the Platform credit two separate mAccounts for the $100 and the $2 fee. This allows you to keep the products cost separate from the fees account.
+
+### Statement
+
+<b>Sign-in Account - 6279059610001205</b>
+
+<img src = "images\Example2\SignInAccountPDFStatement.png">
+
+As expected, there was a credit to the Sign-In Account for $2.00 to cover the fees, with Moneytech Payments debiting the account for $2.84, leaving a closing balance in the account of $-0.84.
+
+
+Where is the transfer to mAccount 6279059610001205 for $2.00? As the mAccount 6279059610001205 is the same as the Sign-In Account, the Credit-Card funds are credited to the Sign-In Account and therefore the $2.00 is already in the account. The Platform simply ignores the request.
+
+<b>mAccount – 6279059700002972</b>
+
+<img src = "images\Example2\mAccountPDFStatement.png">
+
+As expected, the mAccount sees a credit into their account from the Sign-In Account.
+
+### Example 3 – Credit-Card -> Direct Credit
+
+In this example, we are going to extend Example 2 by having the flowers cost ($100) split into $15 and $85. We will have the $85 paid into the principal account while the $15 paid to a courier bank account.
+
+For example. Let’s say the flowers cost $100 and you have added $2.00 as a processing fee and we are paying an Australian Bank Account $15 for the fee taken from the $100 principal.
+
+### Statement
+
+<b>Sign-in Account - 6279059610001205</b>
+
+<img src = "images\Example3\SignInAccountPDFStatement.png">
+
+With $85.00 being paid to an mAccount, $15.00 being a Direct Credit. Moneytech Payments debited a processing fee of $3.72 leaving a balance of $-1.72.
+
+<b>mAccount – 6279059700002980</b>
+
+<img src = "images\Example3\PrincipalmAccountPDFStatement.png">
+
+<b>BSB Account</b>
+
+<img src = "images\Example3\BSBaccountPDFStatement.png">
+
+Behind the scenes, the Platform creates an mAccount for the Direct Credit request. As you can see from the statement for this mAccount, there has been a Direct Credit made for $85.00.
+
+
+### Example 4 – Credit-Card -> BPAY
+
+In this example, we are going to extend Example 3 by having the flowers cost ($100) split into $85 & $15. We will have the $85 paid into a BPAY account, $15 paid to the courier bank account via Direct Credit.
+
+We are once again adding $2 as a processing fee to be paid into the Sign-In Account
+
+### Statement
+
+<b>Sign-in Account - 6279059610001205</b> 
+
+<img src = "images\Example4\SignInAccountPDFStatement.png">
+
+With $85.00 being paid to an mAccount, $15.00 being a Direct Credit and Moneytech Payments has debited a processing fee of $3.34, leaving a balance of $-1.34.
+
+<b>BSB Account</b>
+
+<img src = "images\Example4\BSBaccountPDFStatement.png">
+
+Behind the scenes, the Platform creates an mAccount for the direct credit request. As can see from the statement for this mAccount there has been a Direct Credit made for $15.00.
+
+<b>mWallet – 6279059700002980</b>
+
+<img src = "images\Example4\mWalletPDFStatement.png">
+
+As an mWallet was specified, the statement shows how the funds were deposited along with the payment details.
+
+
+### Example 5 – Credit-Card -> Token & mAccount
+
+In this example, we are going debit a Credit-Card for $102. We will then have $100 paid to a Token.
+
+We are once again adding $2 as a processing fee to be paid into the Sign-In Account
+
+
+### Example 6 – mAccount -> mAccount & mAccount
+
+In this example, we are going debit an mAccount $27. We will then have $25 paid to another mAccount.
+
+We are once again adding $2 as a processing fee to be paid into the Sign-In Account
+
+
+### Example 7 – mWallet -> mWallet
+
+In this example, we will debit an mWallet for $100 and credit another mWallet for $100
+
+### Statement
+
+<b>Sign-in Account - 6279059610001205</b> 
+
+<img src = "images\Example7\SigninAccountPDFStatement.png">
+
+<b>Note</b>
+
+
+The ID’s are all 6 indicating they belong to the same transaction.
+
+<b>Source mWallet- 6279059700010827</b>
+
+<img src = "images\Example7\SourcemWalletPDFStatement.png">
+
+The first row is from Example 1 (we needed some money in the mWallet to transfer).
+
+The second row is the transfer of $100 and who is receiving the funds.
+
+<b>Destination mWallet- 6279059700010835</b>
+
+<img src = "images\Example7\DestinationmWalletPDFStatement.png">
+
+The destination mWallet account shows the deposit for $100 and who it’s from.
+
+
+### Example 8 – mWallet -> Charity Account
+
+In this example, we are going debit an mWallet for $25 and make a donation to a charity.
+
+
+### Example 9 – Direct Debit -> mWallet & mAccount
+
+Debit an Australian Bank Account for the funds crediting an mWallet and an mAccount.
+
+For example; Debit an mWallet for $27 and put this into another mWallet
+
+### Statement
+
+<b>Sign-in Account - 6279059610001205</b> 
+
+<img src = "images\Example9\SignInmAccountPDFStatement.png">
+
+You can see the Direct Debit for $27 followed by the payment to the mWallet. Moneytech Payments debited $0.88 for the processing fee. The $2 disbursement has been optimized away.
+
+<b>BSB Account</b>
+
+<img src = "images\Example9\BSBFinancialStatement.png">
+
+Behind the scenes, the Platform creates an mAccount for the direct debit request. As you can see from the statement for this mAccount there has been a Direct Debit made for $27.00.
+
+<b>Destination mWallet- 6279059700010835</b>
+
+<img src = "images\Example9\mWalletFinancialStatement.png">
+
+The destination mWallet account shows the deposit for $25 and who it’s from.
+
+
+### Example 10 –Token -> mWallet & mAccount
+
+Debit a previously registered Token (using the Token APIs in this document) crediting an mWallet and an mAccount.
+
+For example: Debit a token for $27 and credit an mWallet for $25 and $2 into an mAccount.
+
+
+### Example 11 – directDebit -> directCredit
+
+In this example, we are going debit an ABA (directDebit) for $100 and credit another ABA (directCredit) for the same amount.
 
 
 ## Transaction - Validate
