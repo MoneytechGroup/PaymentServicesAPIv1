@@ -1,18 +1,11 @@
 ```shell
-# valid BSB
-my-machine$ curl -u USER:PASS BASE_URL/tools/v1/ping
+# extends the live of token by the number of minutes provided when the SecurityToken was created
+my-machine$ curl -u USER:PASS -X DELETE BASE_URL/token/v1/delete/20c3a494-7010-4f22-babe-34d643e5e64f
 
 {
-  "address": "Shop 1-047 Henry St",
-  "bankCode": "ANZ",
-  "bsb": "012-433",
-  "city": "Penrith",
-  "closed": false,
-  "postCode": "2750",
-  "state": "NSW",
   "status": "Ok",
   "statusDescription": "Operation completed successfully",
-  "durationMs": 126
+  "durationMs": 255
 }
 ```
 
@@ -22,7 +15,7 @@ import requests
 from requests.auth import HTTPBasicAuth
 
 # extends the live of token by the number of minutes provided when the SecurityToken was created
-r = requests.get(BASE_URL + "/tools/v1/ping", auth=HTTPBasicAuth(USER, PASS))
+r = requests.delete(BASE_URL + "/token/v1/delete/20c3a494-7010-4f22-babe-34d643e5e64f", auth=HTTPBasicAuth(USER, PASS))
 print(r)
 ```
 
@@ -31,7 +24,8 @@ let rp = require('request-promise');
 
 // extends the live of token by the number of minutes provided when the SecurityToken was created
 var options = {
-  uri: BASE_URL + "/tools/v1/ping",
+  method: "DELETE",
+  uri: BASE_URL + "/token/v1/delete/20c3a494-7010-4f22-babe-34d643e5e64f",
   headers: {
     'Authorization': 'Basic ' + new Buffer(USER + ':' + PASS).toString('base64')
   },

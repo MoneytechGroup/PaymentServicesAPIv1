@@ -73,6 +73,58 @@ feeFixedExGst |number | The fixed amount to be taken as a fee Excluding GST
 
 ## Change Password
 
+```shell
+my-machine$ curl -u USER:PASS -H "Content-Type: application/json" -X POST -d '{"password1":"$My Name is Fred@876","password2":"$My Name is Fred@876"}' BASE_URL/security/v1/changePassword
+
+{
+  "status": "Ok",
+  "statusDescription": "Operation completed successfully",
+  "durationMs": 198
+}
+```
+
+```python
+
+import requests
+from requests.auth import HTTPBasicAuth
+
+details = {
+  "password1": "$My Name is Fred@876",
+  "password2": "$My Name is Fred@876"
+}
+
+r = requests.post(BASE_URL + "/security/v1/changePassword", data=details, auth=HTTPBasicAuth(USER, PASS))
+print(r)
+```
+
+```javascript
+let rp = require('request-promise');
+
+let details = {
+  "password1": "$My Name is Fred@876",
+  "password2": "$My Name is Fred@876"
+};
+
+var options = {
+  method: "POST",
+  uri: BASE_URL + "/security/v1/changePassword",
+  headers: {
+    'Authorization': 'Basic ' + new Buffer(USER + ':' + PASS).toString('base64')
+  },
+  body: details,
+  json: true // Automatically parses the JSON string in the response 
+};
+
+rp(options)
+   .then(res => {
+      console.log('result:', res);
+   })
+   .catch(err => {
+      // request failed
+      console.log('error:', err);
+   });
+```
+
 > The above command expects a JSON payload structured like this:
 
 ```json
@@ -119,6 +171,48 @@ durationMs | number | This can be ignored. This value represents the total time 
 
 ## Create One-Shot Security Token
 
+```shell
+# Date follows ISO8601 yyyy-mm-dd format
+my-machine$ curl -u USER:PASS BASE_URL/security/v1/createOneShotSecurityToken/5
+
+{
+  "oneShotSecurityToken": "2215125a-b80b-41aa-af58-740d21b303ed",
+  "status": "Ok",
+  "statusDescription": "Operation completed successfully",
+  "durationMs": 94
+}
+```
+
+```python
+
+import requests
+from requests.auth import HTTPBasicAuth
+
+r = requests.get(BASE_URL + "/security/v1/createOneShotSecurityToken/5", auth=HTTPBasicAuth(USER, PASS))
+print(r)
+```
+
+```javascript
+let rp = require('request-promise');
+
+var options = {
+  uri: BASE_URL + "/security/v1/createOneShotSecurityToken/5",
+  headers: {
+    'Authorization': 'Basic ' + new Buffer(USER + ':' + PASS).toString('base64')
+  },
+  json: true // Automatically parses the JSON string in the response 
+};
+
+rp(options)
+   .then(res => {
+      console.log('result:', res);
+   })
+   .catch(err => {
+      // request failed
+      console.log('error:', err);
+   });
+```
+
 > The above command returns JSON structured like this:
 
 ```json
@@ -163,6 +257,47 @@ durationMs | number | This can be ignored. This value represents the total time 
 
 
 ## Create Security Token
+
+```shell
+my-machine$ curl -u USER:PASS BASE_URL/security/v1/createSecurityToken/5
+
+{
+  "securityToken": " a8d82ecd-c440-4f25-990b-9fe55c41c95a",
+  "status": "Ok",
+  "statusDescription": "Operation completed successfully",
+  "durationMs": 97
+}
+```
+
+```python
+
+import requests
+from requests.auth import HTTPBasicAuth
+
+r = requests.get(BASE_URL + "/security/v1/createSecurityToken/5", auth=HTTPBasicAuth(USER, PASS))
+print(r)
+```
+
+```javascript
+let rp = require('request-promise');
+
+var options = {
+  uri: BASE_URL + "/security/v1/createSecurityToken/5",
+  headers: {
+    'Authorization': 'Basic ' + new Buffer(USER + ':' + PASS).toString('base64')
+  },
+  json: true // Automatically parses the JSON string in the response 
+};
+
+rp(options)
+   .then(res => {
+      console.log('result:', res);
+   })
+   .catch(err => {
+      // request failed
+      console.log('error:', err);
+   });
+```
 
 > The above command returns JSON structured like this:
 
@@ -210,6 +345,47 @@ durationMs | number | This can be ignored. This value represents the total time 
 
 ## Delete Security Token
 
+```shell
+my-machine$ curl -u USER:PASS -X DELETE BASE_URL/security/v1/deleteSecurityToken/5fff1778-ee69-41c8-9ac8-229d56556046
+
+{
+  "status": "Ok",
+  "statusDescription": "Operation completed successfully",
+  "durationMs": 97
+}
+```
+
+```python
+
+import requests
+from requests.auth import HTTPBasicAuth
+
+r = requests.delete(BASE_URL + "/security/v1/deleteSecurityToken/5fff1778-ee69-41c8-9ac8-229d56556046", auth=HTTPBasicAuth(USER, PASS))
+print(r)
+```
+
+```javascript
+let rp = require('request-promise');
+
+var options = {
+  method: "DELTE",
+  uri: BASE_URL + "/security/v1/deleteSecurityToken/5fff1778-ee69-41c8-9ac8-229d56556046",
+  headers: {
+    'Authorization': 'Basic ' + new Buffer(USER + ':' + PASS).toString('base64')
+  },
+  json: true // Automatically parses the JSON string in the response 
+};
+
+rp(options)
+   .then(res => {
+      console.log('result:', res);
+   })
+   .catch(err => {
+      // request failed
+      console.log('error:', err);
+   });
+```
+
 > The above command returns JSON structured like this:
 
 ```json
@@ -224,7 +400,7 @@ This API deletes the security token specified in the parameter {token}. If no {t
 
 ### HTTP Request
 
-`GET BASE_URL + /security/v1/deleteSEcurityToken/{token}`
+`DELETE BASE_URL + /security/v1/deleteSecurityToken/{token}`
 
 ### Request Parameter Decriptions
 
@@ -242,6 +418,50 @@ durationMs | number | This can be ignored. This value represents the total time 
 
 
 ## Create Impersonation Token as Issuer
+
+```shell
+# requests an impersation token for account number 6279059700034215 with an expiry of 3 minutes
+my-machine$ curl -u USER:PASS BASE_URL/security/v1/createImpersonationTokenAsIssuer/6279059700034215/3
+
+{
+  "impersonationToken": " a8d82ecd-c440-4f25-990b-9fe55c41c95a",
+  "status": "Ok",
+  "statusDescription": "Operation completed successfully",
+  "durationMs": 97
+}
+```
+
+```python
+
+import requests
+from requests.auth import HTTPBasicAuth
+
+# requests an impersation token for account number 6279059700034215 with an expiry of 3 minutes
+r = requests.get(BASE_URL + "/security/v1/createImpersonationTokenAsIssuer/6279059700034215/3", auth=HTTPBasicAuth(USER, PASS))
+print(r)
+```
+
+```javascript
+let rp = require('request-promise');
+
+// requests an impersation token for account number 6279059700034215 with an expiry of 3 minutes
+var options = {
+  uri: BASE_URL + "/security/v1/createImpersonationTokenAsIssuer/6279059700034215/3",
+  headers: {
+    'Authorization': 'Basic ' + new Buffer(USER + ':' + PASS).toString('base64')
+  },
+  json: true // Automatically parses the JSON string in the response 
+};
+
+rp(options)
+   .then(res => {
+      console.log('result:', res);
+   })
+   .catch(err => {
+      // request failed
+      console.log('error:', err);
+   });
+```
 
 > The above command returns JSON structured like this:
 
@@ -289,6 +509,49 @@ durationMs | number | This can be ignored. This value represents the total time 
 
 ## Refresh Security Token
 
+```shell
+# extends the live of token by the number of minutes provided when the SecurityToken was created
+my-machine$ curl -u USER:PASS BASE_URL/security/v1/refreshSecurityToken/54e497d0-98a4-430f-85aa-552237e75c3d
+
+{
+  "status": "Ok",
+  "statusDescription": "Operation completed successfully",
+  "durationMs": 97
+}
+```
+
+```python
+
+import requests
+from requests.auth import HTTPBasicAuth
+
+# extends the live of token by the number of minutes provided when the SecurityToken was created
+r = requests.get(BASE_URL + "/security/v1/refreshSecurityToken/54e497d0-98a4-430f-85aa-552237e75c3d", auth=HTTPBasicAuth(USER, PASS))
+print(r)
+```
+
+```javascript
+let rp = require('request-promise');
+
+// extends the live of token by the number of minutes provided when the SecurityToken was created
+var options = {
+  uri: BASE_URL + "/security/v1/refreshSecurityToken/54e497d0-98a4-430f-85aa-552237e75c3d",
+  headers: {
+    'Authorization': 'Basic ' + new Buffer(USER + ':' + PASS).toString('base64')
+  },
+  json: true // Automatically parses the JSON string in the response 
+};
+
+rp(options)
+   .then(res => {
+      console.log('result:', res);
+   })
+   .catch(err => {
+      // request failed
+      console.log('error:', err);
+   });
+```
+
 > The above command returns JSON structured like this:
 
 ```json
@@ -328,6 +591,77 @@ durationMs | number | This can be ignored. This value represents the total time 
 
 
 ## Sign In Account Settings
+
+```shell
+# extends the live of token by the number of minutes provided when the SecurityToken was created
+my-machine$ curl -u USER:PASS BASE_URL/security/v1/signInAccountSettings
+
+{
+  "canAccessUserDatabase": true,
+  "canCreateMAccounts": true,
+  "canCreateMWallets": true,
+  "canDebitCreditCards": true,
+  "canDirectCredit": true,
+  "canDirectDebit": true,
+  "canPayBpay": true,
+  "canImpersonate": true,
+  "isIssuer": true,
+  "childMAccountMonthlyFeeExGst": 5.0,
+  "childMAccountSetupFeeExGst": 0.0,
+  "signInAccountMonthlyFeeExGst": 25.0,
+  "disbursementFees": [
+    {
+      "feeFixedExGst": 0.4546,
+      "feePercentageExGst": 0.0,
+      "method": "BPay"
+    }
+  ],
+  "loadFees": [
+    {
+      "cardType": "Amex",
+      "debitFromMAccount": null,
+      "feeFixedExGst": 0.25,
+      "feePercentageExGst": 3.0,
+      "method": "CreditCard"
+    }
+  ],
+  "status": "Ok",
+  "statusDescription": "Operation completed successfully",
+  "durationMs": 536
+}
+```
+
+```python
+
+import requests
+from requests.auth import HTTPBasicAuth
+
+# extends the live of token by the number of minutes provided when the SecurityToken was created
+r = requests.get(BASE_URL + "/security/v1/signInAccountSettings", auth=HTTPBasicAuth(USER, PASS))
+print(r)
+```
+
+```javascript
+let rp = require('request-promise');
+
+// extends the live of token by the number of minutes provided when the SecurityToken was created
+var options = {
+  uri: BASE_URL + "/security/v1/signInAccountSettings",
+  headers: {
+    'Authorization': 'Basic ' + new Buffer(USER + ':' + PASS).toString('base64')
+  },
+  json: true // Automatically parses the JSON string in the response 
+};
+
+rp(options)
+   .then(res => {
+      console.log('result:', res);
+   })
+   .catch(err => {
+      // request failed
+      console.log('error:', err);
+   });
+```
 
 > The above command returns JSON structured like this:
 

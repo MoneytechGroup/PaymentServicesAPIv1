@@ -80,6 +80,58 @@ amount | number | | The amount you intend to either debit the Credit-Card or ref
 
 ## Validate ABN
 
+```shell
+my-machine$ curl -u USER:PASS BASE_URL/tools/v1/abnValidate/24611393554
+
+{
+  "abn": "24 611 393 554",
+  "businessPhysicalAddressEffectiveFromDate": "2016-07-01T00:00:00",
+  "businessPhysicalAddressPostCode": "2060",
+  "businessPhysicalAddressStateCode": "NSW",
+  "entityTypeCode": "PRV",
+  "entityTypeDescription": "Australian Private Company",
+  "isAbnValid": true,
+  "isCharity": false,
+  "lastUpdatedDate": "2017-02-28T00:00:00",
+  "legalName": null,
+  "organisationName": "MONEYTECH GROUP LIMITED",
+  "organisationNameFromDate": "2017-02-28T00:00:00",
+  "status": "Ok",
+  "statusDescription": "Operation completed successfully",
+  "durationMs": 58
+}
+```
+
+```python
+
+import requests
+from requests.auth import HTTPBasicAuth
+
+r = requests.get(BASE_URL + "/tools/v1/abnValidate/24611393554", auth=HTTPBasicAuth(USER, PASS))
+print(r)
+```
+
+```javascript
+let rp = require('request-promise');
+
+var options = {
+  uri: BASE_URL + "/tools/v1/abnValidate/24611393554",
+  headers: {
+    'Authorization': 'Basic ' + new Buffer(USER + ':' + PASS).toString('base64')
+  },
+  json: true // Automatically parses the JSON string in the response 
+};
+
+rp(options)
+   .then(res => {
+      console.log('result:', res);
+   })
+   .catch(err => {
+      // request failed
+      console.log('error:', err);
+   });
+```
+
 > The above command returns JSON structured like this:
 
 ```json
@@ -139,6 +191,72 @@ durationMs | number | This can be ignored. This value represents the total time 
 
 ## Validate BSB
 
+```shell
+# valid BSB
+my-machine$ curl -u USER:PASS BASE_URL/tools/v1/bsbValidate/012-433
+
+{
+  "address": "Shop 1-047 Henry St",
+  "bankCode": "ANZ",
+  "bsb": "012-433",
+  "city": "Penrith",
+  "closed": false,
+  "postCode": "2750",
+  "state": "NSW",
+  "status": "Ok",
+  "statusDescription": "Operation completed successfully",
+  "durationMs": 126
+}
+
+# valid BSB
+my-machine$ curl -u USER:PASS BASE_URL/tools/v1/bsbValidate/012-413
+
+{
+  "address": "Refer to BSB 083-004 - 08/99",
+  "bankCode": "NAB",
+  "bsb": "083-992",
+  "city": "Melbourne",
+  "closed": true,
+  "postCode": "3000",
+  "state": "VIC",
+  "status": "Ok",
+  "statusDescription": "Operation completed successfully",
+  "durationMs": 177
+}
+```
+
+```python
+
+import requests
+from requests.auth import HTTPBasicAuth
+
+# extends the live of token by the number of minutes provided when the SecurityToken was created
+r = requests.get(BASE_URL + "/tools/v1/bsbValidate/012-433", auth=HTTPBasicAuth(USER, PASS))
+print(r)
+```
+
+```javascript
+let rp = require('request-promise');
+
+// extends the live of token by the number of minutes provided when the SecurityToken was created
+var options = {
+  uri: BASE_URL + "/tools/v1/bsbValidate/012-433",
+  headers: {
+    'Authorization': 'Basic ' + new Buffer(USER + ':' + PASS).toString('base64')
+  },
+  json: true // Automatically parses the JSON string in the response 
+};
+
+rp(options)
+   .then(res => {
+      console.log('result:', res);
+   })
+   .catch(err => {
+      // request failed
+      console.log('error:', err);
+   });
+```
+
 > The above command returns JSON structured like this:
 
 ```json
@@ -180,6 +298,68 @@ durationMs | number | This can be ignored. This value represents the total time 
 
 
 ## Validate Credit Card
+
+```shell
+my-machine$ curl -u USER:PASS -H "Content-Type: application/json" -X POST -d '{"cardNumber":"5123456789012346","nameOnCard":"Kelly Royal","expiryMonth":"05","expiryYear":"17","cardValidationNumber":"000","returnFee":false}' BASE_URL/tools/v1/creditCardValidate
+
+{
+  "cardType": "MASTERCARD",
+  "fee": null,
+  "status": "Ok",
+  "statusDescription": "Credit-Card validation was successful",
+  "durationMs": 159
+}
+```
+
+```python
+
+import requests
+from requests.auth import HTTPBasicAuth
+
+details = {
+  "cardNumber": "5123456789012346",
+  "nameOnCard": "Kelly Royal",
+  "expiryMonth": "05",
+  "expiryYear": "17",
+  "cardValidationNumber": "000",
+  "returnFee": false
+}
+
+r = requests.post(BASE_URL + "/tools/v1/creditCardValidate", data=details, auth=HTTPBasicAuth(USER, PASS))
+print(r)
+```
+
+```javascript
+let rp = require('request-promise');
+
+let details = {
+  "cardNumber": "5123456789012346",
+  "nameOnCard": "Kelly Royal",
+  "expiryMonth": "05",
+  "expiryYear": "17",
+  "cardValidationNumber": "000",
+  "returnFee": false
+};
+
+var options = {
+  method: "POST",
+  uri: BASE_URL + "/tools/v1/creditCardValidate",
+  headers: {
+    'Authorization': 'Basic ' + new Buffer(USER + ':' + PASS).toString('base64')
+  },
+  body: details,
+  json: true // Automatically parses the JSON string in the response 
+};
+
+rp(options)
+   .then(res => {
+      console.log('result:', res);
+   })
+   .catch(err => {
+      // request failed
+      console.log('error:', err);
+   });
+```
 
 > The above command expects a JSON payload structured like this:
 
@@ -232,6 +412,56 @@ durationMs | number | This can be ignored. This value represents the total time 
 
 ## Ping
 
+```shell
+# valid BSB
+my-machine$ curl -u USER:PASS BASE_URL/tools/v1/ping
+
+{
+  "address": "Shop 1-047 Henry St",
+  "bankCode": "ANZ",
+  "bsb": "012-433",
+  "city": "Penrith",
+  "closed": false,
+  "postCode": "2750",
+  "state": "NSW",
+  "status": "Ok",
+  "statusDescription": "Operation completed successfully",
+  "durationMs": 126
+}
+```
+
+```python
+
+import requests
+from requests.auth import HTTPBasicAuth
+
+# extends the live of token by the number of minutes provided when the SecurityToken was created
+r = requests.get(BASE_URL + "/tools/v1/ping", auth=HTTPBasicAuth(USER, PASS))
+print(r)
+```
+
+```javascript
+let rp = require('request-promise');
+
+// extends the live of token by the number of minutes provided when the SecurityToken was created
+var options = {
+  uri: BASE_URL + "/tools/v1/ping",
+  headers: {
+    'Authorization': 'Basic ' + new Buffer(USER + ':' + PASS).toString('base64')
+  },
+  json: true // Automatically parses the JSON string in the response 
+};
+
+rp(options)
+   .then(res => {
+      console.log('result:', res);
+   })
+   .catch(err => {
+      // request failed
+      console.log('error:', err);
+   });
+```
+
 > The above command returns JSON structured like this:
 
 ```json
@@ -263,6 +493,60 @@ durationMs | number | This can be ignored. This value represents the total time 
 
 
 ## Send Email to Issuer
+
+```shell
+my-machine$ curl -u USER:PASS -H "Content-Type: application/json" -X POST -d '{"subject":"Please call me ASAP","isBodyHtml":false,"body":"I have forgotten my password"}' BASE_URL/tools/v1/sendEmailToIssuer
+
+{
+  "status": "Ok",
+  "statusDescription": "Operation completed successfully",
+  "durationMs": 28
+}
+```
+
+```python
+
+import requests
+from requests.auth import HTTPBasicAuth
+
+details = {
+  "subject": "Please call me ASAP",
+  "isBodyHtml": false,
+  "body": "I have forgotten my password"
+}
+
+r = requests.post(BASE_URL + "/tools/v1/sendEmailToIssuer", data=details, auth=HTTPBasicAuth(USER, PASS))
+print(r)
+```
+
+```javascript
+let rp = require('request-promise');
+
+let details = {{
+  "subject": "Please call me ASAP",
+  "isBodyHtml": false,
+  "body": "I have forgotten my password"
+};
+
+var options = {
+  method: "POST",
+  uri: BASE_URL + "/tools/v1/sendEmailToIssuer",
+  headers: {
+    'Authorization': 'Basic ' + new Buffer(USER + ':' + PASS).toString('base64')
+  },
+  body: details,
+  json: true // Automatically parses the JSON string in the response 
+};
+
+rp(options)
+   .then(res => {
+      console.log('result:', res);
+   })
+   .catch(err => {
+      // request failed
+      console.log('error:', err);
+   });
+```
 
 > The above command expects a JSON payload structured like this:
 

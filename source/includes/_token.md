@@ -113,6 +113,68 @@ description | string | Text supplied when the token was created.
 
 ## Create Australian Bank Account
 
+```shell
+my-machine$ curl -u USER:PASS -H "Content-Type: application/json" -X POST -d '{"accountNumber":"6279059700010827","description":"Savings Account","tokenToUpdate":"","bankAccountName":"Test Bank Account","bankAccountNumber":"123456789","bsb":"012-366"}' BASE_URL/token/v1/createBankAccount
+
+{
+  "token": " 9395ddef-69cb-4f38-8836-3c6502c72182",
+  "hint": " Bank: ANZ Account: 123456789",
+  "status": " Ok",
+  "statusDescription": "Operation completed successfully",
+  "durationMs": 159
+}
+```
+
+```python
+
+import requests
+from requests.auth import HTTPBasicAuth
+
+details = {
+  "accountNumber": "6279059700010827",
+  "description": "Savings Account",
+  "tokenToUpdate": "",
+  "bankAccountName": "Test Bank Account",
+  "bankAccountNumber": "123456789",
+  "bsb": "012-366"
+}
+
+r = requests.post(BASE_URL + "/token/v1/createBankAccount", data=details, auth=HTTPBasicAuth(USER, PASS))
+print(r)
+```
+
+```javascript
+let rp = require('request-promise');
+
+let details = {
+  "accountNumber": "6279059700010827",
+  "description": "Savings Account",
+  "tokenToUpdate": "",
+  "bankAccountName": "Test Bank Account",
+  "bankAccountNumber": "123456789",
+  "bsb": "012-366"
+};
+
+var options = {
+  method: "POST",
+  uri: BASE_URL + "/token/v1/createBankAccount",
+  headers: {
+    'Authorization': 'Basic ' + new Buffer(USER + ':' + PASS).toString('base64')
+  },
+  body: details,
+  json: true // Automatically parses the JSON string in the response 
+};
+
+rp(options)
+   .then(res => {
+      console.log('result:', res);
+   })
+   .catch(err => {
+      // request failed
+      console.log('error:', err);
+   });
+```
+
 > The above command expects a JSON payload structured like this:
 
 ```json
@@ -165,6 +227,68 @@ durationMs | number | This can be ignored. This value represents the total time 
 
 ## Create BPAY
 
+```shell
+my-machine$ curl -u USER:PASS -H "Content-Type: application/json" -X POST -d '{"accountNumber":"6279059700010827","description":"Savings Account","tokenToUpdate":"","bankAccountName":"Test Bank Account","bankAccountNumber":"123456789","bsb":"012-366"}' BASE_URL/token/v1/createBPAY
+
+{
+  "token": "20c3a494-7010-4f22-babe-34d643e5e64f",
+  "hint": "Biller: MONEYTECH FINANCE PTY LTD Reference: 6279059700010918 \n Amount: 100 IsVariable: False",
+  "status": "Ok",
+  "statusDescription": "Operation completed successfully",
+  "durationMs": 159
+}
+```
+
+```python
+
+import requests
+from requests.auth import HTTPBasicAuth
+
+details = {
+  "accountNumber": "6279059700010827",
+  "description": "Monthly Electricity Bill BPAY",
+  "tokenToUpdate": "",
+  "billerCode": 857763,
+  "customerReferenceNumber": "6279059700010918",
+  "amount": 100.00
+}
+
+r = requests.post(BASE_URL + "/token/v1/createBPAY", data=details, auth=HTTPBasicAuth(USER, PASS))
+print(r)
+```
+
+```javascript
+let rp = require('request-promise');
+
+let details = {
+  "accountNumber": "6279059700010827",
+  "description": "Monthly Electricity Bill BPAY",
+  "tokenToUpdate": "",
+  "billerCode": 857763,
+  "customerReferenceNumber": "6279059700010918",
+  "amount": 100.00
+};
+
+var options = {
+  method: "POST",
+  uri: BASE_URL + "/token/v1/createBPAY",
+  headers: {
+    'Authorization': 'Basic ' + new Buffer(USER + ':' + PASS).toString('base64')
+  },
+  body: details,
+  json: true // Automatically parses the JSON string in the response 
+};
+
+rp(options)
+   .then(res => {
+      console.log('result:', res);
+   })
+   .catch(err => {
+      // request failed
+      console.log('error:', err);
+   });
+```
+
 > The above command expects a JSON payload structured like this:
 
 ```json
@@ -212,6 +336,72 @@ durationMs | number | This can be ignored. This value represents the total time 
 
 
 ## Create Credit Cards
+
+```shell
+my-machine$ curl -u USER:PASS -H "Content-Type: application/json" -X POST -d '{"accountNumber":"6279059700010827","description":"Everyday use Credit-Card","tokenToUpdate":"","creditCardNumber":"5123456789012346","cvn":"000","expiryMonth":5,"expiryYear":2017,"name":"Test Credit-Card"}' BASE_URL/token/v1/createCreditCard
+
+{
+  "token": "f42b9124-4f6c-4ef5-a812-016195108865",
+  "hint": "Credit-Card: Mastercard **** **** **** 2346 Exp: 5/17",
+  "status": "Ok",
+  "statusDescription": "Operation completed successfully",
+  "durationMs": 159
+}
+```
+
+```python
+
+import requests
+from requests.auth import HTTPBasicAuth
+
+details = {
+  "accountNumber": "6279059700010827",
+  "description": "Everyday use Credit-Card",
+  "tokenToUpdate": "",
+  "creditCardNumber": "5123456789012346",
+  "cvn": "000",
+  "expiryMonth": 5,
+  "expiryYear": 2017,
+  "name": "Test Credit-Card"
+}
+
+r = requests.post(BASE_URL + "/token/v1/createCreditCard", data=details, auth=HTTPBasicAuth(USER, PASS))
+print(r)
+```
+
+```javascript
+let rp = require('request-promise');
+
+let details = {
+  "accountNumber": "6279059700010827",
+  "description": "Everyday use Credit-Card",
+  "tokenToUpdate": "",
+  "creditCardNumber": "5123456789012346",
+  "cvn": "000",
+  "expiryMonth": 5,
+  "expiryYear": 2017,
+  "name": "Test Credit-Card"
+};
+
+var options = {
+  method: "POST",
+  uri: BASE_URL + "/token/v1/createCreditCard",
+  headers: {
+    'Authorization': 'Basic ' + new Buffer(USER + ':' + PASS).toString('base64')
+  },
+  body: details,
+  json: true // Automatically parses the JSON string in the response 
+};
+
+rp(options)
+   .then(res => {
+      console.log('result:', res);
+   })
+   .catch(err => {
+      // request failed
+      console.log('error:', err);
+   });
+```
 
 > The above command expects a JSON payload structured like this:
 
@@ -263,6 +453,47 @@ durationMs | number | This can be ignored. This value represents the total time 
 
 ## Delete
 
+```shell
+my-machine$ curl -u USER:PASS -X DELETE BASE_URL/token/v1/delete/20c3a494-7010-4f22-babe-34d643e5e64f
+
+{
+  "status": "Ok",
+  "statusDescription": "Operation completed successfully",
+  "durationMs": 255
+}
+```
+
+```python
+
+import requests
+from requests.auth import HTTPBasicAuth
+
+r = requests.delete(BASE_URL + "/token/v1/delete/20c3a494-7010-4f22-babe-34d643e5e64f", auth=HTTPBasicAuth(USER, PASS))
+print(r)
+```
+
+```javascript
+let rp = require('request-promise');
+
+var options = {
+  method: "DELETE",
+  uri: BASE_URL + "/token/v1/delete/20c3a494-7010-4f22-babe-34d643e5e64f",
+  headers: {
+    'Authorization': 'Basic ' + new Buffer(USER + ':' + PASS).toString('base64')
+  },
+  json: true // Automatically parses the JSON string in the response 
+};
+
+rp(options)
+   .then(res => {
+      console.log('result:', res);
+   })
+   .catch(err => {
+      // request failed
+      console.log('error:', err);
+   });
+```
+
 > The above command returns JSON structured like this:
 
 ```json
@@ -290,6 +521,50 @@ durationMs | number | This can be ignored. This value represents the total time 
 
 
 ## Get
+
+```shell
+my-machine$ curl -u USER:PASS BASE_URL/token/v1/get/8def2443-5139-4d93-9b61-ef7901363760
+
+{
+  "hint": "Biller: MONEYTECH FINANCE PTY LTD Reference: 6279059700010918 \n Amount:100  IsVariable: False",
+  "payloadType": "BPAY",
+  "token": "8def2443-5139-4d93-9b61-ef7901363760",
+  "description": "Insurance Premium BPAY",
+  "status": "Ok",
+  "statusDescription": "Operation completed successfully",
+  "durationMs": 154
+}
+```
+
+```python
+
+import requests
+from requests.auth import HTTPBasicAuth
+
+r = requests.get(BASE_URL + "/token/v1/get/8def2443-5139-4d93-9b61-ef7901363760", auth=HTTPBasicAuth(USER, PASS))
+print(r)
+```
+
+```javascript
+let rp = require('request-promise');
+
+var options = {
+  uri: BASE_URL + "/token/v1/get/8def2443-5139-4d93-9b61-ef7901363760",
+  headers: {
+    'Authorization': 'Basic ' + new Buffer(USER + ':' + PASS).toString('base64')
+  },
+  json: true // Automatically parses the JSON string in the response 
+};
+
+rp(options)
+   .then(res => {
+      console.log('result:', res);
+   })
+   .catch(err => {
+      // request failed
+      console.log('error:', err);
+   });
+```
 
 > The above command returns JSON structured like this:
 
@@ -322,6 +597,84 @@ durationMs | number | This can be ignored. This value represents the total time 
 
 ## List
 
+```shell
+my-machine$ curl -u USER:PASS BASE_URL/token/v1/list/6279059700010827
+
+{
+  "tokens": [
+    {
+      "hint": "Biller: MONEYTECH FINANCE PTY LTD Reference: 6279059700010918 \nAmount: 100 IsVariable: False",
+      "payloadType": "BPAY",
+      "token": "8def2443-5139-4d93-9b61-ef7901363760",
+      "description": "Insurance Premium BPAY"
+    },
+    {
+      "hint": "Bank: ANZ Account: 123456789",
+      "payloadType": "AustralianBankAccount",
+      "token": "af980b64-c0fb-4d31-b84f-5e4a4ef095a0",
+      "description": "Savings Account"
+    },
+    {
+      "hint": "Credit-Card: Mastercard **** **** **** 2346 \n Exp: 5/17",
+      "payloadType": "CreditCard",
+      "token": "0a4fe0d3-43c7-47ec-b089-4977cead9451",
+      "description": "Personal Credit-Card"
+    },
+    {
+      "hint": "Credit-Card: Visa **** **** **** 8769 \n Exp: 5/17",
+      "payloadType": "CreditCard",
+      "token": "465f2a14-f24f-48ec-a80b-bed378bf968f",
+      "description": "Company Credit-Card"
+    },
+    {
+      "hint": "Biller: MONEYTECH FINANCE PTY LTD Reference: \n 6279059700010918 Amount: 50 IsVariable: False",
+      "payloadType": "BPAY",
+      "token": "33ae9d47-a482-441a-89fe-92f3aa96db48",
+      "description": "Electricity Account BPAY"
+    },
+    {
+      "hint": "Bank: ANZ Account: 123456778",
+      "payloadType": "AustralianBankAccount",
+      "token": "4112f32f-ff76-4fbf-ab19-af676f588229",
+      "description": "Cheque Account"
+    }
+  ],
+  "status": "Ok",
+  "statusDescription": "Operation completed successfully",
+  "durationMs": 154
+}
+```
+
+```python
+
+import requests
+from requests.auth import HTTPBasicAuth
+
+r = requests.get(BASE_URL + "/token/v1/list/6279059700010827", auth=HTTPBasicAuth(USER, PASS))
+print(r)
+```
+
+```javascript
+let rp = require('request-promise');
+
+var options = {
+  uri: BASE_URL + "/token/v1/list/6279059700010827",
+  headers: {
+    'Authorization': 'Basic ' + new Buffer(USER + ':' + PASS).toString('base64')
+  },
+  json: true // Automatically parses the JSON string in the response 
+};
+
+rp(options)
+   .then(res => {
+      console.log('result:', res);
+   })
+   .catch(err => {
+      // request failed
+      console.log('error:', err);
+   });
+```
+
 > The above command returns JSON structured like this:
 
 ```json
@@ -353,6 +706,68 @@ durationMs | number | This can be ignored. This value represents the total time 
 
 
 ## Update Australian Bank Account
+
+```shell
+my-machine$ curl -u USER:PASS -H "Content-Type: application/json" -X POST -d '{"accountNumber":"6279059700010827","description":"Savings Account","tokenToUpdate":"9395ddef-69cb-4f38-8836-3c6502c72182","bankAccountName":"Test Bank Account","bankAccountNumber":"123456789","bsb":"012-366"}' BASE_URL/token/v1/updateAustralianBankAccount
+
+{
+  "token": "9395ddef-69cb-4f38-8836-3c6502c72182",
+  "hint": "Bank: ANZ Account: 123456789",
+  "status": "Ok",
+  "statusDescription": "Operation completed successfully",
+  "durationMs": 159
+}
+```
+
+```python
+
+import requests
+from requests.auth import HTTPBasicAuth
+
+details = {
+  "accountNumber": "6279059700010827",
+  "description": "Savings Account",
+  "tokenToUpdate": "9395ddef-69cb-4f38-8836-3c6502c72182",
+  "bankAccountName": "Test Bank Account",
+  "bankAccountNumber": "123456789",
+  "bsb": "012-366"
+}
+
+r = requests.post(BASE_URL + "/token/v1/updateAustralianBankAccount", data=details, auth=HTTPBasicAuth(USER, PASS))
+print(r)
+```
+
+```javascript
+let rp = require('request-promise');
+
+let details = {
+  "accountNumber": "6279059700010827",
+  "description": "Savings Account",
+  "tokenToUpdate": "9395ddef-69cb-4f38-8836-3c6502c72182",
+  "bankAccountName": "Test Bank Account",
+  "bankAccountNumber": "123456789",
+  "bsb": "012-366"
+};
+
+var options = {
+  method: "POST",
+  uri: BASE_URL + "/token/v1/updateAustralianBankAccount",
+  headers: {
+    'Authorization': 'Basic ' + new Buffer(USER + ':' + PASS).toString('base64')
+  },
+  body: details,
+  json: true // Automatically parses the JSON string in the response 
+};
+
+rp(options)
+   .then(res => {
+      console.log('result:', res);
+   })
+   .catch(err => {
+      // request failed
+      console.log('error:', err);
+   });
+```
 
 > The above command expects a JSON payload structured like this:
 
@@ -406,6 +821,68 @@ durationMs | number | This can be ignored. This value represents the total time 
 
 ## Update BPAY
 
+```shell
+my-machine$ curl -u USER:PASS -H "Content-Type: application/json" -X POST -d '{"accountNumber":"6279059700010827","description":"Monthly Electricity Bill BPAY","tokenToUpdate":"20c3a494-7010-4f22-babe-34d643e5e64f","billerCode":857763,"customerReferenceNumber":"6279059700010918","amount":100.00}' BASE_URL/token/v1/updateBPAY
+
+{
+  "token": "20c3a494-7010-4f22-babe-34d643e5e64f",
+  "hint": "Biller: MONEYTECH FINANCE PTY LTD \n Reference: 6279059700010918 Amount: 100 IsVariable: False",
+  "status": "Ok",
+  "statusDescription": "Operation completed successfully",
+  "durationMs": 159
+}
+```
+
+```python
+
+import requests
+from requests.auth import HTTPBasicAuth
+
+details = {
+  "accountNumber": "6279059700010827",
+  "description": "Monthly Electricity Bill BPAY",
+  "tokenToUpdate": "20c3a494-7010-4f22-babe-34d643e5e64f",
+  "billerCode": 857763,
+  "customerReferenceNumber": "6279059700010918",
+  "amount": 100.00
+}
+
+r = requests.post(BASE_URL + "/token/v1/updateBPAY", data=details, auth=HTTPBasicAuth(USER, PASS))
+print(r)
+```
+
+```javascript
+let rp = require('request-promise');
+
+let details = {
+  "accountNumber": "6279059700010827",
+  "description": "Monthly Electricity Bill BPAY",
+  "tokenToUpdate": "20c3a494-7010-4f22-babe-34d643e5e64f",
+  "billerCode": 857763,
+  "customerReferenceNumber": "6279059700010918",
+  "amount": 100.00
+};
+
+var options = {
+  method: "POST",
+  uri: BASE_URL + "/token/v1/updateBPAY",
+  headers: {
+    'Authorization': 'Basic ' + new Buffer(USER + ':' + PASS).toString('base64')
+  },
+  body: details,
+  json: true // Automatically parses the JSON string in the response 
+};
+
+rp(options)
+   .then(res => {
+      console.log('result:', res);
+   })
+   .catch(err => {
+      // request failed
+      console.log('error:', err);
+   });
+```
+
 > The above command expects a JSON payload structured like this:
 
 ```json
@@ -453,6 +930,72 @@ durationMs | number | This can be ignored. This value represents the total time 
 
 
 ## Update Credit Card
+
+```shell
+my-machine$ curl -u USER:PASS -H "Content-Type: application/json" -X POST -d '{"accountNumber":"6279059700010827","description":"Everyday use Credit-Card","tokenToUpdate":"f42b9124-4f6c-4ef5-a812-016195108865","creditCardNumber":"5123456789012346","cvn":"000","expiryMonth":5,"expiryYear":2017,"name":"Test Credit-Card"}' BASE_URL/token/v1/updateCreditCard
+
+{
+  "token": "f42b9124-4f6c-4ef5-a812-016195108865",
+  "hint": " Credit-Card: Mastercard **** **** **** 2346 Exp: 5/17",
+  "status": "Ok",
+  "statusDescription": "Operation completed successfully",
+  "durationMs": 159
+}
+```
+
+```python
+
+import requests
+from requests.auth import HTTPBasicAuth
+
+details = {
+  "accountNumber": "6279059700010827",
+  "description": "Everyday use Credit-Card",
+  "tokenToUpdate": "f42b9124-4f6c-4ef5-a812-016195108865",
+  "creditCardNumber": "5123456789012346",
+  "cvn": "000",
+  "expiryMonth": 5,
+  "expiryYear": 2017,
+  "name": "Test Credit-Card"
+}
+
+r = requests.post(BASE_URL + "/token/v1/updateCreditCard", data=details, auth=HTTPBasicAuth(USER, PASS))
+print(r)
+```
+
+```javascript
+let rp = require('request-promise');
+
+let details = {
+  "accountNumber": "6279059700010827",
+  "description": "Everyday use Credit-Card",
+  "tokenToUpdate": "f42b9124-4f6c-4ef5-a812-016195108865",
+  "creditCardNumber": "5123456789012346",
+  "cvn": "000",
+  "expiryMonth": 5,
+  "expiryYear": 2017,
+  "name": "Test Credit-Card"
+};
+
+var options = {
+  method: "POST",
+  uri: BASE_URL + "/token/v1/updateCreditCard",
+  headers: {
+    'Authorization': 'Basic ' + new Buffer(USER + ':' + PASS).toString('base64')
+  },
+  body: details,
+  json: true // Automatically parses the JSON string in the response 
+};
+
+rp(options)
+   .then(res => {
+      console.log('result:', res);
+   })
+   .catch(err => {
+      // request failed
+      console.log('error:', err);
+   });
+```
 
 > The above command expects a JSON payload structured like this:
 
@@ -503,6 +1046,56 @@ durationMs | number | This can be ignored. This value represents the total time 
 
 
 ## Validate
+
+```shell
+# passes validation
+my-machine$ curl -u USER:PASS BASE_URL/token/v1/validate/465f2a14-f24f-48ec-a80b-bed378bf968f
+
+{
+  "durationMs": 154,
+  "status": "Ok",
+  "statusDescription": "Operation completed successfully"
+}
+
+# fails validation
+my-machine$ curl -u USER:PASS BASE_URL/token/v1/validate/465f2a14-f24f-48ec-a80b-bed378bf96ff
+
+{
+  "durationMs": 154,
+  "status": "InvalidToken",
+  "statusDescription": "Credit-Card has expired or will expire soon."
+}
+```
+
+```python
+
+import requests
+from requests.auth import HTTPBasicAuth
+
+r = requests.get(BASE_URL + "/token/v1/validate/465f2a14-f24f-48ec-a80b-bed378bf968f", auth=HTTPBasicAuth(USER, PASS))
+print(r)
+```
+
+```javascript
+let rp = require('request-promise');
+
+var options = {
+  uri: BASE_URL + "/token/v1/validate/465f2a14-f24f-48ec-a80b-bed378bf968f",
+  headers: {
+    'Authorization': 'Basic ' + new Buffer(USER + ':' + PASS).toString('base64')
+  },
+  json: true // Automatically parses the JSON string in the response 
+};
+
+rp(options)
+   .then(res => {
+      console.log('result:', res);
+   })
+   .catch(err => {
+      // request failed
+      console.log('error:', err);
+   });
+```
 
 > The above command returns JSON structured like this:
 
