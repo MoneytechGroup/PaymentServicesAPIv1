@@ -31,6 +31,56 @@ data | string | This is the data that was set with the database/v1/add or databa
 
 ## Add
 
+```shell
+# add with bare minimum payload.
+my-machine$ curl -u USER:PASS -H "Content-Type: application/json" -X POST -d '{"accountNumber": null, "key": null, "tag": null,"data": "{\"lastTransactionId\": 1234567}"}' BASE_URL/database/v1/add
+
+{
+  "recordId": 29,
+  "status": "Ok",
+  "statusDescription": "Operation completed successfully",
+  "durationMs": 63
+}
+
+```
+
+```python
+import requests
+from requests.auth import HTTPBasicAuth
+
+data = {"accountNumber": None, "key": None, "tag": None,"data": "{\"lastTransactionId\": 1234567}"}
+r = requests.post(BASE_URL + "/database/v1/add", data=data, auth=HTTPBasicAuth(USER, PASS))
+print(r)
+```
+
+```javascript
+let rp = require('request-promise');
+
+var options = {
+  method: "POST",
+  uri: BASE_URL + "/database/v1/add",
+  headers: {
+    'Authorization': 'Basic ' + new Buffer(USER + ':' + PASS).toString('base64')
+  },
+  body: {
+    "accountNumber": null,
+    "key": null,
+    "tag": null,
+    "data": "{\"lastTransactionId\": 1234567}"
+  },
+  json: true // Automatically parses the JSON string in the response 
+};
+
+rp(options)
+   .then(res => {
+      console.log('result:', res);
+   })
+   .catch(err => {
+      // request failed
+      console.log('error:', err);
+   });
+```
+
 > The above command expects a JSON payload structured like this:
 
 ```json
@@ -84,6 +134,51 @@ durationMs | number | This can be ignored. This value represents the total time 
 
 ## Delete
 
+```shell
+# delete a row that was previously added which returned a recordId equal to 30
+my-machine$ curl -u USER:PASS -X DELETE BASE_URL/database/v1/delete/30
+
+{
+  "status": "Ok",
+  "statusDescription": "Operation completed successfully",
+  "durationMs": 63
+}
+
+```
+
+```python
+
+import requests
+from requests.auth import HTTPBasicAuth
+
+# delete a row that was previously added which returned a recordId equal to 30
+r = requests.delete(BASE_URL + "/database/v1/delete/" + "30", auth=HTTPBasicAuth(USER, PASS))
+print(r)
+```
+
+```javascript
+let rp = require('request-promise');
+
+// delete a row that was previously added which returned a recordId equal to 30
+var options = {
+  method: "DELETE",
+  uri: BASE_URL + "/database/v1/delete/" + "30",
+  headers: {
+    'Authorization': 'Basic ' + new Buffer(USER + ':' + PASS).toString('base64')
+  },
+  json: true // Automatically parses the JSON string in the response 
+};
+
+rp(options)
+   .then(res => {
+      console.log('result:', res);
+   })
+   .catch(err => {
+      // request failed
+      console.log('error:', err);
+   });
+```
+
 > The above command returns JSON structured like this:
 
 ```json
@@ -121,6 +216,55 @@ durationMs | number | This can be ignored. This value represents the total time 
 
 
 ## Get
+
+```shell
+# retrieve a row that was previously added which returned a recordId of 30
+my-machine$ curl -u USER:PASS BASE_URL/database/v1/get/30
+
+{
+  "accountNumber": "12345",
+  "key": " Transaction Result",
+  "tag": " Result:Ok",
+  "data": "{\"durationMs\":93,\"status\":\"Ok\",\"statusDescription\":\"Operation completed successfully\",\"bpayReceipts\":[],\"callerUniqueReference\" :\"12345\",\"feeAmountExcludingGst\":1.7500,\"feeAmountGstComponent\":           0.175,\"feeAmountIncludingGst\":1.925,\"feeBreakdown\": {   \"debitFee\": {  \"feeAmountExcludingGst\":1.0,\"feeAmountGstComponent\": 0.1,    \"feeAmountIncludingGst\": 1.1},    \"disbursementFees\": [{\"disbursementArrayIndex\": 0,\"disbursementFee\":{ \"feeAmountExcludingGst\"  :0.75,\"feeAmountGstComponent\":0.075,\"feeAmountIncludingGst\":0.825}}]},\"transactionId\":3}",
+  "status": "Ok",
+  "statusDescription": "Operation completed successfully",
+  "durationMs": 76
+}
+
+```
+
+```python
+
+import requests
+from requests.auth import HTTPBasicAuth
+
+# retrieve a row that was previously added which returned a recordId of 30
+r = requests.get(BASE_URL + "/database/v1/get/" + "30", auth=HTTPBasicAuth(USER, PASS))
+print(r)
+```
+
+```javascript
+let rp = require('request-promise');
+
+// retrieve a row that was previously added which returned a recordId of 30
+var options = {
+  method: "GET",
+  uri: BASE_URL + "/database/v1/get/" + "30",
+  headers: {
+    'Authorization': 'Basic ' + new Buffer(USER + ':' + PASS).toString('base64')
+  },
+  json: true // Automatically parses the JSON string in the response 
+};
+
+rp(options)
+   .then(res => {
+      console.log('result:', res);
+   })
+   .catch(err => {
+      // request failed
+      console.log('error:', err);
+   });
+```
 
 > The above command returns JSON structured like this:
 
@@ -164,6 +308,199 @@ durationMs | number | This can be ignored. This value represents the total time 
 
 
 ## Search
+
+```shell
+# Return all rows not including the data column
+my-machine$ curl -u USER:PASS -H "Content-Type: application/json" -X POST -d '{  "accountNumber": null,"key": null,"tag": null,"isAccountNumberRegularExpression": false,"isKeyRegularExpression": false,"isTagRegularExpression":false,"includeData": false}' BASE_URL/database/v1/search
+
+{
+  "results": [
+        {
+          "accountNumber" : "",
+          "key": "",
+          "tag": "",
+          "recordId": 29,
+          "data": null},
+        {
+          "accountNumber": "1234567890",
+          "key": "Sales Order Details",
+          "tag": "Inv#20161228-0001",
+          "recordId": 23,
+          "data": null},
+        {
+          "accountNumber": "1234567891",
+          "key": "Sales Order Details",
+          "tag": "Inv#20161228-0002",
+          "recordId": 24,
+          "data": null
+        },
+        {
+          "accountNumber": "1234567891",
+          "key"   : "Sales Order Details",
+          "tag"   : "Inv#20161229-0001",
+          "recordId"  : 25,
+          "data"    : null
+        },
+        {
+          "accountNumber": "1234567892",
+          "key": "Sales Order Details",
+          "tag": "Inv#20161229-0002",
+          "recordId": 26,
+          "data": null
+        },
+        {
+          "accountNumber": "1234567893",
+          "key": "Sales Order Details",
+          "tag": "Inv#20161229-0003",
+          "recordId": 27,
+          "data": null
+        },
+        {
+          "accountNumber": "1234567893",
+          "key": "Sales Refund Details",
+          "tag": "Inv#20161230-0001",
+          "recordId": 28,
+          "data": null
+        },
+        {
+          "accountNumber": "1234567893",
+          "key": "Transaction Result",
+          "tag": "Result:Ok",
+          "recordId": 31,
+          "data": null
+        }
+          ],
+  "status": "Ok",
+  "statusDescription": "Operation completed successfully",
+  "durationMs": 89
+}
+```
+
+```python
+
+import requests
+from requests.auth import HTTPBasicAuth
+
+# Return all rows not including the data column
+allRows = {
+  "accountNumber": null,
+  "key": null,
+  "tag": null,
+  "isAccountNumberRegularExpression": false,
+  "isKeyRegularExpression": false,
+  "isTagRegularExpression": false,
+  "includeData": false
+};
+
+# Return the row (including data) where the accountNumber, key and tag are all empty. 
+# Setting the values to empty is different than setting the key parts to null. 
+# In this case we want the data associated to the recored where all key parts are empty strings.
+emptyRows = {
+  "accountNumber": "",
+  "key": "",
+  "tag": "",
+  "isAccountNumberRegularExpression": false,
+  "isKeyRegularExpression": false,
+  "isTagRegularExpression": false,
+  "includeData": true
+};
+
+# Return the first Sales Order for each day, without data.
+firstSalesOrder = {
+  "accountNumber": null,
+  "key": "^Sales Order",
+  "tag": "-0001$",
+  "isAccountNumberRegularExpression": false,
+  "isKeyRegularExpression": true,
+  "isTagRegularExpression": true,
+  "includeData": false
+};
+
+# Return the first Sales Order for accountNumber 1234567891.
+firstSalesOrderForSomeAcc = {
+  "accountNumber": "1234567891",
+  "key": "^Sales Order",
+  "tag": "-0001$",
+  "isAccountNumberRegularExpression": false,
+  "isKeyRegularExpression": true,
+  "isTagRegularExpression": true,
+  "includeData": false
+};
+
+
+r = requests.get(BASE_URL + "/database/v1/search", data=emptyRows, auth=HTTPBasicAuth(USER, PASS))
+print(r)
+```
+
+```javascript
+let rp = require('request-promise');
+
+// Return all rows not including the data column
+let allRows = {
+  "accountNumber": null,
+  "key": null,
+  "tag": null,
+  "isAccountNumberRegularExpression": false,
+  "isKeyRegularExpression": false,
+  "isTagRegularExpression": false,
+  "includeData": false
+};
+
+// Return the row (including data) where the accountNumber, key and tag are all empty. 
+// Setting the values to empty is different than setting the key parts to null. 
+//In this case we want the data associated to the recored where all key parts are empty strings.
+let emptyRows = {
+  "accountNumber": "",
+  "key": "",
+  "tag": "",
+  "isAccountNumberRegularExpression": false,
+  "isKeyRegularExpression": false,
+  "isTagRegularExpression": false,
+  "includeData": true
+};
+
+// Return the first Sales Order for each day, without data.
+let firstSalesOrder = {
+  "accountNumber": null,
+  "key": "^Sales Order",
+  "tag": "-0001$",
+  "isAccountNumberRegularExpression": false,
+  "isKeyRegularExpression": true,
+  "isTagRegularExpression": true,
+  "includeData": false
+};
+
+// Return the first Sales Order for accountNumber 1234567891.
+let firstSalesOrderForSomeAcc = {
+  "accountNumber": "1234567891",
+  "key": "^Sales Order",
+  "tag": "-0001$",
+  "isAccountNumberRegularExpression": false,
+  "isKeyRegularExpression": true,
+  "isTagRegularExpression": true,
+  "includeData": false
+};
+
+
+var options = {
+  method: "POST",
+  uri: BASE_URL + "/database/v1/search",
+  headers: {
+    'Authorization': 'Basic ' + new Buffer(USER + ':' + PASS).toString('base64')
+  },
+  body: emptyRows,
+  json: true // Automatically parses the JSON string in the response 
+};
+
+rp(options)
+   .then(res => {
+      console.log('result:', res);
+   })
+   .catch(err => {
+      // request failed
+      console.log('error:', err);
+   });
+```
 
 > The above command expects a JSON payload structured like this:
 
@@ -223,6 +560,63 @@ durationMs | number | This can be ignored. This value represents the total time 
 
 
 ## Update
+
+```shell
+# update a row that was previously added which returned a recordId of 29
+my-machine$ curl -u USER:PASS -H "Content-Type: application/json" -X POST -d '{"recordId": 29,"data": "{\"lastTransactionId\":1234568}"}' BASE_URL/database/v1/update
+
+{
+  "status": "Ok",
+  "statusDescription": "Operation completed successfully",
+  "durationMs": 52
+}
+```
+
+```python
+
+import requests
+from requests.auth import HTTPBasicAuth
+
+# update a row that was previously added which returned a recordId of 29
+data = {
+  "recordId": 29,
+  "data": "{\"lastTransactionId\":1234568}"
+};
+
+
+r = requests.post(BASE_URL + "/database/v1/update", data=data, auth=HTTPBasicAuth(USER, PASS))
+print(r)
+```
+
+```javascript
+let rp = require('request-promise');
+
+// update a row that was previously added which returned a recordId of 29
+let data = {
+  "recordId": 29,
+  "data": "{\"lastTransactionId\":1234568}"
+};
+
+
+var options = {
+  method: "POST",
+  uri: BASE_URL + "/database/v1/update",
+  headers: {
+    'Authorization': 'Basic ' + new Buffer(USER + ':' + PASS).toString('base64')
+  },
+  body: data,
+  json: true // Automatically parses the JSON string in the response 
+};
+
+rp(options)
+   .then(res => {
+      console.log('result:', res);
+   })
+   .catch(err => {
+      // request failed
+      console.log('error:', err);
+   });
+```
 
 > The above command expects a JSON payload structured like this:
 

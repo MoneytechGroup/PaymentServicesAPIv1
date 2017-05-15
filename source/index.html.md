@@ -1,5 +1,5 @@
 ---
-title: MoneyTech RESTful Payment Gateway API Reference
+title: MoneyTech Payment Gateway RESTful API Reference - v1.1
 
 language_tabs:
   - shell: cURL
@@ -245,4 +245,4 @@ Card has expired  | 033 | 0033
 Insufficient credit | 051 | 0051
 
 
-# API Hierarchy
+# API v1.1 Hierarchy

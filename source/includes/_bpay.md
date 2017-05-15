@@ -140,6 +140,62 @@ maximumPaymentAmount | number |  | This is the maximum amount that the BPAY bill
 
 ## Biller
 
+```shell
+my-machine$ curl -u USER:PASS BASE_URL/bpay/v1/biller/857763
+
+{
+  "durationMs":10,
+  "status":"Ok",
+  "statusDescription":"Operation completed successfully",
+  "biller":
+  {
+    "acceptedPaymentMethods":"1",
+    "activationDate":"2013-05-29T00:00:00",
+    "billerCode":"857763",
+    "billerLongName":"MONEYTECH FINANCE PTY LTD",
+    "billerShortName":"MONEYTECH",
+    "checkDigitRuleName":"",
+    "crnValidationRuleName":"",
+    "deactivationDate":"",
+    "fixedDigits":"627905              ",
+    "isVariableCrn":false,
+    "lengthMask":"               Y    ",
+    "maxPaymentAmount":50000,
+    "minPaymentAmount":10.0000
+  }
+}
+```
+
+```python
+import requests
+from requests.auth import HTTPBasicAuth
+
+r = requests.get(BASE_URL + '/bpay/v1/biller/857763', auth=HTTPBasicAuth(USER, PASS))
+print(r)
+```
+
+```javascript
+let rp = require('request-promise');
+
+let options = {
+   method: "GET",
+   uri: BASE_URL + "/bpay/v1/biller/857763",
+   headers: {
+      'Authorization': 'Basic ' + new Buffer(USER + ':' + PASS).toString('base64')
+   },
+   json: true // Automatically parses the JSON string in the response 
+};
+
+rp(options)
+   .then(res => {
+      console.log('result:', res);
+   })
+   .catch(err => {
+      // request failed
+      console.log('error:', err);
+   });
+```
+
 > The above command returns JSON structured like this:
 
 ```json
@@ -170,50 +226,83 @@ statusDescription | string | This is a plain English description of the status
 durationMs | number | This can be ignored. This value represents the total time in milliseconds that the Platform took to process the request
 
 
-### BPAYBiller
+## Billers
 
-> Schema for this object
+```shell
+my-machine$ curl -u USER:PASS BASE_URL/bpay/v1/billers?search=pty ltd&skip=0&take=2
 
-
-```json
 {
-  "billerCode":             string,
-  "billerLongName":         string,
-  "billerShortName":        string,
-  "acceptedPaymentMethods": string,
-  "activationDate":         string,
-  "deactivationDate":       string,
-  "minPaymentAmount":       number,
-  "maxPaymentAmount":       number,
-  "crnValidationRuleName":  string,
-  "checkDigitRuleName":     string,
-  "lengthMask":             string,
-  "fixedDigits":            string,
-  "isVariableCrn":          string
+  "billers": [
+                {
+                  "acceptedPaymentMethods"  : "1",
+                  "activationDate": "2011-07-11T00:00:00",
+                  "billerCode": "1040",
+                  "billerLongName": "GMK Partners Pty Ltd",
+                  "billerShortName": "GMK Partners Pty Ltd",
+                  "checkDigitRuleName": "",
+                  "crnValidationRuleName": "",
+                  "deactivationDate": "",
+                  "fixedDigits": "                    ",
+                  "isVariableCrn": false,
+                  "lengthMask": "     Y  Y           ",
+                  "maxPaymentAmount": 50000,
+                  "minPaymentAmount": 1.0
+                },
+                {
+                  "acceptedPaymentMethods": "1",
+                  "activationDate": "2011-07-11T00:00:00",
+                  "billerCode": "1073",
+                  "billerLongName": "GMK Partners Auditor Pty Ltd",
+                  "billerShortName": "GMK Partners Auditor",
+                  "checkDigitRuleName": "",
+                  "crnValidationRuleName": "",
+                  "deactivationDate": "",
+                  "fixedDigits": "                    ",
+                  "isVariableCrn": false,
+                  "lengthMask": "     Y  Y           ",
+                  "maxPaymentAmount": 50000,
+                  "minPaymentAmount": 1.0
+                }
+              ],
+  "search": "pty ltd",
+  "skip": 0,
+  "take": 2,
+  "totalCount": 4984,
+  "status": "Ok",
+  "statusDescription": "Operation completed successfully",
+  "durationMs": 255
 }
 ```
 
+```python
+import requests
+from requests.auth import HTTPBasicAuth
 
-Provides comprehensive biller information that may be required for further complex validation.
+r = requests.get(BASE_URL + '/bpay/v1/billers?search=pty ltd&skip=0&take=2', auth=HTTPBasicAuth(USER, PASS))
+print(r)
+```
 
-Field Name|Type|Max Size | Description
-----|---|---|----
-billerCode | string | 10 | This is the BPAY biller code that was requested. billerCode must be numeric 
-billerLongName| string | 50 | A long description of the biller name
-billerShortName | string | 20 | A short decription of the biller name 
-acceptedPaymentMethods | string | | Always set to “1”. Field reserved for future expansion.
-activationDate | string | | Date this biller was activated for BPAY. ISO 8601 date format with time set to 00:00:00. Note that Timezone is suppressed. The default Timezone is Sydney local time.
-deactivationDate | string  | |  Date this biller was deactivated for BPAY. ISO 8601 date format with time set to 00:00:00 or an empty string if not deactivated. Note that Timezone is suppressed. The default Timezone is Sydney local time.
-minPaymentAmount |  number |  |  This is the minimum amount that the BPAY biller associated with the billerCode accepts for bill payment.
-maximumPaymentAmount |  number |  |  This is the maximum amount that the BPAY biller associated with the billerCode accepts for bill payment.
-crnValidationRuleName | string | |   For internal use only. Set to an empty string.
-checkDigitRuleName |  string |  |  For internal use only. Set to an empty string.
-lengthMask |  string | 20 | A mask in which the position of each ‘Y’ character indicates each valid length that the reference number can take. At least one ‘Y’ character will be present. 
-fixedDigits | string | 20 | This describes which, if any, fixed digits that are standard in the BPAY Customer Reference Number.
-isVariableCrn | boolean | |  Indicates whether BPAY Customer Reference Numbers (CRN) for this biller changes for each individual customer’s bill or do they remain the same. Non variable CRNs can be stored and used later, however they must always be validated as part of paying a bill via the gateway. Variable CRNs should not be stored as they are incorrect for subsequent bills.
+```javascript
+let rp = require('request-promise');
 
+let options = {
+   method: "GET",
+   uri: BASE_URL + "/bpay/v1/billers?search=pty ltd&skip=0&take=2",
+   headers: {
+      'Authorization': 'Basic ' + new Buffer(USER + ':' + PASS).toString('base64')
+   },
+   json: true // Automatically parses the JSON string in the response 
+};
 
-## Billers
+rp(options)
+   .then(res => {
+      console.log('result:', res);
+   })
+   .catch(err => {
+      // request failed
+      console.log('error:', err);
+   });
+```
 
 > The above command returns JSON structured like this:
 
@@ -256,6 +345,66 @@ durationMs | number | This can be ignored. This value represents the total time 
 
 ## History
 
+```shell
+my-machine$ curl -u USER:PASS BASE_URL/bpay/v1/history/6279059700022400?take=3
+
+{
+  "history": [
+                {
+                  "billerCode": "23796",
+                  "customerReferenceNumber": "2000046986210",
+                  "billerName": "TELSTRA CORPORATION LTD",
+                  "count": 27
+                },
+                {
+                  "billerCode": "1552",
+                  "customerReferenceNumber": "155907980",
+                  "billerName": "ERGON ENERGY QUEENSLAND P/L",
+                  "count": 24
+                },
+                {
+                  "billerCode": "747337",
+                  "customerReferenceNumber": "000000506479540",
+                  "billerName": "HOUSING AND PUBLIC WORKS",
+                  "count": 22
+                }
+              ],
+  "status": "Ok",
+  "statusDescription": "Operation completed successfully",
+  "durationMs": 461
+}
+```
+
+```python
+import requests
+from requests.auth import HTTPBasicAuth
+
+r = requests.get(BASE_URL + '/bpay/v1/history/6279059700022400?take=3', auth=HTTPBasicAuth(USER, PASS))
+print(r)
+```
+
+```javascript
+let rp = require('request-promise');
+
+let options = {
+   method: "GET",
+   uri: BASE_URL + "/bpay/v1/history/6279059700022400?take=3",
+   headers: {
+      'Authorization': 'Basic ' + new Buffer(USER + ':' + PASS).toString('base64')
+   },
+   json: true // Automatically parses the JSON string in the response 
+};
+
+rp(options)
+   .then(res => {
+      console.log('result:', res);
+   })
+   .catch(err => {
+      // request failed
+      console.log('error:', err);
+   });
+```
+
 > The above command returns JSON structured like this:
 
 ```json
@@ -293,6 +442,101 @@ statusDescription | string | This is a plain English description of the status
 durationMs | number | This can be ignored. This value represents the total time in milliseconds that the Platform took to process the request
 
 ## Validate
+
+```shell
+# Validate only the Biller Code.
+my-machine$ curl -u USER:PASS BASE_URL/bpay/v1/validate/857763
+
+{
+  "validation": {
+                  "amount": null,
+                  "billerCode": "857763",
+                  "billerName": "MONEYTECH FINANCE PTY LTD",
+                  "customerReferenceNumber": null,
+                  "maximumPaymentAmount": 50000,
+                  "minimumPaymentAmount": 10.0,
+                  "isVariableCrn": false
+                },
+  "status": "Ok",
+  "statusDescription": "Validation has Passed",
+  "durationMs": 16
+}
+# The customerReferenceNumber and amount is null. After this call we know that the biller code is correct because the status is “Ok”.
+
+# Validate Biller Code and customer reference number.
+my-machine$ curl -u USER:PASS BASE_URL/bpay/v1/validate/857763?custRef=6279059700000505
+
+{
+  "validation": {
+                  "amount": null,
+                  "billerCode": "857763",
+                  "billerName": "MONEYTECH FINANCE PTY LTD",
+                  "customerReferenceNumber": "6279059700000505",
+                  "maximumPaymentAmount": 50000,
+                  "minimumPaymentAmount": 10.0,
+                  "isVariableCrn": false
+                },
+  "status": "Ok",
+  "statusDescription": "Validation has Passed",
+  "durationMs": 16
+}
+# The amount is null. After this call we know that the billerCode and customerReference number is correct because the status is “Ok”.
+
+# Validate Biller Code, reference number & amount.
+my-machine$ curl -u USER:PASS BASE_URL/bpay/v1/validate/857763?custRef=6279059700000505&amount=100.75
+
+{
+  "validation": {
+                  "amount": 100.7500,
+                  "billerCode": "857763",
+                  "billerName": "MONEYTECH FINANCE PTY LTD",
+                  "customerReferenceNumber": "6279059700000505",
+                  "maximumPaymentAmount": 50000,
+                  "minimumPaymentAmount": 10.0,
+                  "isVariableCrn": false
+                },
+  "status": "Ok",
+  "statusDescription": "Validation has Passed",
+  "durationMs": 16
+}
+# After this call we know that the billerCode, customerReference number and amount are correct because the status is “Ok”. The BPAY information is fully validated.
+```
+
+```python
+import requests
+from requests.auth import HTTPBasicAuth
+
+billerCodeOnly = "/bpay/v1/validate/857763";
+billerCodeAndCustRef = billerCodeOnly + "?custRef=6279059700000505";
+billerCodeCustRefAndAmount = billerCodeAndCustRef + "&amount=100.75";
+r = requests.get(BASE_URL + billerCodeCustRefAndAmount, auth=HTTPBasicAuth(USER, PASS))
+print(r)
+```
+
+```javascript
+let rp = require('request-promise');
+let billerCodeOnly = "/bpay/v1/validate/857763";
+let billerCodeAndCustRef = billerCodeOnly + "?custRef=6279059700000505";
+let billerCodeCustRefAndAmount = billerCodeAndCustRef + "&amount=100.75";
+
+let options = {
+   method: "GET",
+   uri: BASE_URL + billerCodeAndCustRef,
+   headers: {
+      'Authorization': 'Basic ' + new Buffer(USER + ':' + PASS).toString('base64')
+   },
+   json: true // Automatically parses the JSON string in the response 
+};
+
+rp(options)
+   .then(res => {
+      console.log('result:', res);
+   })
+   .catch(err => {
+      // request failed
+      console.log('error:', err);
+   });
+```
 
 > The above command returns JSON structured like this:
 

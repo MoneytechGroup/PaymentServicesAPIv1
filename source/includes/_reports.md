@@ -5,7 +5,7 @@
 
 ```json
 {
-	"disbursementAmount: 		number,
+	"disbursementAmount": 		number,
 	"transactionId": 			number,
 	"uniqueReferenced": 		string, 
 	"disbursementMethod": 		string,
@@ -57,6 +57,68 @@ uniqueReference| string | This is your uniqueReference that was passed in when t
 
 ## Settlement
 
+```shell
+# Date follows ISO8601 yyyy-mm-dd format
+my-machine$ curl -u USER:PASS BASE_URL/reports/v1/settlement/2015-09-01
+
+{
+  "settlements": [
+    {
+      "disbursementAmount": 23.5000,
+      "transactionId": 1,
+      "uniqueReferenced": "43256",
+      "disbursementMethod": "bpay",
+      "feeAmountExclGst": 1.23,
+      "feeAmountGstComponent": 0.123,
+      "feeAmountInclGst": 1.353
+    },
+    {
+      "disbursementAmount": 1.5000,
+      "transactionId": 1,
+      "uniqueReferenced": "43256",
+      "disbursementMethod": "mAccount",
+      "feeAmountExclGst": 0.35,
+      "feeAmountGstComponent": 0.035,
+      "feeAmountInclGst": 0.385
+    }
+  ],
+  "status": "Ok",
+  "statusDescription": "Operation completed successfully",
+  "durationMs": 42
+}
+
+```
+
+```python
+
+import requests
+from requests.auth import HTTPBasicAuth
+
+r = requests.get(BASE_URL + "/reports/v1/settlement/" + "2015-09-01", auth=HTTPBasicAuth(USER, PASS))
+print(r)
+```
+
+```javascript
+let rp = require('request-promise');
+
+var options = {
+  uri: BASE_URL + "/reports/v1/settlement/" + "2015-09-01",
+  headers: {
+    'Authorization': 'Basic ' + new Buffer(USER + ':' + PASS).toString('base64')
+  },
+  json: true // Automatically parses the JSON string in the response 
+};
+
+rp(options)
+   .then(res => {
+      console.log('result:', res);
+   })
+   .catch(err => {
+      // request failed
+      console.log('error:', err);
+   });
+```
+
 > The above command returns JSON structured like this:
 
 ```json
@@ -98,6 +160,67 @@ durationMs | number | This can be ignored. This value represents the total time 
 
 
 ## Statement
+
+```shell
+# Date follows ISO8601 yyyy-mm-dd format
+my-machine$ curl -u USER:PASS BASE_URL/reports/v1/statement/2015-09-01
+
+{
+  "transactions": [
+    {
+      "dateTime": "2015-09-01T13:32:20",
+      "feeAmountExcludingGst": 0.3350,
+      "feeAmountGstComponent": 0.0335,
+      "feeAmountIncludingGst": 0.3685,
+      "totalAmount": 25.00,
+      "transactionId": 20,
+      "uniqueReferenced": "43256"
+    },
+    {
+      "dateTime": "2015-09-01T19:19:38",
+      "feeAmountExcludingGst": 0.3350,
+      "feeAmountGstComponent": 0.0335,
+      "feeAmountIncludingGst": 0.3685,
+      "totalAmount": 25.00,
+      "transactionId": 36,
+      "uniqueReferenced": "43257"
+    }
+  ],
+  "status": "Ok",
+  "statusDescription": "Operation completed successfully",
+  "durationMs": 47
+}
+```
+
+```python
+
+import requests
+from requests.auth import HTTPBasicAuth
+
+r = requests.get(BASE_URL + "/reports/v1/statement/" + "2015-09-01", auth=HTTPBasicAuth(USER, PASS))
+print(r)
+```
+
+```javascript
+let rp = require('request-promise');
+
+var options = {
+  uri: BASE_URL + "/reports/v1/statement/" + "2015-09-01",
+  headers: {
+    'Authorization': 'Basic ' + new Buffer(USER + ':' + PASS).toString('base64')
+  },
+  json: true // Automatically parses the JSON string in the response 
+};
+
+rp(options)
+   .then(res => {
+      console.log('result:', res);
+   })
+   .catch(err => {
+      // request failed
+      console.log('error:', err);
+   });
+```
 
 > The above command returns JSON structured like this:
 

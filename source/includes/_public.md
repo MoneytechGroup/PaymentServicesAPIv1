@@ -13,6 +13,53 @@ The APIs in this section require NO authentication.
 
 ## Activate Password Reset
 
+```shell
+my-machine$ curl -H "Content-Type: application/json" -X POST -d '{"encryptedCreds":"VoA0SbOjO+yZWHCWExpHROf3JRcNrrCccwgOOdwKvlNcYk5RyuKncEEGsHeUQuWJJsi0sHjaHU6wLQAAws9DKQXDLjv5qsjFYCzB0Ymnoc="}' BASE_URL/public/v1/mAccount/activatePasswordReset
+
+{
+  "status": "Ok",
+  "statusDescription": "Operation completed successfully",
+  "durationMs": 198
+}
+```
+
+```python
+
+import requests
+from requests.auth import HTTPBasicAuth
+
+details = {
+  "encryptedCreds": "VoA0SbOjO+yZWHCWExpHROf3JRcNrrCccwgOOdwKvlNcYk5RyuKncEEGsHeUQuWJJsi0sHjaHU6wLQAAws9DKQXDLjv5qsjFYCzB0Ymnoc="
+}
+
+r = requests.post(BASE_URL + "/public/v1/mAccount/activatePasswordReset", data=details)
+print(r)
+```
+
+```javascript
+let rp = require('request-promise');
+
+let details = {
+  "encryptedCreds": "VoA0SbOjO+yZWHCWExpHROf3JRcNrrCccwgOOdwKvlNcYk5RyuKncEEGsHeUQuWJJsi0sHjaHU6wLQAAws9DKQXDLjv5qsjFYCzB0Ymnoc="
+};
+
+var options = {
+  method: "POST",
+  uri: BASE_URL + "/public/v1/mAccount/activatePasswordReset",
+  body: details,
+  json: true // Automatically parses the JSON string in the response 
+};
+
+rp(options)
+   .then(res => {
+      console.log('result:', res);
+   })
+   .catch(err => {
+      // request failed
+      console.log('error:', err);
+   });
+```
+
 > The above command expects a JSON payload structured like this:
 
 ```json
@@ -54,6 +101,55 @@ durationMs | number | This can be ignored. This value represents the total time 
 
 
 ## Send Password Reset Email
+
+```shell
+my-machine$ curl -H "Content-Type: application/json" -X POST -d '{"accountNumber":"6279059700023317","resetUrlLandingPage":"https://www.mygateway.com.au/activateMerchantPassword"}' BASE_URL/public/v1/mAccount/sendPasswordResetEmail
+
+{
+  "status": "Ok",
+  "statusDescription": "Operation completed successfully",
+  "durationMs": 198
+}
+```
+
+```python
+
+import requests
+from requests.auth import HTTPBasicAuth
+
+details = {
+  "accountNumber": "6279059700023317",
+  "resetUrlLandingPage": "https://www.mygateway.com.au/activateMerchantPassword"
+}
+
+r = requests.post(BASE_URL + "/public/v1/mAccount/sendPasswordResetEmail", data=details)
+print(r)
+```
+
+```javascript
+let rp = require('request-promise');
+
+let details = {
+  "accountNumber": "6279059700023317",
+  "resetUrlLandingPage": "https://www.mygateway.com.au/activateMerchantPassword"
+};
+
+var options = {
+  method: "POST",
+  uri: BASE_URL + "/public/v1/mAccount/sendPasswordResetEmail",
+  body: details,
+  json: true // Automatically parses the JSON string in the response 
+};
+
+rp(options)
+   .then(res => {
+      console.log('result:', res);
+   })
+   .catch(err => {
+      // request failed
+      console.log('error:', err);
+   });
+```
 
 > The above command expects a JSON payload structured like this:
 
@@ -98,6 +194,46 @@ durationMs | number | This can be ignored. This value represents the total time 
 
 
 ## Ping
+
+```shell
+my-machine$ curl BASE_URL/public/v1/ping
+
+{
+  "environment": "Staging",
+  "version": "Moneytech Payments Platform Public V1.0. Engine V:4.53.0.0 \n  Environment:Staging   DateTime:29-Nov-2016 06:54:48 AM",
+  "status": "Ok",
+  "statusDescription": "Operation completed successfully",
+  "durationMs": 94
+}
+
+```
+
+```python
+
+import requests
+from requests.auth import HTTPBasicAuth
+
+r = requests.get(BASE_URL + "/public/v1/ping")
+print(r)
+```
+
+```javascript
+let rp = require('request-promise');
+
+var options = {
+  uri: BASE_URL + "/public/v1/ping",
+  json: true // Automatically parses the JSON string in the response 
+};
+
+rp(options)
+   .then(res => {
+      console.log('result:', res);
+   })
+   .catch(err => {
+      // request failed
+      console.log('error:', err);
+   });
+```
 
 > The above command returns JSON structured like this:
 

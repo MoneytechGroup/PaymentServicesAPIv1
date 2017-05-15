@@ -1,0 +1,43 @@
+```shell
+# extends the live of token by the number of minutes provided when the SecurityToken was created
+my-machine$ curl -u USER:PASS -X DELETE BASE_URL/token/v1/delete/20c3a494-7010-4f22-babe-34d643e5e64f
+
+{
+  "status": "Ok",
+  "statusDescription": "Operation completed successfully",
+  "durationMs": 255
+}
+```
+
+```python
+
+import requests
+from requests.auth import HTTPBasicAuth
+
+# extends the live of token by the number of minutes provided when the SecurityToken was created
+r = requests.delete(BASE_URL + "/token/v1/delete/20c3a494-7010-4f22-babe-34d643e5e64f", auth=HTTPBasicAuth(USER, PASS))
+print(r)
+```
+
+```javascript
+let rp = require('request-promise');
+
+// extends the live of token by the number of minutes provided when the SecurityToken was created
+var options = {
+  method: "DELETE",
+  uri: BASE_URL + "/token/v1/delete/20c3a494-7010-4f22-babe-34d643e5e64f",
+  headers: {
+    'Authorization': 'Basic ' + new Buffer(USER + ':' + PASS).toString('base64')
+  },
+  json: true // Automatically parses the JSON string in the response 
+};
+
+rp(options)
+   .then(res => {
+      console.log('result:', res);
+   })
+   .catch(err => {
+      // request failed
+      console.log('error:', err);
+   });
+```

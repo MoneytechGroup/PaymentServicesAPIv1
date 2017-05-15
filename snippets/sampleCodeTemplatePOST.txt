@@ -1,0 +1,53 @@
+```shell
+my-machine$ curl -u USER:PASS -H "Content-Type: application/json" -X POST -d '{"subject":"Please call me ASAP","isBodyHtml":false,"body":"I have forgotten my password"}' BASE_URL/tools/v1/sendEmailToIssuer
+
+{
+  "status": "Ok",
+  "statusDescription": "Operation completed successfully",
+  "durationMs": 28
+}
+```
+
+```python
+
+import requests
+from requests.auth import HTTPBasicAuth
+
+details = {
+  "subject": "Please call me ASAP",
+  "isBodyHtml": false,
+  "body": "I have forgotten my password"
+}
+
+r = requests.post(BASE_URL + "/tools/v1/sendEmailToIssuer", data=details, auth=HTTPBasicAuth(USER, PASS))
+print(r)
+```
+
+```javascript
+let rp = require('request-promise');
+
+let details = {{
+  "subject": "Please call me ASAP",
+  "isBodyHtml": false,
+  "body": "I have forgotten my password"
+};
+
+var options = {
+  method: "POST",
+  uri: BASE_URL + "/tools/v1/sendEmailToIssuer",
+  headers: {
+    'Authorization': 'Basic ' + new Buffer(USER + ':' + PASS).toString('base64')
+  },
+  body: details,
+  json: true // Automatically parses the JSON string in the response 
+};
+
+rp(options)
+   .then(res => {
+      console.log('result:', res);
+   })
+   .catch(err => {
+      // request failed
+      console.log('error:', err);
+   });
+```

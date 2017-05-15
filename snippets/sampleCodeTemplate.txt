@@ -1,0 +1,49 @@
+```shell
+# valid BSB
+my-machine$ curl -u USER:PASS BASE_URL/tools/v1/ping
+
+{
+  "address": "Shop 1-047 Henry St",
+  "bankCode": "ANZ",
+  "bsb": "012-433",
+  "city": "Penrith",
+  "closed": false,
+  "postCode": "2750",
+  "state": "NSW",
+  "status": "Ok",
+  "statusDescription": "Operation completed successfully",
+  "durationMs": 126
+}
+```
+
+```python
+
+import requests
+from requests.auth import HTTPBasicAuth
+
+# extends the live of token by the number of minutes provided when the SecurityToken was created
+r = requests.get(BASE_URL + "/tools/v1/ping", auth=HTTPBasicAuth(USER, PASS))
+print(r)
+```
+
+```javascript
+let rp = require('request-promise');
+
+// extends the live of token by the number of minutes provided when the SecurityToken was created
+var options = {
+  uri: BASE_URL + "/tools/v1/ping",
+  headers: {
+    'Authorization': 'Basic ' + new Buffer(USER + ':' + PASS).toString('base64')
+  },
+  json: true // Automatically parses the JSON string in the response 
+};
+
+rp(options)
+   .then(res => {
+      console.log('result:', res);
+   })
+   .catch(err => {
+      // request failed
+      console.log('error:', err);
+   });
+```
