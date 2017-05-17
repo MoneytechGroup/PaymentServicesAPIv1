@@ -82,9 +82,9 @@ mAccounts receive a settlement email at the end of the settlement run, explainin
 The above ‘Credit Date’ would have the actual date the settlement would occur if T+n are > 0.
 
 ### Sample PDF Settlement Statement
-The Statement From Date and the To date in the statement below (inside the green box) are from 4pm the previous settlement date (1 December 2016 – A Friday) to 4pm the current settlement date (5th December 2016 – A Monday). This is why it’s called a Settlement Statement. It’s only showing transactions that were settled on the 5th December 2016 (a Monday) which included any transactions over the weekend.
+The Statement From Date and the To date in the statement below (inside the green box) are from 4pm the previous settlement date (5th May 2017 – A Friday) to 4pm the current settlement date (8th May 2017 – A Monday). This is why it’s called a Settlement Statement. It’s only showing transactions that were settled on the 8th May 2017 (a Monday) which included any transactions over the weekend.
 
-When looking at any of the Platform statements, think of the Platform as a bank. In the example below, the Settlement transaction (row 3) shows there is a Debit of $50.00 for the settlement. This is a Debit FROM your Platform account and will therefore be a Credit INTO your physical bank account.
+When looking at any of the Platform statements, think of the Platform as a bank. In the example below, the Settlement transaction (row 2) shows there is a Debit of $85.00 for the settlement. This is a Debit FROM your Platform account and will therefore be a Credit INTO your physical bank account.
 
 
 <img src = "images\Settlement\SettlementSamplePDFStatement.png">
